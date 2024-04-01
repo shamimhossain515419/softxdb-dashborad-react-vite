@@ -39,14 +39,14 @@ const UnitComponent = () => {
       </div>
       {/* items Brand  */}
       <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
-        <h1 className="text-white-base  text-[30px] font-bold"> Unit </h1>
+        <h1 className="text-white-base  text-[30px] font-bold"> unit </h1>
         <div className=" flex gap-3 items-center ">
           <div>
             <button
               onClick={() => setActive(true)}
               className="border-[1.5px] border-[#4d75ff] rounded-md inline-block  text-white-base tex-[14px] px-4 py-2 overflow-hidden"
             >
-              Add new Unit
+              Add new unit
             </button>
           </div>
         </div>
@@ -76,7 +76,7 @@ const UnitComponent = () => {
             </div>
             <div className="  bg-primary-base z-50  w-[70px] absolute border border-[#4d75ff] rounded-[4px]">
               <Collapse isOpened={activeLimit} className="">
-                <div className=" text-white-muted space-y-[2px]   pt-3">
+                <div className=" text-white-muted space-y-[2px]  max-h-[250px] sidebarScrool  overflow-y-scroll  pt-3">
                   {showDataArray?.map((item, index) => {
                     return (
                       <div
@@ -148,7 +148,7 @@ const UnitComponent = () => {
       </div>
 
       {/* add new branch  component  */}
-      <CommonModal title={'Add new Unit'} active={active} setActive={setActive}>
+      <CommonModal title={'Add new unit'} active={active} setActive={setActive}>
         <AddNewUnit refetch={refetch} setActive={setActive} />
       </CommonModal>
     </div>

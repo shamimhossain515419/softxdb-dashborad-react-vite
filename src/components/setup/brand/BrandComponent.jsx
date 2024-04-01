@@ -35,7 +35,7 @@ const BrandComponent = () => {
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
         <Link to={'/setup/branch'} className="text-white-base">
-        Brand
+          Brand
         </Link>
       </div>
       {/* items Brand  */}
@@ -45,8 +45,8 @@ const BrandComponent = () => {
           <div
             onClick={() => setActiveUpload(false)}
             className={` ${activeUpload == false
-                ? ' bg-blue-base'
-                : ' border  border-[#4d75ff] '
+              ? ' bg-blue-base'
+              : ' border  border-[#4d75ff] '
               }  p-[10px] rounded-full cursor-pointer`}
           >
             <FaCloudUploadAlt className={`text-[18px] text-white-base`} />
@@ -54,8 +54,8 @@ const BrandComponent = () => {
           <div
             onClick={() => setActiveUpload(true)}
             className={` ${activeUpload == true
-                ? ' bg-blue-base'
-                : ' border  border-[#4d75ff] '
+              ? ' bg-blue-base'
+              : ' border  border-[#4d75ff] '
               }  p-[10px] rounded-full cursor-pointer`}
           >
             <FaCloudUploadAlt
@@ -97,7 +97,7 @@ const BrandComponent = () => {
             </div>
             <div className="  bg-primary-base z-50  w-[70px] absolute border border-[#4d75ff] rounded-[4px]">
               <Collapse isOpened={activeLimit} className="">
-                <div className=" text-white-muted space-y-[2px]   pt-3">
+                <div className=" text-white-muted space-y-[2px]  max-h-[250px] sidebarScrool  overflow-y-scroll    pt-3">
                   {showDataArray?.map((item, index) => {
                     return (
                       <div

@@ -91,14 +91,15 @@ const CategoryComponent = () => {
               </div>
               <div>
                 <FaChevronDown
-                  className={` ${activeLimit ? ' rotate-180' : ''
-                    }  duration-200 text-[14px] text-white-base`}
+                  className={` ${
+                    activeLimit ? ' rotate-180' : ''
+                  }  duration-200 text-[14px] text-white-base`}
                 />
               </div>
             </div>
-            <div className="  bg-primary-base z-50  w-[70px] absolute border border-[#4d75ff] rounded-[4px]">
+            <div className=" bg-primary-base  z-30  w-[70px]  overflow-hidden absolute border border-[#4d75ff] rounded-[4px]">
               <Collapse isOpened={activeLimit} className="">
-                <div className=" text-white-muted space-y-[2px]   pt-3">
+                <div className=" text-white-muted space-y-[2px]  max-h-[250px] sidebarScrool  overflow-y-scroll  pt-3">
                   {showDataArray?.map((item, index) => {
                     return (
                       <div
@@ -147,10 +148,10 @@ const CategoryComponent = () => {
                 Name
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              category code
+                category code
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              description
+                description
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 Action
@@ -172,8 +173,11 @@ const CategoryComponent = () => {
       </div>
 
       {/* add new branch  component  */}
-      <CommonModal title={"Add new Category"} active={active} setActive={setActive}>
-
+      <CommonModal
+        title={'Add new Category'}
+        active={active}
+        setActive={setActive}
+      >
         <AddNewCategory refetch={refetch} setActive={setActive} />
       </CommonModal>
     </div>
