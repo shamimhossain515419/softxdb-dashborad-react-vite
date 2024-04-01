@@ -8,6 +8,7 @@ import MyCard from '../../components/dashboardHome/MyCard';
 import Anallytics from '../../components/dashboardHome/Anallytics';
 
 const Home = () => {
+  console.log(import.meta.env.VITE_BASE_URL) // "123"
   return (
     <div>
        <div className="grid xl:grid-cols-3 gap-7">

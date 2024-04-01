@@ -1,22 +1,22 @@
 import { useForm } from 'react-hook-form';
-import { useCreateBranchMutation } from '../../../redux/features/api/branch/BranchApi';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { useCreateCategoryMutation } from '../../../redux/features/api/category/CategoryApi';
 
-const AddNewBranch = ({setActive,refetch}) => {
+
+const AddNewCategory = ({setActive,refetch}) => {
   const { register, handleSubmit } = useForm();
-  const [CreateBranch, { data, error }] =
-  useCreateBranchMutation();
+  const [CreateCategory, { data, error }] =
+  useCreateCategoryMutation();
 
   const onSubmit = data => {
     const NewData = {
       name: data.name,
-      address: data.address,
-      email: data.email,
-      mobile: data.mobile,
+      category_code: data.category_code,
+      description: data.description,
       added_by: 1,
     };
-    CreateBranch(NewData);
+    CreateCategory(NewData);
   };
   useEffect(() => {
     if (data?.status=="success") {
@@ -25,6 +25,7 @@ const AddNewBranch = ({setActive,refetch}) => {
        refetch()
     }
   }, [data,setActive,refetch]);
+
 return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className=" space-y-2">
@@ -38,7 +39,6 @@ return (
           </label>
           <input
             {...register('name')}
-            required
             type={'text'}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
             id=""
@@ -50,15 +50,15 @@ return (
             htmlFor=""
             className="text-[16px] font-medium capitalize text-white-base"
           >
-            Email
+            category code
             <span className="text-blue-base ">*</span>
           </label>
           <input
-            {...register('email')}
-            type={'email'}
+            {...register('category_code')}
+            type={'number'}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
             id=""
-            placeholder={'Enter Email'}
+            placeholder={'Enter Branch name'}
           />
         </div>
         <div className=" w-full">
@@ -66,34 +66,18 @@ return (
             htmlFor=""
             className="text-[16px] font-medium capitalize text-white-base"
           >
-            address
+            description
             <span className="text-blue-base ">*</span>
           </label>
           <input
-            {...register('address')}
+            {...register('description')}
             type={'text'}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
             id=""
-            placeholder={'Enter address'}
+            placeholder={'Enter Branch name'}
           />
         </div>
-        <div className=" w-full">
-          <label
-            htmlFor=""
-            className="text-[16px] font-medium capitalize text-white-base"
-          >
-            Mobile
-            <span className="text-blue-base ">*</span>
-          </label>
-          <input
-            {...register('mobile')}
-            type={'number'}
-             maxLength={15}
-            className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
-            id=""
-            placeholder={'Enter mobile'}
-          />
-        </div>
+        
         <div className=" py-2">
           <button
             className="bg-blue-base px-4 rounded-lg py-1  text-white-base text-[18px]"
@@ -107,4 +91,4 @@ return (
   );
 };
 
-export default AddNewBranch;
+export default AddNewCategory;

@@ -35,12 +35,12 @@ const BrandComponent = () => {
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
         <Link to={'/setup/branch'} className="text-white-base">
-          Branch
+        Brand
         </Link>
       </div>
       {/* items Brand  */}
       <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
-        <h1 className="text-white-base  text-[30px] font-bold"> Branch </h1>
+        <h1 className="text-white-base  text-[30px] font-bold"> Brand </h1>
         <div className=" flex gap-3 items-center ">
           <div
             onClick={() => setActiveUpload(false)}

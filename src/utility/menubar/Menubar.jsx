@@ -19,7 +19,7 @@ export const Menubar = [
       {
         id: 3,
         title: "Category",
-        path: "/category",
+        path: "/setup/category",
       },
       {
         id: 4,

@@ -7,6 +7,7 @@ import DirectSele from '../components/directSale/DirectSele';
 import AddToCart from '../components/addToCart/addToCart';
 import Branch from '../pages/branch/Branch';
 import Brand from '../pages/brand/Brand';
+import Category from '../pages/category/Category';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
     { path: '/add-to-cart', element: <AddToCart /> },
     { path: '/setup/branch', element: <Branch /> },
     { path: '/setup/brand', element: <Brand /> },
+    { path: '/setup/category', element: <Category /> },
   ],
   },
 ]);

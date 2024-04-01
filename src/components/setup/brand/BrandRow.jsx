@@ -3,27 +3,25 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import { MdDelete, MdModeEditOutline } from 'react-icons/md';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
-import { useRemoveBrandMutation, useUpdateBrandMutation } from '../../../redux/features/api/brand/BrandApi';
+import {useUpdateBrandMutation } from '../../../redux/features/api/brand/BrandApi';
 import CommonModal from '../../../ui/commonModal/commonModal';
+import DeleteCategory from '../Category/DeleteCategory';
+import DeleteBrand from './DeleteBrand';
 
 const BranchRow = ({ index, item, refetch }) => {
   const [active, setActive] = useState(false);
   const [activeEditModal, setActiveEditModal] = useState(false);
-  const { name, email, mobile, address } = item || {};
+  const { name } = item || {};
+  const [deleteModal, setDeleteOpenModal] = useState();
   const { register, handleSubmit } = useForm();
-  const [removeBranch, { data: resultRemoveBrnnch }] =
-    useRemoveBrandMutation();
-  const [updateBrand, { data: resultUpdate, error }] = useUpdateBrandMutation()
+const [updateBrand, { data: resultUpdate, error }] = useUpdateBrandMutation()
   const handleRemoveAction = () => {
     if (active) {
       setActive(false);
       return;
     }
   };
-  //  handle Delete 
-  const handleDelete = item => {
-    removeBranch(item?.id);
-  };
+ 
   // Handle Edit 
   const onSubmit = data => {
     const NewData = {
@@ -39,19 +37,22 @@ const BranchRow = ({ index, item, refetch }) => {
 
 
   useEffect(() => {
-    if (resultRemoveBrnnch?.status == 'success') {
-      toast.success(resultRemoveBrnnch?.message);
-      refetch()
-    }
+   
     if (resultUpdate?.status == 'success') {
       toast.success(resultUpdate?.message);
       refetch()
       setActiveEditModal(false)
     }
-  }, [resultRemoveBrnnch, refetch, resultUpdate, setActiveEditModal]);
+  }, [refetch, resultUpdate, setActiveEditModal]);
 
   return (
     <>
+     {/* delete modal  */}
+     <DeleteBrand
+        openModal={deleteModal}
+        setOpenModal={setDeleteOpenModal}
+        refetch={refetch}
+      />
       <tr
         onClick={handleRemoveAction}
         key={index}
@@ -70,7 +71,7 @@ const BranchRow = ({ index, item, refetch }) => {
             <div>
               <div className=" absolute  top-0 right-5 rounded-[10px] z-50 py-3  bg-primary-base h-full shadow-xl">
                 <div
-                  onClick={() => handleDelete(item)}
+                  onClick={() => setDeleteOpenModal(item)}
                   className="flex items-center px-6  py-1   gap-2 hover:bg-primary-muted duration-300 cursor-pointer"
                 >
                   <MdDelete className="text-[18px] text-red-base" />
