@@ -1,0 +1,31 @@
+export const TableData = [
+  {
+    photo: "photo1.jpg",
+    name: "Product",
+    code: "ABC123",
+    categories: "N/A",
+    type: "Product",
+    brand: "Brand X",
+    color: "#DB2379",
+    size: "Medium",
+    salePrice: "$20.00",
+    availableStock: 50,
+    status: true,
+    action: "Edit",
+  },
+  {
+    photo: "photo2.jpg",
+    name: "Product",
+    code: "DEF456",
+    categories: "N/A",
+    type: "Type B",
+    brand: "Brand Y",
+    color: "",
+    size: "Large",
+    salePrice: "$30.00",
+    availableStock: 30,
+    status: false,
+    action: "Edit",
+  },
+  // Add more data objects as needed
+];
