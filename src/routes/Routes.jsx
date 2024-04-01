@@ -8,6 +8,7 @@ import AddToCart from '../components/addToCart/addToCart';
 import Branch from '../pages/branch/Branch';
 import Brand from '../pages/brand/Brand';
 import Category from '../pages/category/Category';
+import Unit from '../pages/unit/Unit';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
     { path: '/setup/branch', element: <Branch /> },
     { path: '/setup/brand', element: <Brand /> },
     { path: '/setup/category', element: <Category /> },
+    { path: '/setup/unit', element: <Unit /> },
   ],
   },
 ]);

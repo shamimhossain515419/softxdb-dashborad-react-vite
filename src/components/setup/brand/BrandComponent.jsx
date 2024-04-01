@@ -68,7 +68,7 @@ const BrandComponent = () => {
               onClick={() => setActive(true)}
               className="border-[1.5px] border-[#4d75ff] rounded-md inline-block  text-white-base tex-[14px] px-4 py-2 overflow-hidden"
             >
-              Add new item
+              Add new Brand
             </button>
           </div>
         </div>

@@ -24,7 +24,7 @@ export const Menubar = [
       {
         id: 4,
         title: "Unit",
-        path: "/unit",
+        path: "/setup/unit",
       },
       {
         id: 5,

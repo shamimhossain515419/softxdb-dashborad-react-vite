@@ -1,75 +1,52 @@
 import { useState } from 'react';
 import { Collapse } from 'react-collapse';
-import { FaChevronDown, FaCloudUploadAlt } from 'react-icons/fa';
-import { FaArrowRight } from 'react-icons/fa6';
+import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
 import { IoSearchOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
-import { useGetBranchQuery } from '../../../redux/features/api/branch/BranchApi';
-import BranchRow from './BranchRow';
+import { useGetUnitQuery } from '../../../redux/features/api/unit/UnitApi';
+import AddNewUnit from './AddNewUnit';
 import CommonModal from '../../../ui/commonModal/commonModal';
-import AddNewBranch from './AddNewBranch';
-
-const BranchComponent = () => {
-  const [activeUpload, setActiveUpload] = useState(false);
-  const [showData, setShowData] = useState("25");
+import UnitRow from './UnitRow';
+const UnitComponent = () => {
+  const [showData, setShowData] = useState('25');
   const [activeLimit, setActiveLimit] = useState(false);
+  const { data: UnitData, isLoading, error, refetch } = useGetUnitQuery();
   const [active, setActive] = useState(false);
-  const { data: branchData, isLoading, error,refetch } = useGetBranchQuery()
   const showDataArray = [
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-    "21",
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
   ];
-  
- console.log(error)
 
-return (
-    <>
+  return (
+    <div>
       <div className="flex items-center gap-3">
         <Link to={'/'} className="text-white-muted">
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
         <Link to={'/setup/branch'} className="text-white-base">
-          Branch
+          Unit
         </Link>
       </div>
-      {/* items Branch  */}
+      {/* items Brand  */}
       <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
-        <h1 className="text-white-base  text-[30px] font-bold"> Branch </h1>
+        <h1 className="text-white-base  text-[30px] font-bold"> Unit </h1>
         <div className=" flex gap-3 items-center ">
-          <div
-            onClick={() => setActiveUpload(false)}
-            className={` ${activeUpload == false
-                ? ' bg-blue-base'
-                : ' border  border-[#4d75ff] '
-              }  p-[10px] rounded-full cursor-pointer`}
-          >
-            <FaCloudUploadAlt className={`text-[18px] text-white-base`} />
-          </div>
-          <div
-            onClick={() => setActiveUpload(true)}
-            className={` ${activeUpload == true
-                ? ' bg-blue-base'
-                : ' border  border-[#4d75ff] '
-              }  p-[10px] rounded-full cursor-pointer`}
-          >
-            <FaCloudUploadAlt
-              className={`text-[18px] rotate-180 text-white-base`}
-            />
-          </div>
-
           <div>
-            <button onClick={()=>setActive(true)} className="border-[1.5px] border-[#4d75ff] rounded-md inline-block  text-white-base tex-[14px] px-4 py-2 overflow-hidden">
-              Add new Branch
+            <button
+              onClick={() => setActive(true)}
+              className="border-[1.5px] border-[#4d75ff] rounded-md inline-block  text-white-base tex-[14px] px-4 py-2 overflow-hidden"
+            >
+              Add new Unit
             </button>
           </div>
         </div>
@@ -91,8 +68,9 @@ return (
               </div>
               <div>
                 <FaChevronDown
-                  className={` ${activeLimit ? " rotate-180" : ""
-                    }  duration-200 text-[14px] text-white-base`}
+                  className={` ${
+                    activeLimit ? ' rotate-180' : ''
+                  }  duration-200 text-[14px] text-white-base`}
                 />
               </div>
             </div>
@@ -119,7 +97,7 @@ return (
           <h1 className="text-[14px] font-normal">entries</h1>
         </div>
 
-        {/* search data  */}
+        {/* Brand data  */}
         <div className="border text-white-base rounded-[4px] border-[#4d75ff] flex items-center gap-4 px-2 py-1">
           <input
             className=" w-full bg-transparent placeholder:text-white-base  outline-0 border-none"
@@ -129,16 +107,14 @@ return (
             placeholder="Search..."
           />
           <button className="cursor-pointer">
-            {" "}
+            {' '}
             <IoSearchOutline className="text-[15px] text-white-base " />
           </button>
         </div>
       </div>
 
-
-        {/* branch table  */}
-
-        <div className="overflow-x-auto">
+      {/* Brand table  */}
+      <div className="overflow-x-auto">
         <table className="min-w-full  rounded-md overflow-hidden">
           <thead>
             <tr className="">
@@ -149,35 +125,34 @@ return (
                 Name
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              Address
+              short name
               </th>
+             
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-                Email
-              </th>
-              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-               Mobile
-              </th>
-            <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 Action
               </th>
               {/* Add more table headers here */}
             </tr>
           </thead>
           <tbody className="bg-primary-muted  text-white-base">
-            {branchData?.map((item, index) => <BranchRow refetch={refetch} index={index} item={item} key={index}/> )}
+            {UnitData?.map((item, index) => (
+              <UnitRow
+                refetch={refetch}
+                index={index}
+                item={item}
+                key={index}
+              />
+            ))}
           </tbody>
         </table>
       </div>
 
-     {/* add new branch  component  */}
-
-      <CommonModal title={"Add new branch"} active={active} setActive={setActive}>
-
-        <AddNewBranch refetch={refetch} setActive={setActive} />
+      {/* add new branch  component  */}
+      <CommonModal title={'Add new Unit'} active={active} setActive={setActive}>
+        <AddNewUnit refetch={refetch} setActive={setActive} />
       </CommonModal>
-
-    </>
+    </div>
   );
 };
 
-export default BranchComponent;
+export default UnitComponent;
