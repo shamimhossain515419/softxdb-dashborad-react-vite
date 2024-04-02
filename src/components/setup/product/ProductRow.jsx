@@ -27,8 +27,7 @@ const ProductRow = ({ index, item, refetch }) => {
     }
   };
 
-
- return (
+return (
     <>
       {/* delete modal  */}
       <DeleteProduct
@@ -45,7 +44,11 @@ const ProductRow = ({ index, item, refetch }) => {
         } relative`}
       >
         <td className="px-6 py-4 whitespace-nowrap"> {index + 1} </td>
-        <td className="px-6 py-4 whitespace-nowrap"> {photo} </td>
+        <td className="px-6 py-4 whitespace-nowrap">
+           <div className=' max-h-[80px] w-[80px] overflow-hidden'>
+            <img className=' h-full  object-contain' src={`${import.meta.env.VITE_BASE_URL}/api/v1/images/${photo}`} alt="" />
+           </div>
+        </td>
         <td className="px-6 py-4 whitespace-nowrap"> {name} </td>
         <td className="px-6 py-4 whitespace-nowrap"> {category_name} </td>
         <td className="px-6 py-4 whitespace-nowrap"> {unit_name} </td>
