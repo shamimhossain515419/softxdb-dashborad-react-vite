@@ -1,26 +1,34 @@
 export const CategoryData = [
   {
-    value: "Category",
+    id:2,
+    name: "Category",
+   },
+  {
+    id:2,
+    name: "Category",
   },
   {
-    value: "Category",
+    id:2,
+    name: "Customer",
   },
   {
-    value: "Customer",
+    id:2,
+    name: "Sale",
   },
   {
-    value: "Sale",
+    id:2,
+    name: "E-Commerce E-Commerce E-Commerce",
   },
   {
-    value: "E-Commerce E-Commerce E-Commerce",
+    id:2,
+    name: "Supplier",
   },
   {
-    value: "Supplier",
+    id:2,
+    name: "Inventory",
   },
   {
-    value: "Inventory",
-  },
-  {
-    value: "Report",
+    id:2,
+    name: "Report",
   },
 ];

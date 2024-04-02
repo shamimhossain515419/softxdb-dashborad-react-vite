@@ -55,7 +55,7 @@ const CategoryRow = ({ index, item, refetch }) => {
       <tr
         onClick={handleRemoveAction}
         key={index}
-        className={`${index % 2 === 0 ? 'bg-primary-muted' : ''} relative`}
+        className={`${index % 2 === 0 ? 'bg-primary-muted' : 'bg-primary-base'} relative`}
       >
         <td className="px-6 py-4 whitespace-nowrap"> {index + 1} </td>
         <td className="px-6 py-4 whitespace-nowrap"> {name} </td>

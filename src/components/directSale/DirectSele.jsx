@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import {
   FaAngleDoubleLeft,
@@ -18,7 +17,7 @@ import Datepick from '../../ui/datepick/Datepick ';
 import CommonModal from '../../ui/commonModal/commonModal';
 
 const DirectSele = () => {
-  // const [activeButton, setActiveButton] = useState(1);
+  const [category, setCategory] = useState({ name: 'Select category', id: 0 });
   const [active, setActive] = useState(false);
   const [activeUpload, setActiveUpload] = useState(false);
   const Categoryinfo = CategoryData;
@@ -76,7 +75,10 @@ const DirectSele = () => {
           </div>
 
           <div>
-            <button onClick={()=>setActive(true)} className="border-[1.5px] border-[#4d75ff] rounded-md inline-block  text-white-base tex-[14px] px-4 py-2 overflow-hidden">
+            <button
+              onClick={() => setActive(true)}
+              className="border-[1.5px] border-[#4d75ff] rounded-md inline-block  text-white-base tex-[14px] px-4 py-2 overflow-hidden"
+            >
               Add new item
             </button>
           </div>
@@ -230,29 +232,43 @@ const DirectSele = () => {
       <div className="my-20 ">
         <div className=" flex  flex-wrap lg:flex-nowrap  items-start  gap-12 xl:gap-8 ">
           <div className=" w-full">
-            <Selectitem title={'Categories'} CategoryData={Categoryinfo} />
+            <Selectitem
+              active={category}
+              setActive={setCategory}
+              title={'Categories'}
+              data={Categoryinfo}
+            />
           </div>
           <div className=" w-full">
-            <Selectitem title={'Available in'} CategoryData={Categoryinfo} />
+            <Selectitem
+              active={category}
+              setActive={setCategory}
+              title={'Available in'}
+              data={Categoryinfo}
+            />
           </div>
           <div className=" w-full">
-            <Selectitem title={'Item Type'} CategoryData={Categoryinfo} />
+            <Selectitem
+              active={category}
+              setActive={setCategory}
+              title={'Item Type'}
+              data={Categoryinfo}
+            />
           </div>
-          <div className='w-full flex justify-start  items-center gap-2 h-full '>
-             <div className=''>
-             <Datepick/>
-             </div>
-
+          <div className="w-full flex justify-start  items-center gap-2 h-full ">
+            <div className="">
+              <Datepick />
+            </div>
           </div>
-          <div className=' w-full'>
-          <div className=" flex  items-center gap-4 pt-7">
-            <button className="bg-blue-base px-4 py-2 rounded text-white-base">
-            Apply Filter
-            </button>
-            <button className=" hover:bg-blue-base hover:text-white-base bg-transparent border border-blue-base  px-4 py-2 rounded text-blue-base duration-300">
-             Filter Clear
-            </button>
-          </div>
+          <div className=" w-full">
+            <div className=" flex  items-center gap-4 pt-7">
+              <button className="bg-blue-base px-4 py-2 rounded text-white-base">
+                Apply Filter
+              </button>
+              <button className=" hover:bg-blue-base hover:text-white-base bg-transparent border border-blue-base  px-4 py-2 rounded text-blue-base duration-300">
+                Filter Clear
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -284,7 +300,8 @@ const DirectSele = () => {
                 <div className=" text-white-muted space-y-[2px]   pt-3">
                   {showDataArray?.map((item, index) => {
                     return (
-                      <div key={index}
+                      <div
+                        key={index}
                         onClick={() => {
                           setShowData(item), setActiveLimit(false);
                         }}
@@ -372,11 +389,24 @@ const DirectSele = () => {
         </div>
       </div>
 
-
       <div>
         <CommonModal active={active} setActive={setActive}>
-               <h1 className='text-white-base'> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde quas modi ab quae corporis quam asperiores eius, temporibus voluptate cupiditate cum aliquam dicta, possimus quidem! Quisquam fuga obcaecati expedita nihil quia quaerat temporibus animi excepturi debitis deserunt optio corporis tenetur, asperiores veritatis reprehenderit dolores ex eveniet possimus doloremque quam, quasi ea doloribus fugiat? Reiciendis explicabo rem, quo obcaecati, tempora suscipit animi aliquid tenetur repellendus deserunt quae nulla repellat quas? At voluptas commodi architecto neque voluptatibus, nisi totam inventore dolorum! Quas, consectetur natus. Odio sit exercitationem neque! Blanditiis sapiente quasi aliquid debitis asperiores neque, exercitationem ea magnam, necessitatibus itaque amet non!</h1>
-
+          <h1 className="text-white-base">
+            {' '}
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde quas
+            modi ab quae corporis quam asperiores eius, temporibus voluptate
+            cupiditate cum aliquam dicta, possimus quidem! Quisquam fuga
+            obcaecati expedita nihil quia quaerat temporibus animi excepturi
+            debitis deserunt optio corporis tenetur, asperiores veritatis
+            reprehenderit dolores ex eveniet possimus doloremque quam, quasi ea
+            doloribus fugiat? Reiciendis explicabo rem, quo obcaecati, tempora
+            suscipit animi aliquid tenetur repellendus deserunt quae nulla
+            repellat quas? At voluptas commodi architecto neque voluptatibus,
+            nisi totam inventore dolorum! Quas, consectetur natus. Odio sit
+            exercitationem neque! Blanditiis sapiente quasi aliquid debitis
+            asperiores neque, exercitationem ea magnam, necessitatibus itaque
+            amet non!
+          </h1>
         </CommonModal>
       </div>
     </div>

@@ -9,6 +9,9 @@ import Branch from '../pages/branch/Branch';
 import Brand from '../pages/brand/Brand';
 import Category from '../pages/category/Category';
 import Unit from '../pages/unit/Unit';
+import Size from '../pages/size/Size';
+import Color from '../pages/color/Color';
+import Product from '../pages/product/Product';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +27,9 @@ const router = createBrowserRouter([
     { path: '/setup/brand', element: <Brand /> },
     { path: '/setup/category', element: <Category /> },
     { path: '/setup/unit', element: <Unit /> },
+    { path: '/setup/size', element: <Size /> },
+    { path: '/setup/color', element: <Color /> },
+    { path: '/setup/product', element: <Product /> },
   ],
   },
 ]);

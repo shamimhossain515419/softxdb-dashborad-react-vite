@@ -29,17 +29,17 @@ export const Menubar = [
       {
         id: 5,
         title: "Size",
-        path: "/size",
+        path: "/setup/size",
       },
       {
         id: 6,
         title: "Color",
-        path: "/color",
+        path: "/setup/color",
       },
       {
         id: 7,
         title: "Product",
-        path: "/product",
+        path: "/setup/product",
       },
     ]
   },

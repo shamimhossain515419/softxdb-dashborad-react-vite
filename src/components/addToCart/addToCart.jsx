@@ -4,8 +4,10 @@ import { CategoryData } from '../../utility/selectItems/SelectItemsData';
 import { Link } from 'react-router-dom';
 import Selectitem from '../../ui/selectitem/Selectitem';
 import Input from '../../ui/inputField/Input';
+import { useState } from 'react';
 const AddToCart = () => {
   const Categoryinfo = CategoryData;
+  const [category,setCategory]=useState({name:"Select category",id:0})
    return (
     <>
       <div className="flex items-center gap-3">
@@ -33,13 +35,13 @@ const AddToCart = () => {
         <div className="lg:w-[20%] pt-4 lg:pt-0">
           <div className="  space-y-14">
             <div className=" w-full">
-              <Selectitem title={'Categories'} CategoryData={Categoryinfo} />
+              <Selectitem active={category} setActive={setCategory}  title={'Categories'} data={Categoryinfo} />
             </div>
             <div className=" w-full">
-              <Selectitem title={'Brands'} CategoryData={Categoryinfo} />
+              <Selectitem active={category} setActive={setCategory}  title={'Brands'} data={Categoryinfo} />
             </div>
             <div className=" w-full">
-              <Selectitem title={'Product'} CategoryData={Categoryinfo} />
+              <Selectitem active={category} setActive={setCategory}  title={'Product'} data={Categoryinfo} />
             </div>
           </div>
           <div className="mt-16">

@@ -3,14 +3,15 @@ import { Collapse } from 'react-collapse';
 import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
 import { IoSearchOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
-import { useGetUnitQuery } from '../../../redux/features/api/unit/UnitApi';
-import AddNewUnit from './AddNewUnit';
+import { useGetColorQuery } from '../../../redux/features/api/color/ColorsApi';
+import ColorRow from './ColorRow';
 import CommonModal from '../../../ui/commonModal/commonModal';
-import UnitRow from './UnitRow';
-const UnitComponent = () => {
+import AddNewColor from './AddNewColor';
+
+const ColorComponent = () => {
   const [showData, setShowData] = useState('25');
   const [activeLimit, setActiveLimit] = useState(false);
-  const { data: UnitData, isLoading, error, refetch } = useGetUnitQuery();
+  const { data: ColorData, refetch } = useGetColorQuery();
   const [active, setActive] = useState(false);
   const showDataArray = [
     '11',
@@ -34,19 +35,19 @@ const UnitComponent = () => {
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
         <Link to={'/setup/branch'} className="text-white-base">
-          Unit
+          color
         </Link>
       </div>
       {/* items Brand  */}
       <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
-        <h1 className="text-white-base  text-[30px] font-bold"> unit </h1>
+        <h1 className="text-white-base  text-[30px] font-bold"> color </h1>
         <div className=" flex gap-3 items-center ">
           <div>
             <button
               onClick={() => setActive(true)}
               className="border-[1.5px] border-[#4d75ff] rounded-md inline-block  text-white-base tex-[14px] px-4 py-2 overflow-hidden"
             >
-              Add new unit
+              Add new color
             </button>
           </div>
         </div>
@@ -125,18 +126,14 @@ const UnitComponent = () => {
                 Name
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              short name
-              </th>
-             
-              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 Action
               </th>
               {/* Add more table headers here */}
             </tr>
           </thead>
           <tbody className="bg-primary-muted  text-white-base">
-            {UnitData?.map((item, index) => (
-              <UnitRow
+            {ColorData?.map((item, index) => (
+              <ColorRow
                 refetch={refetch}
                 index={index}
                 item={item}
@@ -149,10 +146,10 @@ const UnitComponent = () => {
 
       {/* add new branch  component  */}
       <CommonModal title={'Add new color'} active={active} setActive={setActive}>
-        <AddNewUnit refetch={refetch} setActive={setActive} />
+        <AddNewColor refetch={refetch} setActive={setActive} />
       </CommonModal>
     </div>
   );
 };
 
-export default UnitComponent;
+export default ColorComponent;
