@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Selectitem from '../../ui/selectitem/Selectitem';
-import { CategoryData } from '../../utility/selectItems/SelectItemsData';
+import Selectitem from '../../../../ui/selectitem/Selectitem';
+import { CategoryData } from '../../../../utility/selectItems/SelectItemsData';
 
 const Address = () => {
   const Categoryinfo = CategoryData;

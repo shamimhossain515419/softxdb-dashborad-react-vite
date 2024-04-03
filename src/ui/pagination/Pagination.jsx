@@ -10,7 +10,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 const Pagination = ({ totalResult,setPage, per_page }) => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-
+ console.log(totalResult)
   // Get a specific query parameter
   const currentPage = searchParams.get('page');
   const data = Array.from({ length: totalResult }, (_, i) => `${i + 1}`);

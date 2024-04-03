@@ -3,14 +3,11 @@ import { Collapse } from 'react-collapse';
 import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
 import { IoSearchOutline } from 'react-icons/io5';
 import { Link, useSearchParams } from 'react-router-dom';
-import CommonModal from '../../../ui/commonModal/commonModal';
+import { useGetCustomerDataMutation } from '../../../redux/features/api/customer/customerApi';
+import CustomerRow from './CustomerRow';
 
-import SupplierRow from './PupplierRow';
-import AddNewSupplier from './AddNewSupplier';
-import { useGetSupplierDataMutation } from '../../../redux/features/api/supplier/supplier';
-import Pagination from '../../../ui/pagination/Pagination';
 
-const SupplierComponent = () => {
+const CustomerComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = searchParams.get('page');
 
@@ -18,8 +15,8 @@ const SupplierComponent = () => {
   const [page, setPage] = useState(currentPage ? currentPage : '1');
   const [activeLimit, setActiveLimit] = useState(false);
   const [keyword, setKeyword] = useState('');
-  const [getSupplier, { data: productData, refetch }] =
-    useGetSupplierDataMutation();
+  const [getCustomerData, { data: productData, refetch }] =
+    useGetCustomerDataMutation();
   const [active, setActive] = useState(false);
   const showDataArray = [
     '5',
@@ -41,36 +38,36 @@ const SupplierComponent = () => {
         limit: showData,
         page: page,
       };
-      getSupplier(data);
+      getCustomerData(data);
     }
     if (currentPage) {
       setPage(currentPage)
     }
-  }, [getSupplier, currentPage, setPage, showData, page, keyword]);
+  }, [getCustomerData, currentPage, setPage, showData, page, keyword]);
 
 
 return (
     <div>
       <div className="flex items-center gap-3">
-        <Link to={'/'} className="text-white-muted">
+        <Link to={'/setup/customer'} className="text-white-muted">
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/setup/branch'} className="text-white-base">
-          supplier
+        <Link to={'/setup/customer/add-customer'} className="text-white-base">
+          Customer
         </Link>
       </div>
-      {/* items supplier  */}
+      {/* items Customer  */}
       <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
-        <h1 className="text-white-base  text-[30px] font-bold"> Supplier </h1>
+        <h1 className="text-white-base  text-[30px] font-bold"> Customer </h1>
         <div className=" flex gap-3 items-center ">
           <div>
-            <button
+            <Link to={'/setup/customer/add-customer'}
               onClick={() => setActive(true)}
               className="border-[1.5px] border-[#4d75ff] rounded-md inline-block  text-white-base tex-[14px] px-4 py-2 overflow-hidden"
             >
-              Add new supplier
-            </button>
+              Add new Customer
+            </Link>
           </div>
         </div>
       </div>
@@ -163,6 +160,18 @@ return (
                 nid
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
+              credit limit
+              </th>
+              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
+              reference name
+              </th>
+              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
+              reference phone
+              </th>
+              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
+              reference_address
+              </th>
+              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 closing balance
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
@@ -173,7 +182,7 @@ return (
           </thead>
           <tbody className="bg-primary-muted  text-white-base">
             {productData?.suppliers?.map((item, index) => (
-              <SupplierRow
+              <CustomerRow
                 refetch={refetch}
                 index={index}
                 item={item}
@@ -186,21 +195,14 @@ return (
 
       {/* pagination  */}
 
-      <Pagination
+      {/* <Pagination
         setPage={setPage}
         per_page={showData}
         totalResult={productData?.count}
-      />
-      {/* add new branch  component  */}
-      <CommonModal
-        title={'Add new Supllier'}
-        active={active}
-        setActive={setActive}
-      >
-        <AddNewSupplier refetch={refetch} setActive={setActive} />
-      </CommonModal>
+      /> */}
+     
     </div>
   );
 };
 
-export default SupplierComponent;
+export default CustomerComponent;
