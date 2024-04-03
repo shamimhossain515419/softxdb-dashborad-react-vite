@@ -1,31 +1,52 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Collapse } from 'react-collapse';
 import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
 import { IoSearchOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import CommonModal from '../../../ui/commonModal/commonModal';
-import { useGetSizeQuery } from '../../../redux/features/api/size/sizesApi';
-import SizeRow from './SizeRow';
-import AddNewSize from './AddNewSize';
 
-const SizesComponent = () => {
-  const [showData, setShowData] = useState('25');
+import SupplierRow from './PupplierRow';
+import AddNewSupplier from './AddNewSupplier';
+import { useGetSupplierDataMutation } from '../../../redux/features/api/supplier/supplier';
+import Pagination from '../../../ui/pagination/Pagination';
+
+const SupplierComponent = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = searchParams.get('page');
+
+  const [showData, setShowData] = useState('5');
+  const [page, setPage] = useState(currentPage ? currentPage : '1');
   const [activeLimit, setActiveLimit] = useState(false);
-  const { data: SizeData, refetch } = useGetSizeQuery();
+  const [keyword, setKeyword] = useState('');
+  const [getSupplier, { data: productData, refetch }] =
+    useGetSupplierDataMutation();
   const [active, setActive] = useState(false);
   const showDataArray = [
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
+    '5',
+    '7',
+    '10',
     '16',
-    '17',
-    '18',
-    '19',
     '20',
-    '21',
+    '25',
+    '30',
+    '35',
+    '40',
+    '45',
+    '50',
   ];
+  useEffect(() => {
+    if (showData || page || keyword) {
+      const data = {
+        keyword: keyword,
+        limit: showData,
+        page: page,
+      };
+      getSupplier(data);
+    }
+    if (currentPage) {
+      setPage(currentPage)
+    }
+  }, [getSupplier, currentPage, setPage, showData, page, keyword]);
 
   return (
     <div>
@@ -35,19 +56,19 @@ const SizesComponent = () => {
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
         <Link to={'/setup/branch'} className="text-white-base">
-          size
+          supplier
         </Link>
       </div>
-      {/* items Brand  */}
+      {/* items supplier  */}
       <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
-        <h1 className="text-white-base  text-[30px] font-bold"> size </h1>
+        <h1 className="text-white-base  text-[30px] font-bold"> Supplier </h1>
         <div className=" flex gap-3 items-center ">
           <div>
             <button
               onClick={() => setActive(true)}
               className="border-[1.5px] border-[#4d75ff] rounded-md inline-block  text-white-base tex-[14px] px-4 py-2 overflow-hidden"
             >
-              Add new size
+              Add new supplier
             </button>
           </div>
         </div>
@@ -69,9 +90,8 @@ const SizesComponent = () => {
               </div>
               <div>
                 <FaChevronDown
-                  className={` ${
-                    activeLimit ? ' rotate-180' : ''
-                  }  duration-200 text-[14px] text-white-base`}
+                  className={` ${activeLimit ? ' rotate-180' : ''
+                    }  duration-200 text-[14px] text-white-base`}
                 />
               </div>
             </div>
@@ -101,6 +121,7 @@ const SizesComponent = () => {
         {/* Brand data  */}
         <div className="border text-white-base rounded-[4px] border-[#4d75ff] flex items-center gap-4 px-2 py-1">
           <input
+            onChange={e => setKeyword(e.target.value)}
             className=" w-full bg-transparent placeholder:text-white-base  outline-0 border-none"
             type="search"
             name=""
@@ -119,11 +140,29 @@ const SizesComponent = () => {
         <table className="min-w-full  rounded-md overflow-hidden">
           <thead>
             <tr className="">
+              <th className="px-6 py-5  w-[50px]  bg-blue-base text-left text-xs font-medium text-white-base uppercase ">
+                order
+              </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-                order number
+                photo
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 Name
+              </th>
+              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
+                phone
+              </th>
+              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
+                email
+              </th>
+              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
+                address
+              </th>
+              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
+                nid
+              </th>
+              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
+                closing balance
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 Action
@@ -132,8 +171,8 @@ const SizesComponent = () => {
             </tr>
           </thead>
           <tbody className="bg-primary-muted  text-white-base">
-            {SizeData?.map((item, index) => (
-              <SizeRow
+            {productData?.suppliers?.map((item, index) => (
+              <SupplierRow
                 refetch={refetch}
                 index={index}
                 item={item}
@@ -144,12 +183,23 @@ const SizesComponent = () => {
         </table>
       </div>
 
+      {/* pagination  */}
+
+      <Pagination
+        setPage={setPage}
+        per_page={showData}
+        totalResult={productData?.count}
+      />
       {/* add new branch  component  */}
-      <CommonModal title={'Add new unit'} active={active} setActive={setActive}>
-        <AddNewSize refetch={refetch} setActive={setActive} />
+      <CommonModal
+        title={'Add new Supllier'}
+        active={active}
+        setActive={setActive}
+      >
+        <AddNewSupplier refetch={refetch} setActive={setActive} />
       </CommonModal>
     </div>
   );
 };
 
-export default SizesComponent;
+export default SupplierComponent;

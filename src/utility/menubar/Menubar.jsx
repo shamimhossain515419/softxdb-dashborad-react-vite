@@ -41,6 +41,11 @@ export const Menubar = [
         title: "Product",
         path: "/setup/product",
       },
+      {
+        id: 8,
+        title: "Supplier",
+        path: "/setup/supplier",
+      },
     ]
   },
   {

@@ -12,6 +12,7 @@ import Unit from '../pages/unit/Unit';
 import Size from '../pages/size/Size';
 import Color from '../pages/color/Color';
 import Product from '../pages/product/Product';
+import Supplier from '../pages/supplier/Supplier';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
     { path: '/setup/size', element: <Size /> },
     { path: '/setup/color', element: <Color /> },
     { path: '/setup/product', element: <Product /> },
+    { path: '/setup/supplier', element: <Supplier /> },
   ],
   },
 ]);

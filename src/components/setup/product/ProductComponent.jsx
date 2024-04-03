@@ -119,7 +119,7 @@ const ProductComponent = () => {
         <table className="min-w-full  rounded-md overflow-hidden">
           <thead>
             <tr className="">
-              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase ">
+              <th className="px-6 py-5  w-[50px]  bg-blue-base text-left text-xs font-medium text-white-base uppercase ">
                 order 
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
