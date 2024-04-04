@@ -1,14 +1,13 @@
-import { useForm } from 'react-hook-form';
-import { useCreateBranchMutation } from '../../../redux/features/api/branch/BranchApi';
-import { useEffect } from 'react';
-import toast from 'react-hot-toast';
+import { useForm } from "react-hook-form";
+import { useCreateBranchMutation } from "../../../redux/features/api/branch/BranchApi";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
-const AddNewBranch = ({setActive,refetch}) => {
+const AddNewBranch = ({ setActive, refetch }) => {
   const { register, handleSubmit } = useForm();
-  const [CreateBranch, { data, error }] =
-  useCreateBranchMutation();
+  const [CreateBranch, { data }] = useCreateBranchMutation();
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     const NewData = {
       name: data.name,
       address: data.address,
@@ -19,13 +18,13 @@ const AddNewBranch = ({setActive,refetch}) => {
     CreateBranch(NewData);
   };
   useEffect(() => {
-    if (data?.status=="success") {
-       toast.success(data?.message);
-       setActive(false);
-       refetch()
+    if (data?.status == "success") {
+      toast.success(data?.message);
+      setActive(false);
+      refetch();
     }
-  }, [data,setActive,refetch]);
-return (
+  }, [data, setActive, refetch]);
+  return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className=" space-y-2">
         <div className=" w-full">
@@ -37,12 +36,12 @@ return (
             <span className="text-blue-base ">*</span>
           </label>
           <input
-            {...register('name')}
+            {...register("name")}
             required
-            type={'text'}
+            type={"text"}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
             id=""
-            placeholder={'Enter Branch name'}
+            placeholder={"Enter Branch name"}
           />
         </div>
         <div className=" w-full">
@@ -54,11 +53,11 @@ return (
             <span className="text-blue-base ">*</span>
           </label>
           <input
-            {...register('email')}
-            type={'email'}
+            {...register("email")}
+            type={"email"}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
             id=""
-            placeholder={'Enter Email'}
+            placeholder={"Enter Email"}
           />
         </div>
         <div className=" w-full">
@@ -70,11 +69,11 @@ return (
             <span className="text-blue-base ">*</span>
           </label>
           <input
-            {...register('address')}
-            type={'text'}
+            {...register("address")}
+            type={"text"}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
             id=""
-            placeholder={'Enter address'}
+            placeholder={"Enter address"}
           />
         </div>
         <div className=" w-full">
@@ -86,12 +85,12 @@ return (
             <span className="text-blue-base ">*</span>
           </label>
           <input
-            {...register('mobile')}
-            type={'number'}
-             maxLength={15}
+            {...register("mobile")}
+            type={"number"}
+            maxLength={15}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
             id=""
-            placeholder={'Enter mobile'}
+            placeholder={"Enter mobile"}
           />
         </div>
         <div className=" py-2">
