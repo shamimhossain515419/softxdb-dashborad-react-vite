@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { Collapse } from 'react-collapse';
-import { FaCaretDown } from 'react-icons/fa';
-import { CiSearch } from 'react-icons/ci';
+import { useState } from "react";
+import { Collapse } from "react-collapse";
+import { FaCaretDown } from "react-icons/fa";
+import { CiSearch } from "react-icons/ci";
 
 const SelectAndSearch = ({
   setSearchValue,
@@ -16,20 +16,18 @@ const SelectAndSearch = ({
     <>
       <div className=" w-full md:w-auto relative">
         <h1 className="text-[14px] pb-2 pl-1 font-semibold text-white-base py-1">
-          {' '}
-          {title}{' '}
+          {title}
         </h1>
         <div className="relative ">
           <div
             className={`${
-              open ? 'z-[500]' : 'z-0'
+              open ? "z-[500]" : "z-0"
             } w-full absolute  top-0 text-white-muted overflow-hidden bg-primary-base   border border-[#4d75ff] rounded-[4px]`}
           >
             {open ? (
               <div className=" w-full py-1  border-b border-[#4d75ff]   overflow-hidden flex justify-between items-center gap-4 text-white-base">
-                {' '}
                 <input
-                  onChange={e => setSearchValue(e.target.value)}
+                  onChange={(e) => setSearchValue(e.target.value)}
                   type="text"
                   placeholder="Please Search"
                   className=" text-[14px] px-2 w-[90%] outline-0  bg-transparent "
@@ -54,7 +52,7 @@ const SelectAndSearch = ({
                 <div>
                   <FaCaretDown
                     className={` ${
-                      active ? ' rotate-180' : ''
+                      active ? " rotate-180" : ""
                     }  duration-200 text-[16px]`}
                   />
                 </div>
