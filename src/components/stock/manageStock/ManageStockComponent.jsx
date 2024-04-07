@@ -1,20 +1,9 @@
 import { FaArrowRight } from 'react-icons/fa6';
-import Selectitem from '../../../ui/selectitem/Selectitem';
-import { CategoryData } from '../../../utility/selectItems/SelectItemsData';
-import { useState } from 'react';
-import Input from '../../../ui/inputField/Input';
 import AddToStockTable from './AddToStockTable';
 import { Link } from 'react-router-dom';
 import AddStockFrom from './AddStockFrom';
-import { useGetProductQuery } from '../../../redux/features/api/product/productApi';
 
 const ManageStockComponent = () => {
-  const Categoryinfo = CategoryData;
-
-  const [category, setCategory] = useState({
-    name: 'Select category',
-    id: 0,
-  });
   return (
     <>
       <div className="flex items-center gap-3">
@@ -41,7 +30,7 @@ const ManageStockComponent = () => {
         <div className=" pt-4 lg:pt-0 lg:w-[80%]">
           <AddToStockTable />
           {/* total  summary  */}
-          <div className=" flex justify-end items-center pt-9">
+          {/* <div className=" flex justify-end items-center pt-9">
             <div className="bg-primary-muted text-white-base p-4 space-y-4 rounded-md ">
               <div className=" grid grid-cols-2 gap-10 border-b border-[#4D75FF] pb-2">
                 <p>Total Quantity</p>
@@ -60,7 +49,7 @@ const ManageStockComponent = () => {
                 <p>1000.00</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

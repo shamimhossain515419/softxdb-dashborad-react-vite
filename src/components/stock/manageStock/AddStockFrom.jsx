@@ -1,29 +1,30 @@
-import SelectAndSearch from "../../../ui/selectAndSearch/SelectAndSearch";
-import { useGetProductQuery } from "../../../redux/features/api/product/productApi";
-import SelectItem from "../../../ui/selectitem/Selectitem";
-import { useGetColorQuery } from "../../../redux/features/api/color/ColorsApi";
-import { useGetSizeQuery } from "../../../redux/features/api/size/sizesApi";
-import { MdClose } from "react-icons/md";
-import toast from "react-hot-toast";
-import { useState } from "react";
-
+import SelectAndSearch from '../../../ui/selectAndSearch/SelectAndSearch';
+import { useGetProductQuery } from '../../../redux/features/api/product/productApi';
+import SelectItem from '../../../ui/selectitem/Selectitem';
+import { useGetColorQuery } from '../../../redux/features/api/color/ColorsApi';
+import { useGetSizeQuery } from '../../../redux/features/api/size/sizesApi';
+import { MdClose } from 'react-icons/md';
+import toast from 'react-hot-toast';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../../redux/features/api/stock/addProductSlice';
 const AddStockFrom = () => {
-  const [searchValue, setSearchValue] = useState("");
-
+  const [searchValue, setSearchValue] = useState('');
   // fetch data starting
   const { data: productData, refetch } = useGetProductQuery(searchValue);
   const { data: colors } = useGetColorQuery();
   const { data: sizes } = useGetSizeQuery();
   // fetch data end
 
-  const setKeyword = (word) => {
+  const dispatch = useDispatch();
+  const setKeyword = word => {
     setSearchValue(word);
     refetch();
   };
 
   // all states start
   const [product, setProduct] = useState({
-    name: "Select product",
+    name: 'Select product',
     id: 0,
   });
   const [color, setColor] = useState({});
@@ -33,33 +34,61 @@ const AddStockFrom = () => {
   const [quantity, setQuantity] = useState(0);
   // all states end
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
+  const handleKeyPress = event => {
+    if (event.key === 'Enter') {
       //check duplicate
-      const isExit = serials?.find((item) => item === event.target.value);
+      const isExit = serials?.find(item => item === event.target.value);
 
-      if (event.target.value == "") {
-        toast.error("Serial number is empty");
+      if (event.target.value == '') {
+        toast.error('Serial number is empty');
         return;
       }
       if (isExit) {
-        toast.error("This serial is already exited");
+        toast.error('This serial is already exited');
         return;
       }
       const newArray = [...serials, event.target.value];
       setSerial(newArray);
-      event.target.value = "";
+      event.target.value = '';
       setQuantity(serials?.length + 1);
     }
   };
 
   //
-  const removeSerial = (item) => {
-    const newArray = serials.filter((serial) => serial !== item);
+  const removeSerial = item => {
+    const newArray = serials.filter(serial => serial !== item);
     setSerial(newArray);
     setQuantity(serials?.length - 1);
   };
+  //  handle add  product
 
+  const handleAddProduct = () => {
+    const data = {
+      product_id: product?.id,
+      product_name: product?.name,
+      price: price,
+      quantity: quantity,
+      color_id: color,
+      size_id: size,
+      serials,
+    };
+    if (!quantity) return toast.error('Please provide a quantity');
+    if (!serials) return toast.error('Please provide a Serials number');
+    dispatch(addProduct(data));
+    setProduct({
+      name: 'Select product',
+      id: 0,
+    });
+    setQuantity('');
+    setSerial([]);
+    setPrice(0);
+    setColor({});
+    setSize({});
+  };
+
+  useEffect(() => {
+    setPrice(product?.selling_price);
+  }, [product]);
   return (
     <>
       {/* select  section  */}
@@ -69,7 +98,7 @@ const AddStockFrom = () => {
             <SelectAndSearch
               active={product}
               setActive={setProduct}
-              title={"Product"}
+              title={'Product'}
               data={productData?.products}
               setSearchValue={setKeyword}
             />
@@ -80,7 +109,7 @@ const AddStockFrom = () => {
           <div className=" pt-12">
             <SelectItem
               data={colors}
-              title={"Select Color"}
+              title={'Select Color'}
               active={color}
               setActive={setColor}
             />
@@ -92,7 +121,7 @@ const AddStockFrom = () => {
           <div className=" pt-12">
             <SelectItem
               data={sizes}
-              title={"Select Size"}
+              title={'Select Size'}
               active={size}
               setActive={setSize}
             />
@@ -111,13 +140,13 @@ const AddStockFrom = () => {
                 {/* <span className="text-blue-base "> {star ? "*" : ""}</span> */}
               </label>
               <div className="flex gap-2 flex-wrap items-center justify-center text-white-base">
-                {serials.map((serial, index) => {
+                {serials?.map((serial, index) => {
                   return (
                     <p
                       className="px-2 flex items-center gap-1 bg-stone-600"
                       key={index}
                     >
-                      {serial}{" "}
+                      {serial}{' '}
                       <MdClose
                         onClick={() => removeSerial(serial)}
                         className="cursor-pointer"
@@ -129,7 +158,7 @@ const AddStockFrom = () => {
               <input
                 type="text"
                 className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
-                name={name}
+                name={'serial'}
                 id=""
                 onKeyDown={handleKeyPress}
                 placeholder="serial"
@@ -137,8 +166,8 @@ const AddStockFrom = () => {
             </div>
           </div>
         )}
-        <div className="mt-12">
-          <div className=" space-y-5">
+        <div className={`${product?.selling_price ? 'mt-3' : 'mt-12'}`}>
+          <div className="space-y-5">
             <div className=" w-full">
               <label
                 htmlFor=""
@@ -150,11 +179,11 @@ const AddStockFrom = () => {
               <input
                 type="text"
                 className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
-                name={name}
+                name={'quantity'}
                 id=""
                 placeholder="00.."
                 value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
+                onChange={e => setQuantity(e.target.value)}
               />
             </div>
             <div className=" w-full">
@@ -166,19 +195,22 @@ const AddStockFrom = () => {
                 {/* <span className="text-blue-base "> {star ? "*" : ""}</span> */}
               </label>
               <input
-                type="text"
+                type="number"
                 className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
-                name={name}
+                name={'price'}
                 id=""
                 placeholder="00.."
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                defaultValue={price}
+                onChange={e => setPrice(e.target.value)}
               />
             </div>
           </div>
         </div>
         <div className=" flex i items-center gap-4 pt-7">
-          <button className="bg-blue-base px-4 py-2 rounded text-white-base">
+          <button
+            onClick={handleAddProduct}
+            className="bg-blue-base px-4 py-2 rounded text-white-base"
+          >
             Add to Cart
           </button>
         </div>
