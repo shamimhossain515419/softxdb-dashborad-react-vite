@@ -109,7 +109,6 @@ const ProductComponent = () => {
             placeholder="Search..."
           />
           <button className="cursor-pointer">
-            {" "}
             <IoSearchOutline className="text-[15px] text-white-base " />
           </button>
         </div>
