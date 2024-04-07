@@ -8,6 +8,7 @@ export const ProductApi = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
+    
     CreateProduct: builder.mutation({
       query: data => ({
         url: 'v1/product',

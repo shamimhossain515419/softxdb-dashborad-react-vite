@@ -11,7 +11,7 @@ import AddNewProduct from './AddNewProduct';
 const ProductComponent = () => {
   const [showData, setShowData] = useState('25');
   const [activeLimit, setActiveLimit] = useState(false);
-  const { data: productData, refetch } = useGetProductQuery();
+  const { data: productData, refetch } = useGetProductQuery('');
   const [active, setActive] = useState(false);
   const showDataArray = [
     '11',
@@ -156,7 +156,7 @@ const ProductComponent = () => {
             </tr>
           </thead>
           <tbody className="bg-primary-muted  text-white-base">
-            {productData?.map((item, index) => (
+            {productData?.products?.map((item, index) => (
               <ProductRow
                 refetch={refetch}
                 index={index}
