@@ -26,6 +26,7 @@ const ProductComponent = () => {
     '20',
     '21',
   ];
+  console.log(productData);
 
   return (
     <div>
@@ -108,7 +109,6 @@ const ProductComponent = () => {
             placeholder="Search..."
           />
           <button className="cursor-pointer">
-            {' '}
             <IoSearchOutline className="text-[15px] text-white-base " />
           </button>
         </div>

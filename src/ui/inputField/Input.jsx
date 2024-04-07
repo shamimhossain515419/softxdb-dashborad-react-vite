@@ -6,7 +6,7 @@ const Input = ({ type, title, placeholder, name, star }) => {
         className="text-[16px] font-medium capitalize text-white-base"
       >
         {title}
-        <span className="text-blue-base "> {star ? '*' : ''}</span>
+        <span className="text-blue-base "> {star ? "*" : ""}</span>
       </label>
       <input
         type={type}
