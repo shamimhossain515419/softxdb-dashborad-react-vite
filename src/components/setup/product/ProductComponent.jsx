@@ -1,40 +1,41 @@
-import { useState } from 'react';
-import { Collapse } from 'react-collapse';
-import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
-import { IoSearchOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
-import CommonModal from '../../../ui/commonModal/commonModal';
-import { useGetProductQuery } from '../../../redux/features/api/product/productApi';
-import ProductRow from './ProductRow';
-import AddNewProduct from './AddNewProduct';
+import { useState } from "react";
+import { Collapse } from "react-collapse";
+import { FaArrowRight, FaChevronDown } from "react-icons/fa";
+import { IoSearchOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import CommonModal from "../../../ui/commonModal/commonModal";
+import { useGetProductQuery } from "../../../redux/features/api/product/productApi";
+import ProductRow from "./ProductRow";
+import AddNewProduct from "./AddNewProduct";
 
 const ProductComponent = () => {
-  const [showData, setShowData] = useState('25');
+  const [showData, setShowData] = useState("25");
   const [activeLimit, setActiveLimit] = useState(false);
-  const { data: productData, refetch } = useGetProductQuery();
+  const { data: productData, refetch } = useGetProductQuery("");
   const [active, setActive] = useState(false);
   const showDataArray = [
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
   ];
+  console.log(productData);
 
   return (
     <div>
       <div className="flex items-center gap-3">
-        <Link to={'/'} className="text-white-muted">
+        <Link to={"/"} className="text-white-muted">
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/setup/branch'} className="text-white-base">
+        <Link to={"/setup/branch"} className="text-white-base">
           product
         </Link>
       </div>
@@ -70,7 +71,7 @@ const ProductComponent = () => {
               <div>
                 <FaChevronDown
                   className={` ${
-                    activeLimit ? ' rotate-180' : ''
+                    activeLimit ? " rotate-180" : ""
                   }  duration-200 text-[14px] text-white-base`}
                 />
               </div>
@@ -108,7 +109,7 @@ const ProductComponent = () => {
             placeholder="Search..."
           />
           <button className="cursor-pointer">
-            {' '}
+            {" "}
             <IoSearchOutline className="text-[15px] text-white-base " />
           </button>
         </div>
@@ -156,7 +157,7 @@ const ProductComponent = () => {
             </tr>
           </thead>
           <tbody className="bg-primary-muted  text-white-base">
-            {productData?.map((item, index) => (
+            {productData?.products?.map((item, index) => (
               <ProductRow
                 refetch={refetch}
                 index={index}
@@ -170,7 +171,7 @@ const ProductComponent = () => {
 
       {/* add new branch  component  */}
       <CommonModal
-        title={'Add new product'}
+        title={"Add new product"}
         active={active}
         setActive={setActive}
       >

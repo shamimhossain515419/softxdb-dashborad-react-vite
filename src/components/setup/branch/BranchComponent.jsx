@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { Collapse } from "react-collapse";
-import { FaChevronDown, FaCloudUploadAlt } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa6";
-import { IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useGetBranchQuery } from "../../../redux/features/api/branch/BranchApi";
 import BranchRow from "./BranchRow";
@@ -11,24 +8,8 @@ import AddNewBranch from "./AddNewBranch";
 import Loader from "../../../ui/loader/Loader";
 
 const BranchComponent = () => {
-  const [activeUpload, setActiveUpload] = useState(false);
-  const [showData, setShowData] = useState("25");
-  const [activeLimit, setActiveLimit] = useState(false);
   const [active, setActive] = useState(false);
   const { data: branchData, isLoading, refetch } = useGetBranchQuery();
-  const showDataArray = [
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-    "21",
-  ];
 
   if (isLoading) {
     return <Loader />;
