@@ -13,28 +13,30 @@ import Color from '../pages/color/Color';
 import Product from '../pages/product/Product';
 import Supplier from '../pages/supplier/Supplier';
 import Customer from '../pages/customer/Customer';
-import AddCustomer from '../components/setup/customer/Addcustomer/Customer';
+import MangeStock from '../pages/stock/manage-stock/MangeStock';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
-   children: [
-    { path: '/', element: <Home /> },
-    { path: '/setup/customer/', element: <Customer /> },
-    { path: '/items', element: <Items /> },
-    { path: '/direct-sale', element: <DirectSele /> },
-    { path: '/add-to-cart', element: <AddToCart /> },
-    { path: '/setup/branch', element: <Branch /> },
-    { path: '/setup/brand', element: <Brand /> },
-    { path: '/setup/category', element: <Category /> },
-    { path: '/setup/unit', element: <Unit /> },
-    { path: '/setup/size', element: <Size /> },
-    { path: '/setup/color', element: <Color /> },
-    { path: '/setup/product', element: <Product /> },
-    { path: '/setup/supplier', element: <Supplier /> },
-    { path: '/setup/customer/add-customer', element: <AddCustomer /> },
-   ],
+    children: [
+      { path: '/', element: <Home /> },
+      { path: '/setup/customer/', element: <Customer /> },
+      { path: '/items', element: <Items /> },
+      { path: '/direct-sale', element: <DirectSele /> },
+      { path: '/add-to-cart', element: <AddToCart /> },
+      { path: '/setup/branch', element: <Branch /> },
+      { path: '/setup/brand', element: <Brand /> },
+      { path: '/setup/category', element: <Category /> },
+      { path: '/setup/unit', element: <Unit /> },
+      { path: '/setup/size', element: <Size /> },
+      { path: '/setup/color', element: <Color /> },
+      { path: '/setup/product', element: <Product /> },
+      { path: '/setup/supplier', element: <Supplier /> },
+
+      // stock  path
+      { path: '/stock/manage-stock', element: <MangeStock /> },
+    ],
   },
 ]);
 

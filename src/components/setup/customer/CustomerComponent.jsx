@@ -5,7 +5,9 @@ import { IoSearchOutline } from 'react-icons/io5';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useGetCustomerDataMutation } from '../../../redux/features/api/customer/customerApi';
 import CustomerRow from './CustomerRow';
-
+import CommonModal from '../../../ui/commonModal/commonModal';
+import AddCustomer from './Addcustomer/Customer';
+import Pagination from '../../../ui/pagination/Pagination';
 
 const CustomerComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,7 +17,7 @@ const CustomerComponent = () => {
   const [page, setPage] = useState(currentPage ? currentPage : '1');
   const [activeLimit, setActiveLimit] = useState(false);
   const [keyword, setKeyword] = useState('');
-  const [getCustomerData, { data: productData, refetch }] =
+  const [getCustomerData, { data: productData, error, refetch }] =
     useGetCustomerDataMutation();
   const [active, setActive] = useState(false);
   const showDataArray = [
@@ -41,12 +43,11 @@ const CustomerComponent = () => {
       getCustomerData(data);
     }
     if (currentPage) {
-      setPage(currentPage)
+      setPage(currentPage);
     }
   }, [getCustomerData, currentPage, setPage, showData, page, keyword]);
 
-
-return (
+  return (
     <div>
       <div className="flex items-center gap-3">
         <Link to={'/setup/customer'} className="text-white-muted">
@@ -62,12 +63,12 @@ return (
         <h1 className="text-white-base  text-[30px] font-bold"> Customer </h1>
         <div className=" flex gap-3 items-center ">
           <div>
-            <Link to={'/setup/customer/add-customer'}
+            <button
               onClick={() => setActive(true)}
               className="border-[1.5px] border-[#4d75ff] rounded-md inline-block  text-white-base tex-[14px] px-4 py-2 overflow-hidden"
             >
               Add new Customer
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -88,8 +89,9 @@ return (
               </div>
               <div>
                 <FaChevronDown
-                  className={` ${activeLimit ? ' rotate-180' : ''
-                    }  duration-200 text-[14px] text-white-base`}
+                  className={` ${
+                    activeLimit ? ' rotate-180' : ''
+                  }  duration-200 text-[14px] text-white-base`}
                 />
               </div>
             </div>
@@ -160,16 +162,16 @@ return (
                 nid
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              credit limit
+                credit limit
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              reference name
+                reference name
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              reference phone
+                reference phone
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              reference_address
+                reference_address
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 closing balance
@@ -193,14 +195,21 @@ return (
         </table>
       </div>
 
+      <CommonModal
+        title={'Add new color'}
+        active={active}
+        setActive={setActive}
+      >
+        <AddCustomer refetch={refetch} setActive={setActive} />
+      </CommonModal>
+
       {/* pagination  */}
 
-      {/* <Pagination
+      <Pagination
         setPage={setPage}
         per_page={showData}
         totalResult={productData?.count}
-      /> */}
-     
+      />
     </div>
   );
 };

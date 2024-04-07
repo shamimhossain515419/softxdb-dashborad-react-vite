@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useRemoveCustomerMutation } from '../../../redux/features/api/customer/customerApi';
 
-const DeleteCustomer = ({ openModal, setOpenModal, refetch }) => {
-  const [removeCustomer, { data }] =
-  useRemoveCustomerMutation();
+const DeleteCustomer = ({ openModal, setOpenModal }) => {
+  const [removeCustomer, { data }] = useRemoveCustomerMutation();
   const deleteUserHandler = () => {
     removeCustomer(openModal?.id);
   };
@@ -12,32 +11,34 @@ const DeleteCustomer = ({ openModal, setOpenModal, refetch }) => {
   useEffect(() => {
     if (data?.status == 'success') {
       toast.success(data?.message);
-      refetch();
-      setOpenModal()
+      setOpenModal();
     }
-  }, [data, setOpenModal, refetch]);
- 
-return (
+  }, [data, setOpenModal]);
+
+  return (
     <div className="w-72 mx-auto flex items-center justify-center">
       {/* action modal  */}
       <div
         onClick={() => setOpenModal(false)}
-        className={`fixed flex justify-center items-center z-[100] ${openModal ? 'visible opacity-1' : 'invisible opacity-0'
-          } inset-0 backdrop-blur-sm   bg-[#0000004e] duration-100`}
+        className={`fixed flex justify-center items-center z-[100] ${
+          openModal ? 'visible opacity-1' : 'invisible opacity-0'
+        } inset-0 backdrop-blur-sm   bg-[#0000004e] duration-100`}
       >
         <div
           onClick={e_ => e_.stopPropagation()}
-          className={`absolute  bg-primary-muted w-80 p-6 text-center bg-white drop-shadow-2xl rounded-lg ${openModal
+          className={`absolute  bg-primary-muted w-80 p-6 text-center bg-white drop-shadow-2xl rounded-lg ${
+            openModal
               ? 'translate-y-0 opacity-1 duration-300'
               : 'translate-y-20 opacity-0 duration-150'
-            }`}
+          }`}
         >
           <div className="space-y-3 flex flex-col justify-center items-center">
             <svg
-              className={`${openModal
+              className={`${
+                openModal
                   ? 'scale-100 rotate-0 duration-200'
                   : 'scale-0 rotate-90'
-                } delay-100`}
+              } delay-100`}
               width={75}
               viewBox="0 0 1024 1024"
               xmlns="http://www.w3.org/2000/svg"

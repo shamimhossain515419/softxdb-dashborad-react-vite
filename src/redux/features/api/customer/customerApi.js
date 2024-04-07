@@ -1,13 +1,13 @@
-import { apiSlice } from "../apiSlice";
+import { apiSlice } from '../apiSlice';
 
-export  const CustomerApi=  apiSlice.injectEndpoints({
-   endpoints: builder =>({
+export const CustomerApi = apiSlice.injectEndpoints({
+  endpoints: builder => ({
     getCustomerData: builder.mutation({
-      query: (data) => ({
+      query: data => ({
         url: `v1/customer?keyword=${data?.keyword}&per_page=${data?.limit}&page=${data?.page}`,
         method: 'GET',
       }),
-     }),
+    }),
     CreateCustomer: builder.mutation({
       query: data => ({
         url: 'v1/customer',
@@ -16,13 +16,14 @@ export  const CustomerApi=  apiSlice.injectEndpoints({
       }),
     }),
     removeCustomer: builder.mutation({
-      query: (data) => ({
+      query: data => ({
         url: `v1/customer/${data}`,
         method: 'DELETE',
         body: data,
       }),
     }),
-   })
-})
+  }),
+});
 
-export const {  useGetCustomerDataMutation, useRemoveCustomerMutation }=CustomerApi
+export const { useGetCustomerDataMutation, useRemoveCustomerMutation } =
+  CustomerApi;

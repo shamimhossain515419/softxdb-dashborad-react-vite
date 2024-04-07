@@ -3,12 +3,24 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import { MdDelete, MdModeEditOutline } from 'react-icons/md';
 import DeleteCustomer from './DeleteCustomer';
 import CommonModal from '../../../ui/commonModal/commonModal';
+import UpdateCustmer from './UpdateCustomer';
 const CustomerRow = ({ index, item, refetch }) => {
   const [active, setActive] = useState(false);
   const [activeEditModal, setActiveEditModal] = useState(false);
   const [deleteModal, setDeleteOpenModal] = useState();
-  const { name, photo, nid, address,reference_address,reference_phone,credit_limit,reference_name, email, phone, closing_balance } =
-    item || {};
+  const {
+    name,
+    photo,
+    nid,
+    address,
+    reference_address,
+    reference_phone,
+    credit_limit,
+    reference_name,
+    email,
+    phone,
+    closing_balance,
+  } = item || {};
   const handleRemoveAction = () => {
     if (active) {
       setActive(false);
@@ -88,11 +100,11 @@ const CustomerRow = ({ index, item, refetch }) => {
         active={activeEditModal}
         setActive={setActiveEditModal}
       >
-        {/* <UpdateSupplier
+        <UpdateCustmer
           refetch={refetch}
           active={activeEditModal}
           setActive={setActiveEditModal}
-        ></UpdateSupplier> */}
+        ></UpdateCustmer>
       </CommonModal>
     </>
   );

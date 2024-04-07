@@ -1,17 +1,26 @@
 import { useState } from 'react';
-import { FaCheck } from 'react-icons/fa';
-import Address from './Address';
-import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 
-const AddInformation = ({ refetch, CloseModal }) => {
-  const [active, setActive] = useState(false);
-  const [category, setCategory] = useState({ name: 'Select category', id: 0 });
-  const [photo, setPhoto] = useState('');
+const UpdateCustmer = ({ refetch, setActive, active }) => {
+  const {
+    name,
+    photo,
+    nid,
+    address,
+    reference_address,
+    reference_phone,
+    credit_limit,
+    reference_name,
+    email,
+    phone,
+    closing_balance,
+    added_by,
+    id,
+  } = active || {};
+  const [selectPhoto, setSelectPhoto] = useState('');
   const [selectImage, setselectImage] = useState('');
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = data => {
-    console.log(data);
     const formData = new FormData();
     formData.append('name', data?.name);
     formData.append('branch_id', '1');
@@ -24,10 +33,10 @@ const AddInformation = ({ refetch, CloseModal }) => {
     formData.append('address', data?.address);
     formData.append('closing_balance', data?.closing_balance);
     formData.append('nid', data?.nid);
-    formData.append('photo', photo);
-    formData.append('added_by', '1');
+    formData.append('photo', selectPhoto ? selectPhoto : photo);
+    formData.append('added_by', added_by);
 
-    fetch(`https://vicexhost.com/api/v1/customer`, {
+    fetch(`https://vicexhost.com/api/v1/customer/update/${id}`, {
       method: 'POST',
       body: formData,
     })
@@ -36,9 +45,9 @@ const AddInformation = ({ refetch, CloseModal }) => {
         if (data.status === 'success') {
           toast.success(data?.message);
           setActive(false);
-          CloseModal(false);
           refetch();
           reset();
+          toast.success(data?.message);
           return;
         } else {
           toast.error('Failed to Add Product');
@@ -55,7 +64,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPhoto(file);
+        setSelectPhoto(file);
         setselectImage(reader.result);
       };
       reader.readAsDataURL(file);
@@ -63,9 +72,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
   };
 
   return (
-    <div>
-      {/* Basic Information  */}
-      <p className="text-[15px] text-white-base mt-7">Basic Information</p>
+    <>
       <form form onSubmit={handleSubmit(onSubmit)} action="">
         <div className="mt-8 grid  grid-cols-1 gap-9">
           <div className="">
@@ -82,6 +89,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   <input
                     {...register('name')}
                     type="text"
+                    defaultValue={name}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="name"
                     id=""
@@ -99,6 +107,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   <input
                     type="email"
                     {...register('email')}
+                    defaultValue={email}
                     required
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="email"
@@ -117,6 +126,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   <input
                     type="text"
                     {...register('address')}
+                    defaultValue={address}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="address"
                     id="address"
@@ -135,6 +145,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   <input
                     type="number"
                     {...register('nid')}
+                    defaultValue={nid}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="nid"
                     id=""
@@ -152,6 +163,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   <input
                     type="number"
                     {...register('phone')}
+                    defaultValue={phone}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="phone"
                     id=""
@@ -169,6 +181,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   <input
                     type="number"
                     {...register('credit_limit')}
+                    defaultValue={credit_limit}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="credit_limit"
                     id=""
@@ -187,6 +200,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   <input
                     type="text"
                     {...register('reference_name')}
+                    defaultValue={reference_name}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="reference_name"
                     id=""
@@ -205,6 +219,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   <input
                     type="text"
                     {...register('reference_address')}
+                    defaultValue={reference_address}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="reference_address"
                     id=""
@@ -222,6 +237,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   <input
                     type="number"
                     {...register('reference_phone')}
+                    defaultValue={reference_phone}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="reference_phone"
                     id=""
@@ -239,6 +255,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   <input
                     type="number"
                     {...register('closing_balance')}
+                    defaultValue={closing_balance}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="closing_balance"
                     id=""
@@ -246,18 +263,13 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   />
                 </div>
               </div>
-              {/* <div className=" h-[1px] w-full bg-blue-base mt-8 mb-4"></div> */}
+
               <div className=" h-[1px] w-full bg-blue-base mt-6 mb-4"></div>
             </div>
           </div>
           <div className="">
             <div className="border border-dashed border-blue-500 rounded-lg flex justify-center items-center gap-5  p-4 ">
-              {selectImage ? (
-                <div>
-                  {' '}
-                  <img src={selectImage} alt="" />{' '}
-                </div>
-              ) : (
+              <div className=" grid sm:grid-cols-2 gap-7">
                 <div>
                   <div className="text-center space-y-3 pt-2">
                     <svg
@@ -305,55 +317,28 @@ const AddInformation = ({ refetch, CloseModal }) => {
                     </div>
                   </div>
                 </div>
-              )}
-            </div>
-          </div>
-        </div>
-        {!active && (
-          <div className="flex justify-end items-center gap-3 mt-10">
-            <div className=" flex items-center gap-6">
-              <button className="text-[14px] text-white-base  bg-blue-base px-6 py-2 rounded ">
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="text-[14px] text-white-base  border border-blue-base hover:bg-blue-base duration-300 px-6 py-2 rounded "
-              >
-                Save
-              </button>
-            </div>
-          </div>
-        )}
-      </form>
-
-      {/* add address toggle button  */}
-      <div className="mt-8 grid  xl:grid-cols-7 gap-9">
-        <div className=" lg:col-span-5">
-          <div className="  inline-block mt-3">
-            <div
-              onClick={() => setActive(!active)}
-              className="bg-blue-base relative flex justify-center items-center  h-[30px] w-[55px]  cursor-pointer px-5 py-1 rounded-full"
-            >
-              <div
-                className={` ${
-                  active
-                    ? ' right-1 bg-white-base  '
-                    : ' left-1 bg-primary-base'
-                } w-[25px] absolute  h-[25px]  flex justify-center items-center  rounded-full`}
-              >
-                {active && <FaCheck className="text-[16px] text-blue-base " />}
+                <div>
+                  <img src={selectImage ? selectImage : photo} alt="" />
+                </div>
               </div>
             </div>
           </div>
-          {active && (
-            <div className=" h-[1px] w-full bg-blue-base mt-6 mb-4"></div>
-          )}
         </div>
-      </div>
-
-      {active && <Address />}
-    </div>
+        <div className="flex justify-end items-center gap-3 mt-10">
+          <div className=" flex items-center gap-6">
+            <button className="text-[14px] text-white-base  bg-blue-base px-6 py-2 rounded ">
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="text-[14px] text-white-base  border border-blue-base hover:bg-blue-base duration-300 px-6 py-2 rounded "
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
+    </>
   );
 };
-
-export default AddInformation;
+export default UpdateCustmer;

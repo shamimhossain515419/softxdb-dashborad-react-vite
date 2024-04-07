@@ -120,34 +120,34 @@ const ProductComponent = () => {
           <thead>
             <tr className="">
               <th className="px-6 py-5  w-[50px]  bg-blue-base text-left text-xs font-medium text-white-base uppercase ">
-                order 
+                order
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              photo
+                photo
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 Name
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              category 
+                category
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              unit 
+                unit
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              brand 
+                brand
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              selling price
+                selling price
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              purchase price
+                purchase price
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              product code
+                product code
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              size status
+                size status
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 Action
@@ -169,7 +169,11 @@ const ProductComponent = () => {
       </div>
 
       {/* add new branch  component  */}
-      <CommonModal title={'Add new product'} active={active} setActive={setActive}>
+      <CommonModal
+        title={'Add new product'}
+        active={active}
+        setActive={setActive}
+      >
         <AddNewProduct refetch={refetch} setActive={setActive} />
       </CommonModal>
     </div>
