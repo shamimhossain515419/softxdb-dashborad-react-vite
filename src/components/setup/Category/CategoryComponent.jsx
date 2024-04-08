@@ -36,12 +36,12 @@ const CategoryComponent = () => {
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
         <Link to={'/setup/branch'} className="text-white-base">
-          Cagtegory
+          Category
         </Link>
       </div>
       {/* items Brand  */}
       <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
-        <h1 className="text-white-base  text-[30px] font-bold"> Cagtegory </h1>
+        <h1 className="text-white-base  text-[30px] font-bold"> Category </h1>
         <div className=" flex gap-3 items-center ">
           {/* <div
             onClick={() => setActiveUpload(false)}
@@ -69,7 +69,7 @@ const CategoryComponent = () => {
               onClick={() => setActive(true)}
               className="border-[1.5px] border-[#4d75ff] rounded-md inline-block  text-white-base tex-[14px] px-4 py-2 overflow-hidden"
             >
-              Add new Cagtegory
+              Add new category
             </button>
           </div>
         </div>

@@ -7,6 +7,7 @@ import { useGetBrandQuery } from '../../../redux/features/api/brand/BrandApi';
 import BranchRow from './BrandRow';
 import CommonModal from '../../../ui/commonModal/commonModal';
 import AddNewBrand from './AddNewBrand';
+import Loader from '../../../ui/loader/Loader';
 const BrandComponent = () => {
   const [activeUpload, setActiveUpload] = useState(false);
   const [showData, setShowData] = useState('25');
@@ -27,6 +28,9 @@ const BrandComponent = () => {
     '21',
   ];
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div>
       <div className="flex items-center gap-3">
@@ -44,19 +48,21 @@ const BrandComponent = () => {
         <div className=" flex gap-3 items-center ">
           <div
             onClick={() => setActiveUpload(false)}
-            className={` ${activeUpload == false
-              ? ' bg-blue-base'
-              : ' border  border-[#4d75ff] '
-              }  p-[10px] rounded-full cursor-pointer`}
+            className={` ${
+              activeUpload == false
+                ? ' bg-blue-base'
+                : ' border  border-[#4d75ff] '
+            }  p-[10px] rounded-full cursor-pointer`}
           >
             <FaCloudUploadAlt className={`text-[18px] text-white-base`} />
           </div>
           <div
             onClick={() => setActiveUpload(true)}
-            className={` ${activeUpload == true
-              ? ' bg-blue-base'
-              : ' border  border-[#4d75ff] '
-              }  p-[10px] rounded-full cursor-pointer`}
+            className={` ${
+              activeUpload == true
+                ? ' bg-blue-base'
+                : ' border  border-[#4d75ff] '
+            }  p-[10px] rounded-full cursor-pointer`}
           >
             <FaCloudUploadAlt
               className={`text-[18px] rotate-180 text-white-base`}
@@ -90,8 +96,9 @@ const BrandComponent = () => {
               </div>
               <div>
                 <FaChevronDown
-                  className={` ${activeLimit ? ' rotate-180' : ''
-                    }  duration-200 text-[14px] text-white-base`}
+                  className={` ${
+                    activeLimit ? ' rotate-180' : ''
+                  }  duration-200 text-[14px] text-white-base`}
                 />
               </div>
             </div>
@@ -165,8 +172,11 @@ const BrandComponent = () => {
       </div>
 
       {/* add new branch  component  */}
-      <CommonModal title={"Add new brand"} active={active} setActive={setActive}>
-
+      <CommonModal
+        title={'Add new brand'}
+        active={active}
+        setActive={setActive}
+      >
         <AddNewBrand refetch={refetch} setActive={setActive} />
       </CommonModal>
     </div>

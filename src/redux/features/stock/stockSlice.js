@@ -25,7 +25,11 @@ const addProductSlice = createSlice({
         product => product.size_id === size_id
       );
 
-      if (existingProductIndex !== -1) {
+      if (
+        existingProductIndex !== -1 ||
+        existingProductColor !== -1 ||
+        existingProductSize !== -1
+      ) {
         // If product with the same product_id already exists, update its properties
         state.products.push(action.payload);
       } else {
