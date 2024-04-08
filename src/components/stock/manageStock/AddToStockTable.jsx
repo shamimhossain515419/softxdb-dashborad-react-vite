@@ -1,13 +1,14 @@
 import { RiDeleteBin6Fill } from 'react-icons/ri';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  deleteAllProducts,
-  deleteProduct,
-} from '../../../redux/features/api/stock/addProductSlice';
+
 import { useCreateStockMutation } from '../../../redux/features/api/stock/stockApi';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { formattedDate } from '../../../utility/formattedDate/formattedDate';
+import {
+  deleteAllProducts,
+  deleteProduct,
+} from '../../../redux/features/stock/addProductSlice';
 const AddToStockTable = () => {
   const dispatch = useDispatch();
   const { products } = useSelector(state => state?.products);

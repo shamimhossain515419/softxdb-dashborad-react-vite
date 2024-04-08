@@ -14,12 +14,17 @@ const addProductSlice = createSlice({
       const { product_id, color_id, size_id } = action.payload;
 
       const existingProductIndex = state.products.findIndex(
-        product =>
-          product.product_id === product_id &&
-          product.product_id === product_id &&
-          (product.color_id !== color_id || product.size_id !== size_id)
+        product => product.product_id === product_id
       );
-      console.log(existingProductIndex, 'dfdfd');
+
+      const existingProductColor = state.products.findIndex(
+        product => product.color_id === color_id
+      );
+
+      const existingProductSize = state.products.findIndex(
+        product => product.size_id === size_id
+      );
+
       if (existingProductIndex !== -1) {
         // If product with the same product_id already exists, update its properties
         state.products.push(action.payload);
