@@ -1,46 +1,50 @@
-import { RiDeleteBin6Fill } from 'react-icons/ri';
-import { useSelector, useDispatch } from 'react-redux';
+import { RiDeleteBin6Fill } from "react-icons/ri";
+import { useSelector, useDispatch } from "react-redux";
 
-import { useCreateStockMutation } from '../../../redux/features/api/stock/stockApi';
-import { useEffect } from 'react';
-import toast from 'react-hot-toast';
-import { formattedDate } from '../../../utility/formattedDate/formattedDate';
+import { useCreateStockMutation } from "../../../redux/features/api/stock/stockApi";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
+import { formattedDate } from "../../../utility/formattedDate/formattedDate";
 import {
   deleteAllProducts,
   deleteProduct,
-} from '../../../redux/features/stock/stockSlice';
+} from "../../../redux/features/stock/addProductSlice";
+
 const AddToStockTable = () => {
   const dispatch = useDispatch();
-  const { products } = useSelector(state => state?.products);
+  const { products } = useSelector((state) => state?.products);
   const [CreateStock, { daa: stockResult, error, isLoading }] =
     useCreateStockMutation();
 
-  const stockData = products?.map(item => {
-    const createNewData = {
-      product_id: item?.product_id,
-      price: item?.price,
-      quantity: item?.quantity,
-      color_id: item?.color_id?.id,
-      size_id: item?.size_id?.id,
-      serials: item?.serials,
-    };
-    return createNewData;
-  });
+  // const stockData = products?.map((item) => {
+  //   const createNewData = {
+  //     product_id: item?.product_id,
+  //     price: item?.price,
+  //     quantity: item?.quantity,
+  //     color_id: item?.color_id?.id,
+  //     size_id: item?.size_id?.id,
+  //     serials: item?.serials,
+  //     //  status
+  //   };
+  //   return createNewData;
+  // });
 
   // add stock
   const handleAddStock = () => {
     const data = {
-      added_by: '1',
-      branch_id: '1',
-      stock_date: formattedDate(),
-      items: stockData,
+      added_by: "1",
+      branch_id: "1",
+      stock_date: "2024-04-07",
+      items: products,
     };
+
     console.log(data);
     CreateStock(data);
   };
+  console.log(products);
 
   useEffect(() => {
-    if (stockResult?.status == 'success') {
+    if (stockResult?.status == "success") {
       toast.success(stockResult?.message);
       dispatch(deleteAllProducts());
     }
@@ -74,9 +78,7 @@ const AddToStockTable = () => {
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 Price
               </th>
-              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-                Total Price
-              </th>
+
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 Remove
               </th>
@@ -88,7 +90,7 @@ const AddToStockTable = () => {
               <tr
                 key={index}
                 className={`${
-                  index % 2 === 0 ? '' : ''
+                  index % 2 === 0 ? "" : ""
                 } border-b border-[#4D75FF]`}
               >
                 <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
@@ -96,11 +98,10 @@ const AddToStockTable = () => {
                   {item?.product_name}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {item?.color_id?.name ? item?.color_id?.name : 'N/A'}
+                  {item?.color_id ? item?.color_name : "N/A"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {' '}
-                  {item?.size_id?.name ? item?.size_id?.name : 'N/A'}
+                  {item?.size_id ? item?.size_name : "N/A"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {item?.serials?.[0]}
@@ -110,12 +111,10 @@ const AddToStockTable = () => {
                 </td>
 
                 <td className="px-6 py-4 whitespace-nowrap"> {item?.price}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {parseFloat(item?.price) * item?.quantity}
-                </td>
+
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div
-                    onClick={() => dispatch(deleteProduct(item?.product_id))}
+                    onClick={() => dispatch(deleteProduct(index))}
                     className="cursor-pointer text-[#FF0000]"
                   >
                     <RiDeleteBin6Fill className="text-[20px]" />
@@ -131,7 +130,7 @@ const AddToStockTable = () => {
           onClick={handleAddStock}
           className="bg-blue-base px-4 py-2 rounded text-white-base"
         >
-          {isLoading ? 'Loading...' : ' Add to Stock'}
+          {isLoading ? "Loading..." : " Add to Stock"}
         </button>
       </div>
     </div>
