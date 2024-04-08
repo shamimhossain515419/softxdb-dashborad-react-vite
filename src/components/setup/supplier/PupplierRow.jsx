@@ -20,12 +20,6 @@ const SupplierRow = ({ index, item, refetch }) => {
 
   return (
     <>
-      {/* delete modal  */}
-      <DeleteSupplier
-        openModal={deleteModal}
-        setOpenModal={setDeleteOpenModal}
-        refetch={refetch}
-      />
       {/* table row  */}
       <tr
         onClick={handleRemoveAction}
@@ -84,6 +78,14 @@ const SupplierRow = ({ index, item, refetch }) => {
         </td>
       </tr>
 
+      {/* delete modal  */}
+      {deleteModal && (
+        <DeleteSupplier
+          openModal={deleteModal}
+          setOpenModal={setDeleteOpenModal}
+          refetch={refetch}
+        />
+      )}
       {/* update modal  */}
       <CommonModal
         title={'Edit:' + ' ' + activeEditModal?.name}

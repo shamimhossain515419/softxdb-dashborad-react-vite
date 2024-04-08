@@ -15,7 +15,7 @@ const AddToStockTable = () => {
 
   // add stock
   const [isLoading, setLoading] = useState(false);
-  const [date, setData] = useState(false);
+  const [date, setDate] = useState('');
 
   const handleAddStock = () => {
     setLoading(true);

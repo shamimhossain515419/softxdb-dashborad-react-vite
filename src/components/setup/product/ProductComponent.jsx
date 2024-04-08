@@ -42,8 +42,8 @@ const ProductComponent = () => {
           product
         </Link>
       </div>
-      {/* items Brand  */}
-      <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
+      {/* items Product  */}
+      <div className="py-5 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
         <h1 className="text-white-base  text-[30px] font-bold"> product </h1>
         <div className=" flex gap-3 items-center ">
           <div>
@@ -57,7 +57,7 @@ const ProductComponent = () => {
         </div>
       </div>
       {/* filter and limit  */}
-      <div className=" flex flex-col lg:flex-row lg:items-center justify-between gap-3 py-10">
+      <div className=" flex flex-col lg:flex-row lg:items-center justify-between gap-3 py-5">
         {/* show  limit data  */}
         <div className=" flex items-center gap-3 text-white-base">
           <h1 className="text-[14px] font-normal">Show</h1>
@@ -102,7 +102,7 @@ const ProductComponent = () => {
           <h1 className="text-[14px] font-normal">entries</h1>
         </div>
 
-        {/* Brand data  */}
+        {/* Product data  */}
         <div className="border text-white-base rounded-[4px] border-[#4d75ff] flex items-center gap-4 px-2 py-1">
           <input
             className=" w-full bg-transparent placeholder:text-white-base  outline-0 border-none"
@@ -117,7 +117,7 @@ const ProductComponent = () => {
         </div>
       </div>
 
-      {/* Brand table  */}
+      {/* Product table  */}
       <div className="overflow-x-auto">
         <table className="min-w-full  rounded-md overflow-hidden">
           <thead>
@@ -138,7 +138,7 @@ const ProductComponent = () => {
                 unit
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-                brand
+                Product
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 selling price

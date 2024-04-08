@@ -30,12 +30,6 @@ const CustomerRow = ({ index, item, refetch }) => {
 
   return (
     <>
-      {/* delete modal  */}
-      <DeleteCustomer
-        openModal={deleteModal}
-        setOpenModal={setDeleteOpenModal}
-        refetch={refetch}
-      />
       {/* table row  */}
       <tr
         onClick={handleRemoveAction}
@@ -97,6 +91,15 @@ const CustomerRow = ({ index, item, refetch }) => {
           )}
         </td>
       </tr>
+
+      {/* delete modal  */}
+      {deleteModal && (
+        <DeleteCustomer
+          openModal={deleteModal}
+          setOpenModal={setDeleteOpenModal}
+          refetch={refetch}
+        />
+      )}
 
       {/* update modal  */}
       <CommonModal

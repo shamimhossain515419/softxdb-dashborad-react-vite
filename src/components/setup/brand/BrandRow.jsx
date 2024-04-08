@@ -44,12 +44,6 @@ const BranchRow = ({ index, item, refetch }) => {
 
   return (
     <>
-      {/* delete modal  */}
-      <DeleteBrand
-        openModal={deleteModal}
-        setOpenModal={setDeleteOpenModal}
-        refetch={refetch}
-      />
       <tr
         onClick={handleRemoveAction}
         key={index}
@@ -93,6 +87,16 @@ const BranchRow = ({ index, item, refetch }) => {
         </td>
       </tr>
 
+      {/* delete modal  */}
+      {deleteModal && (
+        <DeleteBrand
+          openModal={deleteModal}
+          setOpenModal={setDeleteOpenModal}
+          refetch={refetch}
+        />
+      )}
+
+      {/* edit component  */}
       <CommonModal
         title={'Edit:' + ' ' + activeEditModal?.name}
         active={activeEditModal}

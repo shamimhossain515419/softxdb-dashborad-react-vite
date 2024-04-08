@@ -66,6 +66,11 @@ export const Menubar = [
       },
       {
         id: 2,
+        title: 'Add Stock',
+        path: '/stock/add-stock',
+      },
+      {
+        id: 2,
         title: 'Items',
         path: '/',
       },
@@ -246,44 +251,14 @@ export const Menubar = [
   },
   {
     id: 1,
-    title: 'POS',
+    title: 'Report',
     path: '/',
     icon: <FaRegSquarePlus></FaRegSquarePlus>,
     submenu: [
       {
         id: 1,
-        title: 'Category',
-        path: '/',
-      },
-      {
-        id: 2,
-        title: 'Items',
-        path: '/',
-      },
-      {
-        id: 3,
-        title: 'Manufacturer',
-        path: '/',
-      },
-      {
-        id: 4,
-        title: 'Brand',
-        path: '/',
-      },
-      {
-        id: 5,
-        title: 'Colors',
-        path: '/',
-      },
-      {
-        id: 6,
-        title: 'Size types',
-        path: '/',
-      },
-      {
-        id: 7,
-        title: 'Attribute Set',
-        path: '/',
+        title: 'Report',
+        path: '/stock/report',
       },
     ],
   },
@@ -459,49 +434,7 @@ export const Menubar = [
       },
     ],
   },
-  {
-    id: 1,
-    title: 'Report',
-    path: '/',
-    icon: <FaRegSquarePlus></FaRegSquarePlus>,
-    submenu: [
-      {
-        id: 1,
-        title: 'Category',
-        path: '/',
-      },
-      {
-        id: 2,
-        title: 'Items',
-        path: '/',
-      },
-      {
-        id: 3,
-        title: 'Manufacturer',
-        path: '/',
-      },
-      {
-        id: 4,
-        title: 'Brand',
-        path: '/',
-      },
-      {
-        id: 5,
-        title: 'Colors',
-        path: '/',
-      },
-      {
-        id: 6,
-        title: 'Size types',
-        path: '/',
-      },
-      {
-        id: 7,
-        title: 'Attribute Set',
-        path: '/',
-      },
-    ],
-  },
+
   {
     id: 1,
     title: 'Configuration',
