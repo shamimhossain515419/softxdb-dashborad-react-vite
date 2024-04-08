@@ -85,6 +85,7 @@ const AddStockFrom = () => {
     setColor({});
     setSize({});
   };
+  console.log(product);
 
   useEffect(() => {
     setPrice(product?.selling_price);

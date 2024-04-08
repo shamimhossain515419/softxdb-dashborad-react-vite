@@ -34,6 +34,7 @@ const AddToStockTable = () => {
       stock_date: formattedDate(),
       items: stockData,
     };
+    console.log(data);
     CreateStock(data);
   };
 
@@ -43,7 +44,8 @@ const AddToStockTable = () => {
       dispatch(deleteAllProducts());
     }
   }, [stockResult]);
-
+  console.log(stockResult);
+  console.log(error);
   return (
     <div>
       <div className="overflow-x-auto">

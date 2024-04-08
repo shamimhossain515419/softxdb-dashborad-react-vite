@@ -1,4 +1,4 @@
-import {useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useGetCategoryQuery } from '../../../redux/features/api/category/CategoryApi';
@@ -7,8 +7,8 @@ import Selectitem from '../../../ui/selectitem/Selectitem';
 import { useGetBrandQuery } from '../../../redux/features/api/brand/BrandApi';
 import { FaCheck } from 'react-icons/fa';
 const AddNewProduct = ({ setActive, refetch }) => {
-  const { register, handleSubmit,reset } = useForm();
- 
+  const { register, handleSubmit, reset } = useForm();
+
   const [category, setCategory] = useState({ name: 'Select category', id: 0 });
   const [brand, setBrand] = useState({ name: 'Select Brand', id: 0 });
   const [unit, setUnit] = useState({ name: 'Select Unit', id: 0 });
@@ -21,7 +21,7 @@ const AddNewProduct = ({ setActive, refetch }) => {
   const { data: UnitData } = useGetUnitQuery();
 
   const onSubmit = data => {
-   const formData = new FormData();
+    const formData = new FormData();
     formData.append('name', data?.name);
     formData.append('category_id', category?.id);
     formData.append('brand_id', brand?.id);
@@ -30,36 +30,35 @@ const AddNewProduct = ({ setActive, refetch }) => {
     formData.append('purchase_price', data?.purchase_price);
     formData.append('product_code', data?.product_code);
     formData.append('description', data?.description);
-    formData.append('serial_status', size_status ? "1" :  "0");
-    formData.append('color_status', color_status ? "1" :  "0");
-    formData.append('size_status', size_status ? "1" :  "0");
+    formData.append('serial_status', serial_status ? '1' : '0');
+    formData.append('color_status', color_status ? '1' : '0');
+    formData.append('size_status', size_status ? '1' : '0');
     formData.append('photo', photo);
-    formData.append('added_by', "1");
+    formData.append('added_by', '1');
 
     fetch(`https://vicexhost.com/api/v1/product`, {
-      method: "POST",
+      method: 'POST',
       body: formData,
-  })
-      .then((res) => res.json())
-      .then((data) => {
-         if (data.status === "success") {
-              toast.success(data?.message);
-              setActive(false);
-              refetch()
-              reset();
-
-          } else {
-              toast.error("Failed to Add Product");
-              setActive(false);
-          }
-      })
-      .catch((errors) => {
-        console.log(errors)
-          toast.error("Failed to Product");
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
+          toast.success(data?.message);
           setActive(false);
+          refetch();
+          reset();
+        } else {
+          toast.error('Failed to Add Product');
+          setActive(false);
+        }
+      })
+      .catch(errors => {
+        console.log(errors);
+        toast.error('Failed to Product');
+        setActive(false);
       });
   };
- 
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className=" space-y-2">

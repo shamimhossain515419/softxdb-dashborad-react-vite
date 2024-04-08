@@ -8,8 +8,8 @@ import { FaCheck } from 'react-icons/fa';
 import Selectitem from '../../../ui/selectitem/Selectitem';
 
 const UpdateProduct = ({ active, setActive, refetch }) => {
-  // all  state 
-   const { register, handleSubmit } = useForm();
+  // all  state
+  const { register, handleSubmit } = useForm();
   const [category, setCategory] = useState({
     name: active?.category_name,
     id: active?.category_id,
@@ -30,7 +30,7 @@ const UpdateProduct = ({ active, setActive, refetch }) => {
   const { data: brandData } = useGetBrandQuery();
   const { data: UnitData } = useGetUnitQuery();
 
-  //  handle  update from  
+  //  handle  update from
   const onSubmit = data => {
     const formData = new FormData();
     formData.append('name', data?.name);
@@ -41,7 +41,7 @@ const UpdateProduct = ({ active, setActive, refetch }) => {
     formData.append('purchase_price', data?.purchase_price);
     formData.append('product_code', data?.product_code);
     formData.append('description', data?.description);
-    formData.append('serial_status', size_status ? '1' : '0');
+    formData.append('serial_status', serial_status ? '1' : '0');
     formData.append('color_status', color_status ? '1' : '0');
     formData.append('size_status', size_status ? '1' : '0');
     formData.append('photo', photo);
@@ -53,9 +53,9 @@ const UpdateProduct = ({ active, setActive, refetch }) => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
+        console.log(data);
         if (data.status === 'success') {
-          refetch()
+          refetch();
           setActive(false);
           toast.success(data?.message);
         } else {
@@ -101,11 +101,10 @@ const UpdateProduct = ({ active, setActive, refetch }) => {
             <span className="text-blue-base ">*</span>
           </label>
           <input
-           type={'file'}
+            type={'file'}
             onChange={e => setPhoto(e.target.files[0])}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
             id=""
-            
           />
         </div>
         {/* input purchase_price  */}
