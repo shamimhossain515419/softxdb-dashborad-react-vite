@@ -9,6 +9,7 @@ import SupplierRow from './PupplierRow';
 import AddNewSupplier from './AddNewSupplier';
 import { useGetSupplierDataMutation } from '../../../redux/features/api/supplier/supplier';
 import Pagination from '../../../ui/pagination/Pagination';
+import Loader from '../../../ui/loader/Loader';
 
 const SupplierComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,7 +19,7 @@ const SupplierComponent = () => {
   const [page, setPage] = useState(currentPage ? currentPage : '1');
   const [activeLimit, setActiveLimit] = useState(false);
   const [keyword, setKeyword] = useState('');
-  const [getSupplier, { data: productData, refetch }] =
+  const [getSupplier, { data: productData, refetch, isLoading }] =
     useGetSupplierDataMutation();
   const [active, setActive] = useState(false);
   const showDataArray = [
@@ -44,19 +45,21 @@ const SupplierComponent = () => {
       getSupplier(data);
     }
     if (currentPage) {
-      setPage(currentPage)
+      setPage(currentPage);
     }
   }, [getSupplier, currentPage, setPage, showData, page, keyword]);
 
-
-return (
+  if (isLoading) {
+    return <Loader />;
+  }
+  return (
     <div>
       <div className="flex items-center gap-3">
         <Link to={'/'} className="text-white-muted">
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/setup/branch'} className="text-white-base">
+        <Link to={'/setup/supplier'} className="text-white-base">
           supplier
         </Link>
       </div>
@@ -91,8 +94,9 @@ return (
               </div>
               <div>
                 <FaChevronDown
-                  className={` ${activeLimit ? ' rotate-180' : ''
-                    }  duration-200 text-[14px] text-white-base`}
+                  className={` ${
+                    activeLimit ? ' rotate-180' : ''
+                  }  duration-200 text-[14px] text-white-base`}
                 />
               </div>
             </div>

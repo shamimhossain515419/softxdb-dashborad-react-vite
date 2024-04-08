@@ -8,6 +8,7 @@ import CustomerRow from './CustomerRow';
 import CommonModal from '../../../ui/commonModal/commonModal';
 import AddCustomer from './Addcustomer/Customer';
 import Pagination from '../../../ui/pagination/Pagination';
+import Loader from '../../../ui/loader/Loader';
 
 const CustomerComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,7 +18,7 @@ const CustomerComponent = () => {
   const [page, setPage] = useState(currentPage ? currentPage : '1');
   const [activeLimit, setActiveLimit] = useState(false);
   const [keyword, setKeyword] = useState('');
-  const [getCustomerData, { data: productData, error, refetch }] =
+  const [getCustomerData, { data: productData, isLoading, refetch }] =
     useGetCustomerDataMutation();
   const [active, setActive] = useState(false);
   const showDataArray = [
@@ -47,6 +48,10 @@ const CustomerComponent = () => {
     }
   }, [getCustomerData, currentPage, setPage, showData, page, keyword]);
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div>
       <div className="flex items-center gap-3">
@@ -54,7 +59,7 @@ const CustomerComponent = () => {
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/setup/customer/add-customer'} className="text-white-base">
+        <Link to={'/setup/customer'} className="text-white-base">
           Customer
         </Link>
       </div>

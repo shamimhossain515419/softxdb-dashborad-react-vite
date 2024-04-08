@@ -1,21 +1,19 @@
-import { useEffect, useState } from "react";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { MdDelete, MdModeEditOutline } from "react-icons/md";
-import CommonModal from "../../../ui/commonModal/commonModal";
-import { useUpdateUnitMutation } from "../../../redux/features/api/unit/UnitApi";
-import toast from "react-hot-toast";
-import { useForm } from "react-hook-form";
-import DeleteCategory from "../Category/DeleteCategory";
-import DeleteUnit from "./DeleteUnit";
-
+import { useEffect, useState } from 'react';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import { MdDelete, MdModeEditOutline } from 'react-icons/md';
+import CommonModal from '../../../ui/commonModal/commonModal';
+import { useUpdateUnitMutation } from '../../../redux/features/api/unit/UnitApi';
+import toast from 'react-hot-toast';
+import { useForm } from 'react-hook-form';
+import DeleteCategory from '../Category/DeleteCategory';
+import DeleteUnit from './DeleteUnit';
 
 const UnitRow = ({ index, item, refetch }) => {
   const [active, setActive] = useState(false);
   const [activeEditModal, setActiveEditModal] = useState(false);
   const [deleteModal, setDeleteOpenModal] = useState();
   const { register, handleSubmit } = useForm();
-  const [updateUnit, { data: resultUpdate, error }] =
-  useUpdateUnitMutation();
+  const [updateUnit, { data: resultUpdate, error }] = useUpdateUnitMutation();
   const { name, short_name } = item || {};
   const handleRemoveAction = () => {
     if (active) {
@@ -45,25 +43,31 @@ const UnitRow = ({ index, item, refetch }) => {
 
   return (
     <>
-    {/* delete modal  */}
-    <DeleteUnit
+      {/* delete modal  */}
+      <DeleteUnit
         openModal={deleteModal}
         setOpenModal={setDeleteOpenModal}
         refetch={refetch}
       />
-        <tr
+      <tr
         onClick={handleRemoveAction}
         key={index}
-        className={`${index % 2 === 0 ? 'bg-primary-muted' : 'bg-primary-base'} relative`}
+        className={`${
+          index % 2 === 0 ? 'bg-primary-muted' : 'bg-primary-base'
+        } relative`}
       >
         <td className="px-6 py-4 whitespace-nowrap"> {index + 1} </td>
         <td className="px-6 py-4 whitespace-nowrap"> {name} </td>
         <td className="px-6 py-4 whitespace-nowrap">{short_name}</td>
-      
+
         <td className="px-6 py-4 whitespace-nowrap">
           <div
             onClick={() => setActive(!active)}
-            className=" cursor-pointer hover:bg-primary-base duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1"
+            className={`${
+              index % 2 === 0
+                ? 'hover:bg-primary-base'
+                : 'hover:bg-primary-muted'
+            } cursor-pointer  duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1`}
           >
             <BsThreeDotsVertical className="text-[20px] text-white-base" />
           </div>
@@ -131,7 +135,7 @@ const UnitRow = ({ index, item, refetch }) => {
                 defaultValue={activeEditModal?.short_name}
               />
             </div>
-             <div className=" py-2">
+            <div className=" py-2">
               <button
                 className="bg-blue-base px-4 rounded-lg py-1  text-white-base text-[18px]"
                 type="submit"

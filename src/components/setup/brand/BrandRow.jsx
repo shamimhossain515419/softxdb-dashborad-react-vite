@@ -3,9 +3,8 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import { MdDelete, MdModeEditOutline } from 'react-icons/md';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
-import {useUpdateBrandMutation } from '../../../redux/features/api/brand/BrandApi';
+import { useUpdateBrandMutation } from '../../../redux/features/api/brand/BrandApi';
 import CommonModal from '../../../ui/commonModal/commonModal';
-import DeleteCategory from '../Category/DeleteCategory';
 import DeleteBrand from './DeleteBrand';
 
 const BranchRow = ({ index, item, refetch }) => {
@@ -14,15 +13,15 @@ const BranchRow = ({ index, item, refetch }) => {
   const { name } = item || {};
   const [deleteModal, setDeleteOpenModal] = useState();
   const { register, handleSubmit } = useForm();
-const [updateBrand, { data: resultUpdate, error }] = useUpdateBrandMutation()
+  const [updateBrand, { data: resultUpdate, error }] = useUpdateBrandMutation();
   const handleRemoveAction = () => {
     if (active) {
       setActive(false);
       return;
     }
   };
- 
-  // Handle Edit 
+
+  // Handle Edit
   const onSubmit = data => {
     const NewData = {
       name: data.name,
@@ -32,23 +31,21 @@ const [updateBrand, { data: resultUpdate, error }] = useUpdateBrandMutation()
       added_by: activeEditModal?.added_by,
       id: activeEditModal?.id,
     };
-    updateBrand(NewData)
+    updateBrand(NewData);
   };
 
-
   useEffect(() => {
-   
     if (resultUpdate?.status == 'success') {
       toast.success(resultUpdate?.message);
-      refetch()
-      setActiveEditModal(false)
+      refetch();
+      setActiveEditModal(false);
     }
   }, [refetch, resultUpdate, setActiveEditModal]);
 
   return (
     <>
-     {/* delete modal  */}
-     <DeleteBrand
+      {/* delete modal  */}
+      <DeleteBrand
         openModal={deleteModal}
         setOpenModal={setDeleteOpenModal}
         refetch={refetch}
@@ -56,14 +53,20 @@ const [updateBrand, { data: resultUpdate, error }] = useUpdateBrandMutation()
       <tr
         onClick={handleRemoveAction}
         key={index}
-        className={`${index % 2 === 0 ? 'bg-primary-muted' : 'bg-primary-base'} relative`}
+        className={`${
+          index % 2 === 0 ? 'bg-primary-muted' : 'bg-primary-base'
+        } relative`}
       >
         <td className="px-6 py-4 whitespace-nowrap"> {index + 1} </td>
         <td className="px-6 py-4 whitespace-nowrap"> {name} </td>
         <td className="px-6 py-4 whitespace-nowrap">
           <div
             onClick={() => setActive(!active)}
-            className=" cursor-pointer hover:bg-primary-base duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1"
+            className={`${
+              index % 2 === 0
+                ? 'hover:bg-primary-base'
+                : 'hover:bg-primary-muted'
+            } cursor-pointer  duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1`}
           >
             <BsThreeDotsVertical className="text-[20px] text-white-base" />
           </div>
@@ -90,7 +93,11 @@ const [updateBrand, { data: resultUpdate, error }] = useUpdateBrandMutation()
         </td>
       </tr>
 
-      <CommonModal title={"Edit:" + " " + activeEditModal?.name} active={activeEditModal} setActive={setActiveEditModal}>
+      <CommonModal
+        title={'Edit:' + ' ' + activeEditModal?.name}
+        active={activeEditModal}
+        setActive={setActiveEditModal}
+      >
         <div>
           <form onSubmit={handleSubmit(onSubmit)} className=" space-y-2">
             <div className=" w-full">
