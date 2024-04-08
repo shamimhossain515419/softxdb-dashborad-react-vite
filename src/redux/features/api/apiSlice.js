@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://vicexhost.com/api/`,
+    baseUrl: `http://127.0.0.1:8000/api/`,
     // prepareHeaders: async (headers, { getState, endpoint }) => {
     //   const token = getState()?.auth?.accessToken;
     //   if (token) {
@@ -11,7 +11,7 @@ export const apiSlice = createApi({
     //   }
     //   return headers;
     // },
-    // ${import.meta.env.VITE_BASE_URL}/api/` 
+    // ${import.meta.env.VITE_BASE_URL}/api/`
   }),
   endpoints: (builder) => ({}),
 });
