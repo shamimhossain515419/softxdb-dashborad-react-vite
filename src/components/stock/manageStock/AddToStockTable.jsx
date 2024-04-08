@@ -8,7 +8,7 @@ import { formattedDate } from '../../../utility/formattedDate/formattedDate';
 import {
   deleteAllProducts,
   deleteProduct,
-} from '../../../redux/features/stock/addProductSlice';
+} from '../../../redux/features/stock/stockSlice';
 const AddToStockTable = () => {
   const dispatch = useDispatch();
   const { products } = useSelector(state => state?.products);

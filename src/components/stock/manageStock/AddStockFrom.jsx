@@ -7,7 +7,7 @@ import { MdClose } from 'react-icons/md';
 import toast from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addProduct } from '../../../redux/features/stock/addProductSlice';
+import { addProduct } from '../../../redux/features/stock/stockSlice';
 
 const AddStockFrom = () => {
   const [searchValue, setSearchValue] = useState('');
