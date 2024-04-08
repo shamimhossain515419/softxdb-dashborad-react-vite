@@ -7,25 +7,14 @@ import { useGetUnitQuery } from '../../../redux/features/api/unit/UnitApi';
 import AddNewUnit from './AddNewUnit';
 import CommonModal from '../../../ui/commonModal/commonModal';
 import UnitRow from './UnitRow';
+import Loader from '../../../ui/loader/Loader';
 const UnitComponent = () => {
-  const [showData, setShowData] = useState('25');
-  const [activeLimit, setActiveLimit] = useState(false);
   const { data: UnitData, isLoading, error, refetch } = useGetUnitQuery();
   const [active, setActive] = useState(false);
-  const showDataArray = [
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
-  ];
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div>
       <div className="flex items-center gap-3">
@@ -33,11 +22,11 @@ const UnitComponent = () => {
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/setup/branch'} className="text-white-base">
+        <Link to={'/setup/unit'} className="text-white-base">
           Unit
         </Link>
       </div>
-      {/* items Brand  */}
+      {/* items unit  */}
       <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
         <h1 className="text-white-base  text-[30px] font-bold"> unit </h1>
         <div className=" flex gap-3 items-center ">
@@ -51,69 +40,8 @@ const UnitComponent = () => {
           </div>
         </div>
       </div>
-      {/* filter and limit  */}
-      <div className=" flex flex-col lg:flex-row lg:items-center justify-between gap-3 py-10">
-        {/* show  limit data  */}
-        <div className=" flex items-center gap-3 text-white-base">
-          <h1 className="text-[14px] font-normal">Show</h1>
-          <div className="text-white-muted bg-primary-base border border-[#4d75ff] rounded-[4px]">
-            <div
-              onClick={() => setActiveLimit(!activeLimit)}
-              className=" px-2  py-[6px] w-[70px] flex justify-between cursor-pointer items-center gap-3"
-            >
-              <div>
-                <h1 className="text-[14px] font-normal text-white-base">
-                  {showData}
-                </h1>
-              </div>
-              <div>
-                <FaChevronDown
-                  className={` ${
-                    activeLimit ? ' rotate-180' : ''
-                  }  duration-200 text-[14px] text-white-base`}
-                />
-              </div>
-            </div>
-            <div className="  bg-primary-base z-50  w-[70px] absolute border border-[#4d75ff] rounded-[4px]">
-              <Collapse isOpened={activeLimit} className="">
-                <div className=" text-white-muted space-y-[2px]  max-h-[250px] sidebarScrool  overflow-y-scroll  pt-3">
-                  {showDataArray?.map((item, index) => {
-                    return (
-                      <div
-                        onClick={() => {
-                          setShowData(item), setActiveLimit(false);
-                        }}
-                        key={index}
-                        className="flex px-2 py-2 cursor-pointer hover:bg-blue-base hover:text-white-base text-white-muted duration-300 items-center gap-3"
-                      >
-                        <h1 className="text-[12px]  ">{item}</h1>
-                      </div>
-                    );
-                  })}
-                </div>
-              </Collapse>
-            </div>
-          </div>
-          <h1 className="text-[14px] font-normal">entries</h1>
-        </div>
 
-        {/* Brand data  */}
-        <div className="border text-white-base rounded-[4px] border-[#4d75ff] flex items-center gap-4 px-2 py-1">
-          <input
-            className=" w-full bg-transparent placeholder:text-white-base  outline-0 border-none"
-            type="search"
-            name=""
-            id=""
-            placeholder="Search..."
-          />
-          <button className="cursor-pointer">
-            {' '}
-            <IoSearchOutline className="text-[15px] text-white-base " />
-          </button>
-        </div>
-      </div>
-
-      {/* Brand table  */}
+      {/* unit table  */}
       <div className="overflow-x-auto">
         <table className="min-w-full  rounded-md overflow-hidden">
           <thead>
@@ -125,9 +53,9 @@ const UnitComponent = () => {
                 Name
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-              short name
+                short name
               </th>
-             
+
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 Action
               </th>
@@ -147,8 +75,8 @@ const UnitComponent = () => {
         </table>
       </div>
 
-      {/* add new branch  component  */}
-      <CommonModal title={'Add new color'} active={active} setActive={setActive}>
+      {/* add new unit  component  */}
+      <CommonModal title={'Add new unit'} active={active} setActive={setActive}>
         <AddNewUnit refetch={refetch} setActive={setActive} />
       </CommonModal>
     </div>

@@ -55,7 +55,9 @@ const CategoryRow = ({ index, item, refetch }) => {
       <tr
         onClick={handleRemoveAction}
         key={index}
-        className={`${index % 2 === 0 ? 'bg-primary-muted' : 'bg-primary-base'} relative`}
+        className={`${
+          index % 2 === 0 ? 'bg-primary-muted' : 'bg-primary-base'
+        } relative`}
       >
         <td className="px-6 py-4 whitespace-nowrap"> {index + 1} </td>
         <td className="px-6 py-4 whitespace-nowrap"> {name} </td>
@@ -64,7 +66,11 @@ const CategoryRow = ({ index, item, refetch }) => {
         <td className="px-6 py-4 whitespace-nowrap">
           <div
             onClick={() => setActive(!active)}
-            className=" cursor-pointer hover:bg-primary-base duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1"
+            className={`${
+              index % 2 === 0
+                ? 'hover:bg-primary-base'
+                : 'hover:bg-primary-muted'
+            } cursor-pointer  duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1`}
           >
             <BsThreeDotsVertical className="text-[20px] text-white-base" />
           </div>

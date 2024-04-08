@@ -64,7 +64,11 @@ const TableRow = ({ item, index }) => {
         <td className="px-6 py-4 whitespace-nowrap">
           <div
             onClick={() => setActive(!active)}
-            className=" cursor-pointer hover:bg-primary-base duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1"
+            className={`${
+              index % 2 === 0
+                ? 'hover:bg-primary-base'
+                : 'hover:bg-primary-muted'
+            } cursor-pointer  duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1`}
           >
             <BsThreeDotsVertical className="text-[20px] text-white-base" />
           </div>

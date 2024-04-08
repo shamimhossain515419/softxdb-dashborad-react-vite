@@ -7,26 +7,14 @@ import { useGetColorQuery } from '../../../redux/features/api/color/ColorsApi';
 import ColorRow from './ColorRow';
 import CommonModal from '../../../ui/commonModal/commonModal';
 import AddNewColor from './AddNewColor';
+import Loader from '../../../ui/loader/Loader';
 
 const ColorComponent = () => {
-  const [showData, setShowData] = useState('25');
-  const [activeLimit, setActiveLimit] = useState(false);
-  const { data: ColorData, refetch } = useGetColorQuery();
+  const { data: ColorData, refetch, isLoading } = useGetColorQuery();
   const [active, setActive] = useState(false);
-  const showDataArray = [
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
-  ];
-
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div>
       <div className="flex items-center gap-3">
@@ -34,13 +22,13 @@ const ColorComponent = () => {
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/setup/branch'} className="text-white-base">
+        <Link to={'/setup/color'} className="text-white-base">
           color
         </Link>
       </div>
-      {/* items Brand  */}
+      {/* items color  */}
       <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
-        <h1 className="text-white-base  text-[30px] font-bold"> color </h1>
+        <h1 className="text-white-base  text-[30px] font-bold"> Color </h1>
         <div className=" flex gap-3 items-center ">
           <div>
             <button
@@ -52,69 +40,7 @@ const ColorComponent = () => {
           </div>
         </div>
       </div>
-      {/* filter and limit  */}
-      <div className=" flex flex-col lg:flex-row lg:items-center justify-between gap-3 py-10">
-        {/* show  limit data  */}
-        <div className=" flex items-center gap-3 text-white-base">
-          <h1 className="text-[14px] font-normal">Show</h1>
-          <div className="text-white-muted bg-primary-base border border-[#4d75ff] rounded-[4px]">
-            <div
-              onClick={() => setActiveLimit(!activeLimit)}
-              className=" px-2  py-[6px] w-[70px] flex justify-between cursor-pointer items-center gap-3"
-            >
-              <div>
-                <h1 className="text-[14px] font-normal text-white-base">
-                  {showData}
-                </h1>
-              </div>
-              <div>
-                <FaChevronDown
-                  className={` ${
-                    activeLimit ? ' rotate-180' : ''
-                  }  duration-200 text-[14px] text-white-base`}
-                />
-              </div>
-            </div>
-            <div className="  bg-primary-base z-50  w-[70px] absolute border border-[#4d75ff] rounded-[4px]">
-              <Collapse isOpened={activeLimit} className="">
-                <div className=" text-white-muted space-y-[2px]  max-h-[250px] sidebarScrool  overflow-y-scroll  pt-3">
-                  {showDataArray?.map((item, index) => {
-                    return (
-                      <div
-                        onClick={() => {
-                          setShowData(item), setActiveLimit(false);
-                        }}
-                        key={index}
-                        className="flex px-2 py-2 cursor-pointer hover:bg-blue-base hover:text-white-base text-white-muted duration-300 items-center gap-3"
-                      >
-                        <h1 className="text-[12px]  ">{item}</h1>
-                      </div>
-                    );
-                  })}
-                </div>
-              </Collapse>
-            </div>
-          </div>
-          <h1 className="text-[14px] font-normal">entries</h1>
-        </div>
-
-        {/* Brand data  */}
-        <div className="border text-white-base rounded-[4px] border-[#4d75ff] flex items-center gap-4 px-2 py-1">
-          <input
-            className=" w-full bg-transparent placeholder:text-white-base  outline-0 border-none"
-            type="search"
-            name=""
-            id=""
-            placeholder="Search..."
-          />
-          <button className="cursor-pointer">
-            {' '}
-            <IoSearchOutline className="text-[15px] text-white-base " />
-          </button>
-        </div>
-      </div>
-
-      {/* Brand table  */}
+      {/* color table  */}
       <div className="overflow-x-auto">
         <table className="min-w-full  rounded-md overflow-hidden">
           <thead>
@@ -144,8 +70,12 @@ const ColorComponent = () => {
         </table>
       </div>
 
-      {/* add new branch  component  */}
-      <CommonModal title={'Add new color'} active={active} setActive={setActive}>
+      {/* add new color  component  */}
+      <CommonModal
+        title={'Add new color'}
+        active={active}
+        setActive={setActive}
+      >
         <AddNewColor refetch={refetch} setActive={setActive} />
       </CommonModal>
     </div>

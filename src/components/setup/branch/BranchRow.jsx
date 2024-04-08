@@ -5,10 +5,7 @@ import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 
 import CommonModal from '../../../ui/commonModal/commonModal';
-import {
-  
-  useUpdateBranchMutation,
-} from '../../../redux/features/api/branch/BranchApi';
+import { useUpdateBranchMutation } from '../../../redux/features/api/branch/BranchApi';
 import DeleteBranch from './DeleteBranch';
 
 const BranchRow = ({ index, item, refetch }) => {
@@ -26,8 +23,7 @@ const BranchRow = ({ index, item, refetch }) => {
       return;
     }
   };
-  
- 
+
   // Handle Edit
   const onSubmit = data => {
     const NewData = {
@@ -42,12 +38,12 @@ const BranchRow = ({ index, item, refetch }) => {
   };
 
   useEffect(() => {
-     if (resultUpdate?.status == 'success') {
+    if (resultUpdate?.status == 'success') {
       toast.success(resultUpdate?.message);
       refetch();
       setActiveEditModal(false);
     }
-  }, [ refetch, resultUpdate, setActiveEditModal]);
+  }, [refetch, resultUpdate, setActiveEditModal]);
 
   return (
     <>
@@ -60,7 +56,9 @@ const BranchRow = ({ index, item, refetch }) => {
       <tr
         onClick={handleRemoveAction}
         key={index}
-        className={`${index % 2 === 0 ? 'bg-primary-muted' : 'bg-primary-base'} relative`}
+        className={`${
+          index % 2 === 0 ? 'bg-primary-muted' : 'bg-primary-base'
+        } relative`}
       >
         <td className="px-6 py-4 whitespace-nowrap"> {index + 1} </td>
         <td className="px-6 py-4 whitespace-nowrap"> {name} </td>
@@ -70,7 +68,11 @@ const BranchRow = ({ index, item, refetch }) => {
         <td className="px-6 py-4 whitespace-nowrap">
           <div
             onClick={() => setActive(!active)}
-            className=" cursor-pointer hover:bg-primary-base duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1"
+            className={`${
+              index % 2 === 0
+                ? 'hover:bg-primary-base'
+                : 'hover:bg-primary-muted'
+            } cursor-pointer  duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1`}
           >
             <BsThreeDotsVertical className="text-[20px] text-white-base" />
           </div>

@@ -7,11 +7,12 @@ import CommonModal from '../../../ui/commonModal/commonModal';
 import { useGetProductQuery } from '../../../redux/features/api/product/productApi';
 import ProductRow from './ProductRow';
 import AddNewProduct from './AddNewProduct';
+import Loader from '../../../ui/loader/Loader';
 
 const ProductComponent = () => {
   const [showData, setShowData] = useState('25');
   const [activeLimit, setActiveLimit] = useState(false);
-  const { data: productData, refetch } = useGetProductQuery('');
+  const { data: productData, refetch, isLoading } = useGetProductQuery('');
   const [active, setActive] = useState(false);
   const showDataArray = [
     '11',
@@ -26,7 +27,9 @@ const ProductComponent = () => {
     '20',
     '21',
   ];
-  console.log(productData);
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div>
@@ -35,7 +38,7 @@ const ProductComponent = () => {
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/setup/branch'} className="text-white-base">
+        <Link to={'/setup/product'} className="text-white-base">
           product
         </Link>
       </div>

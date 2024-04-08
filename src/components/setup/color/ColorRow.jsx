@@ -21,7 +21,7 @@ const ColorRow = ({ index, item, refetch }) => {
     }
   };
 
-  //  update submit 
+  //  update submit
   const onSubmit = data => {
     const UpdateData = {
       id: activeEditModal?.id,
@@ -48,7 +48,7 @@ const ColorRow = ({ index, item, refetch }) => {
         setOpenModal={setDeleteOpenModal}
         refetch={refetch}
       />
-       {/* table row  */}
+      {/* table row  */}
       <tr
         onClick={handleRemoveAction}
         key={index}
@@ -61,7 +61,11 @@ const ColorRow = ({ index, item, refetch }) => {
         <td className="px-6 py-4 whitespace-nowrap">
           <div
             onClick={() => setActive(!active)}
-            className=" cursor-pointer hover:bg-primary-base duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1"
+            className={`${
+              index % 2 === 0
+                ? 'hover:bg-primary-base'
+                : 'hover:bg-primary-muted'
+            } cursor-pointer  duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1`}
           >
             <BsThreeDotsVertical className="text-[20px] text-white-base" />
           </div>
@@ -87,8 +91,8 @@ const ColorRow = ({ index, item, refetch }) => {
           )}
         </td>
       </tr>
- 
- {/* update modal  */}
+
+      {/* update modal  */}
       <CommonModal
         title={'Edit:' + ' ' + activeEditModal?.name}
         active={activeEditModal}

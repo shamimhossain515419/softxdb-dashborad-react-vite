@@ -27,7 +27,7 @@ const ProductRow = ({ index, item, refetch }) => {
     }
   };
 
-return (
+  return (
     <>
       {/* delete modal  */}
       <DeleteProduct
@@ -45,9 +45,13 @@ return (
       >
         <td className="px-6 py-4 whitespace-nowrap"> {index + 1} </td>
         <td className="px-6 py-4 whitespace-nowrap">
-           <div className=' max-h-[80px] w-[80px] overflow-hidden'>
-            <img className=' h-full  object-contain' src={`${import.meta.env.VITE_BASE_URL}/api/v1/images/${photo}`} alt="" />
-           </div>
+          <div className=" max-h-[80px] w-[80px] overflow-hidden">
+            <img
+              className=" h-full  object-contain"
+              src={`${import.meta.env.VITE_BASE_URL}/api/v1/images/${photo}`}
+              alt=""
+            />
+          </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap"> {name} </td>
         <td className="px-6 py-4 whitespace-nowrap"> {category_name} </td>
@@ -60,7 +64,11 @@ return (
         <td className="px-6 py-4 whitespace-nowrap">
           <div
             onClick={() => setActive(!active)}
-            className=" cursor-pointer hover:bg-primary-base duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1"
+            className={`${
+              index % 2 === 0
+                ? 'hover:bg-primary-base'
+                : 'hover:bg-primary-muted'
+            } cursor-pointer  duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1`}
           >
             <BsThreeDotsVertical className="text-[20px] text-white-base" />
           </div>
