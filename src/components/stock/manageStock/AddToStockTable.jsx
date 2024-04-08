@@ -1,56 +1,49 @@
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
 
-import { useCreateStockMutation } from "../../../redux/features/api/stock/stockApi";
-import { useEffect } from "react";
+import { deleteProduct } from "../../../redux/features/stock/addProductSlice";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { formattedDate } from "../../../utility/formattedDate/formattedDate";
-import {
-  deleteAllProducts,
-  deleteProduct,
-} from "../../../redux/features/stock/addProductSlice";
 
 const AddToStockTable = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state?.products);
-  const [CreateStock, { daa: stockResult, error, isLoading }] =
-    useCreateStockMutation();
-
-  // const stockData = products?.map((item) => {
-  //   const createNewData = {
-  //     product_id: item?.product_id,
-  //     price: item?.price,
-  //     quantity: item?.quantity,
-  //     color_id: item?.color_id?.id,
-  //     size_id: item?.size_id?.id,
-  //     serials: item?.serials,
-  //     //  status
-  //   };
-  //   return createNewData;
-  // });
 
   // add stock
+  const [isLoading, setLoading] = useState(false);
+
   const handleAddStock = () => {
+    setLoading(true);
     const data = {
       added_by: "1",
       branch_id: "1",
-      stock_date: "2024-04-07",
+      stock_date: formattedDate(),
       items: products,
     };
 
-    console.log(data);
-    CreateStock(data);
+    fetch("http://127.0.0.1:8000/api/v1/stock", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setLoading(false);
+        if (data.status === "success") {
+          toast.success(data?.message);
+        } else {
+          toast.error(data?.message);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log("error", err);
+      });
   };
-  console.log(products);
 
-  useEffect(() => {
-    if (stockResult?.status == "success") {
-      toast.success(stockResult?.message);
-      dispatch(deleteAllProducts());
-    }
-  }, [stockResult]);
-  console.log(stockResult);
-  console.log(error);
   return (
     <div>
       <div className="overflow-x-auto">
