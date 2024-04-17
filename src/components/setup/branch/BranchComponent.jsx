@@ -48,7 +48,7 @@ const BranchComponent = () => {
         <table className="min-w-full  rounded-md overflow-hidden">
           <thead>
             <tr className="">
-              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
+              <th className="px-6  w-[50px]  py-5 bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 #SL
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">

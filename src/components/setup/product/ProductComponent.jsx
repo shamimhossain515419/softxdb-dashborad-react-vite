@@ -49,9 +49,10 @@ const ProductComponent = () => {
           product
         </Link>
       </div>
-      {/* items Brand  */}
-      <div className=" py-2 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
-        <h1 className="text-white-base  text-[30px] font-bold"> product </h1>
+
+      {/* items Product  */}
+      <div className="py-5 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
+   <h1 className="text-white-base  text-[30px] font-bold"> product </h1>
         <div className=" flex gap-3 items-center ">
           <div>
             <button
@@ -109,7 +110,7 @@ const ProductComponent = () => {
           <h1 className="text-[14px] font-normal">entries</h1>
         </div>
 
-        {/* Brand data  */}
+        {/* Product data  */}
         <div className="border text-white-base rounded-[4px] border-[#4d75ff] flex items-center gap-4 px-2 py-1">
           <input
             onChange={(e) => keywordHandler(e.target.value)}
@@ -125,7 +126,7 @@ const ProductComponent = () => {
         </div>
       </div>
 
-      {/* Brand table  */}
+      {/* Product table  */}
       <div className="overflow-x-auto">
         <table className="min-w-full  rounded-md overflow-hidden">
           <thead>
@@ -146,7 +147,7 @@ const ProductComponent = () => {
                 unit
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-                brand
+                Product
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 selling price

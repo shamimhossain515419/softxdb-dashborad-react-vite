@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { useRemoveBrandMutation } from '../../../redux/features/api/brand/BrandApi';
-const DeleteBrand = ({ openModal, setOpenModal, refetch }) => {
-  const [removeBrand, { data, error }] = useRemoveBrandMutation();
+import { useRemoveReportMutation } from '../../../redux/features/api/report/reportApi';
+const DeleteReport = ({ openModal, setOpenModal, refetch }) => {
+  const [removeReport, { data, error }] = useRemoveReportMutation();
   const deleteBrandHandler = () => {
-    removeBrand(openModal?.id);
+    removeReport(openModal?.id);
   };
 
   useEffect(() => {
@@ -14,6 +14,7 @@ const DeleteBrand = ({ openModal, setOpenModal, refetch }) => {
       setOpenModal();
     }
   }, [data, setOpenModal, refetch]);
+
   return (
     <div className="w-72 mx-auto flex items-center justify-center">
       {/* action modal  */}
@@ -77,4 +78,4 @@ const DeleteBrand = ({ openModal, setOpenModal, refetch }) => {
   );
 };
 
-export default DeleteBrand;
+export default DeleteReport;

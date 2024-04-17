@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import toast from "react-hot-toast";
-import { useRemoveSupplierMutation } from "../../../redux/features/api/supplier/supplier";
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
+import { useRemoveSupplierMutation } from '../../../redux/features/api/supplier/supplier';
 
 const DeleteSupplier = ({ openModal, setOpenModal, refetch }) => {
   const [removeSupplier, { data }] = useRemoveSupplierMutation();
@@ -9,7 +9,7 @@ const DeleteSupplier = ({ openModal, setOpenModal, refetch }) => {
   };
 
   useEffect(() => {
-    if (data?.status == "success") {
+    if (data?.status == 'success') {
       toast.success(data?.message);
       refetch();
       setOpenModal();
@@ -22,23 +22,23 @@ const DeleteSupplier = ({ openModal, setOpenModal, refetch }) => {
       <div
         onClick={() => setOpenModal(false)}
         className={`fixed flex justify-center items-center z-[100] ${
-          openModal ? "visible opacity-1" : "invisible opacity-0"
+          openModal ? 'visible opacity-1' : 'invisible opacity-0'
         } inset-0 backdrop-blur-sm   bg-[#0000004e] duration-100`}
       >
         <div
-          onClick={(e_) => e_.stopPropagation()}
+          onClick={e_ => e_.stopPropagation()}
           className={`absolute  bg-primary-muted w-80 p-6 text-center bg-white drop-shadow-2xl rounded-lg ${
             openModal
-              ? "translate-y-0 opacity-1 duration-300"
-              : "translate-y-20 opacity-0 duration-150"
+              ? 'translate-y-0 opacity-1 duration-300'
+              : 'translate-y-20 opacity-0 duration-150'
           }`}
         >
           <div className="space-y-3 flex flex-col justify-center items-center">
             <svg
               className={`${
                 openModal
-                  ? "scale-100 rotate-0 duration-200"
-                  : "scale-0 rotate-90"
+                  ? 'scale-100 rotate-0 duration-200'
+                  : 'scale-0 rotate-90'
               } delay-100`}
               width={75}
               viewBox="0 0 1024 1024"
@@ -56,7 +56,7 @@ const DeleteSupplier = ({ openModal, setOpenModal, refetch }) => {
             </svg>
             <h6 className="font-medium text-center text-white-base">
               <p>
-                Are you sure you want to delete{" "}
+                Are you sure you want to delete{' '}
                 <span className="font-bold"> {openModal?.name}</span>?
               </p>
             </h6>

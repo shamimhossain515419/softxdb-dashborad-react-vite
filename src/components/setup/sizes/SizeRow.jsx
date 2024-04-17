@@ -42,12 +42,6 @@ const SizeRow = ({ index, item, refetch }) => {
 
   return (
     <>
-      {/* delete modal  */}
-      <DeleteSize
-        openModal={deleteModal}
-        setOpenModal={setDeleteOpenModal}
-        refetch={refetch}
-      />
       {/* table row  */}
       <tr
         onClick={handleRemoveAction}
@@ -91,6 +85,15 @@ const SizeRow = ({ index, item, refetch }) => {
           )}
         </td>
       </tr>
+
+      {/* delete modal  */}
+      {deleteModal && (
+        <DeleteSize
+          openModal={deleteModal}
+          setOpenModal={setDeleteOpenModal}
+          refetch={refetch}
+        />
+      )}
 
       {/* update modal  */}
       <CommonModal

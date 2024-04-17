@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { IoSearchOutline } from 'react-icons/io5';
-import { useGetStockQuery } from '../../../redux/features/api/stock/stockApi';
 import { Link } from 'react-router-dom';
 import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
 import { Collapse } from 'react-collapse';
-import StockRow from './StockRow';
+import ReportRow from './ReportRow';
+import { useGetReportQuery } from '../../../redux/features/api/report/reportApi';
 
-const ManageStockComponent = () => {
+const ReportComponent = () => {
   const [showData, setShowData] = useState('25');
   const [activeLimit, setActiveLimit] = useState(false);
-  const { data: stockData, refetch, isLoading } = useGetStockQuery('');
+  const { data: reportData, refetch, isLoading } = useGetReportQuery('');
   const [active, setActive] = useState(false);
   const showDataArray = [
     '11',
@@ -34,19 +34,19 @@ const ManageStockComponent = () => {
           </Link>
           <FaArrowRight className="text-[18px] text-blue-base" />
           <Link to={'/stock/manage-stock'} className="text-white-base">
-            manage Stock
+            manage report
           </Link>
         </div>
         {/* items stock  */}
         <div className="py-5 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
-          <h1 className="text-white-base  text-[30px] font-bold"> Stock </h1>
+          <h1 className="text-white-base  text-[30px] font-bold"> Report </h1>
           <div className=" flex gap-3 items-center ">
             <div>
               <Link
                 to={'/stock/add-stock'}
                 className="border-[1.5px] border-[#4d75ff] rounded-md inline-block  text-white-base tex-[14px] px-4 py-2 overflow-hidden"
               >
-                Add new Stock
+                Add new Report
               </Link>
             </div>
           </div>
@@ -97,7 +97,7 @@ const ManageStockComponent = () => {
             <h1 className="text-[14px] font-normal">entries</h1>
           </div>
 
-          {/* stock data  */}
+          {/* Report data  */}
           <div className="border text-white-base rounded-[4px] border-[#4d75ff] flex items-center gap-4 px-2 py-1">
             <input
               className=" w-full bg-transparent placeholder:text-white-base  outline-0 border-none"
@@ -112,7 +112,7 @@ const ManageStockComponent = () => {
           </div>
         </div>
 
-        {/* Stock table  */}
+        {/* Report table  */}
         <div className="overflow-x-auto">
           <table className="min-w-full  rounded-md overflow-hidden">
             <thead>
@@ -124,22 +124,27 @@ const ManageStockComponent = () => {
                   Name
                 </th>
                 <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-                  available stock
+                  quantity
                 </th>
                 <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-                  average price
+                  price
+                </th>
+                <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
+                  transaction
+                </th>
+                <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
+                  date
                 </th>
 
                 <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                   Action
                 </th>
-
                 {/* Add more table headers here */}
               </tr>
             </thead>
             <tbody className="bg-primary-muted  text-white-base">
-              {stockData?.map((item, index) => (
-                <StockRow
+              {reportData?.map((item, index) => (
+                <ReportRow
                   refetch={refetch}
                   index={index}
                   item={item}
@@ -154,4 +159,4 @@ const ManageStockComponent = () => {
   );
 };
 
-export default ManageStockComponent;
+export default ReportComponent;

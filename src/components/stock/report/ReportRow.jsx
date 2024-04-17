@@ -1,25 +1,12 @@
 import { useState } from 'react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { MdDelete, MdModeEditOutline } from 'react-icons/md';
-import CommonModal from '../../../ui/commonModal/commonModal';
-import DeleteProduct from './DeleteProduct';
-import UpdateProduct from './UpdateProduct';
+import DeleteReport from './DeleteReport';
 
-const ProductRow = ({ index, item, refetch }) => {
+const ReportRow = ({ item, index, refetch }) => {
   const [active, setActive] = useState(false);
-  const [activeEditModal, setActiveEditModal] = useState(false);
   const [deleteModal, setDeleteOpenModal] = useState();
-  const {
-    name,
-    photo,
-    selling_price,
-    brand_name,
-    unit_name,
-    category_name,
-    purchase_price,
-    product_code,
-    size_status,
-  } = item || {};
+  const { stock_date, name, price, quantity, transaction_id } = item || {};
   const handleRemoveAction = () => {
     if (active) {
       setActive(false);
@@ -29,7 +16,7 @@ const ProductRow = ({ index, item, refetch }) => {
 
   return (
     <>
-      {/* table row  */}
+      {/* table data  */}
       <tr
         onClick={handleRemoveAction}
         key={index}
@@ -38,23 +25,11 @@ const ProductRow = ({ index, item, refetch }) => {
         } relative`}
       >
         <td className="px-6 py-4 whitespace-nowrap"> {index + 1} </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <div className=" max-h-[80px] w-[80px] overflow-hidden">
-            <img
-              className=" h-full  object-contain"
-              src={`${import.meta.env.VITE_BASE_URL}/api/v1/images/${photo}`}
-              alt=""
-            />
-          </div>
-        </td>
         <td className="px-6 py-4 whitespace-nowrap"> {name} </td>
-        <td className="px-6 py-4 whitespace-nowrap"> {category_name} </td>
-        <td className="px-6 py-4 whitespace-nowrap"> {unit_name} </td>
-        <td className="px-6 py-4 whitespace-nowrap"> {brand_name} </td>
-        <td className="px-6 py-4 whitespace-nowrap"> {selling_price} </td>
-        <td className="px-6 py-4 whitespace-nowrap"> {purchase_price} </td>
-        <td className="px-6 py-4 whitespace-nowrap"> {product_code} </td>
-        <td className="px-6 py-4 whitespace-nowrap"> {size_status} </td>
+        <td className="px-6 py-4 whitespace-nowrap"> {quantity} </td>
+        <td className="px-6 py-4 whitespace-nowrap"> {price} </td>
+        <td className="px-6 py-4 whitespace-nowrap"> {transaction_id} </td>
+        <td className="px-6 py-4 whitespace-nowrap"> {stock_date} </td>
         <td className="px-6 py-4 whitespace-nowrap">
           <div
             onClick={() => setActive(!active)}
@@ -89,27 +64,13 @@ const ProductRow = ({ index, item, refetch }) => {
         </td>
       </tr>
       {/* delete modal  */}
-      {deleteModal && (
-        <DeleteProduct
-          openModal={deleteModal}
-          setOpenModal={setDeleteOpenModal}
-          refetch={refetch}
-        />
-      )}
-      {/* update modal  */}
-      <CommonModal
-        title={'Edit:' + ' ' + activeEditModal?.name}
-        active={activeEditModal}
-        setActive={setActiveEditModal}
-      >
-        <UpdateProduct
-          refetch={refetch}
-          active={activeEditModal}
-          setActive={setActiveEditModal}
-        ></UpdateProduct>
-      </CommonModal>
+      <DeleteReport
+        openModal={deleteModal}
+        setOpenModal={setDeleteOpenModal}
+        refetch={refetch}
+      />
     </>
   );
 };
 
-export default ProductRow;
+export default ReportRow;

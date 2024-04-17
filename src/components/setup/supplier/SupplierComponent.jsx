@@ -64,7 +64,7 @@ const SupplierComponent = () => {
         </Link>
       </div>
       {/* items supplier  */}
-      <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
+      <div className="py-5 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
         <h1 className="text-white-base  text-[30px] font-bold"> Supplier </h1>
         <div className=" flex gap-3 items-center ">
           <div>
@@ -78,7 +78,7 @@ const SupplierComponent = () => {
         </div>
       </div>
       {/* filter and limit  */}
-      <div className=" flex flex-col lg:flex-row lg:items-center justify-between gap-3 py-10">
+      <div className=" flex flex-col lg:flex-row lg:items-center justify-between gap-3 py-5">
         {/* show  limit data  */}
         <div className=" flex items-center gap-3 text-white-base">
           <h1 className="text-[14px] font-normal">Show</h1>

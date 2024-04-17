@@ -46,12 +46,6 @@ const CategoryRow = ({ index, item, refetch }) => {
 
   return (
     <>
-      {/* delete modal  */}
-      <DeleteCategory
-        openModal={deleteModal}
-        setOpenModal={setDeleteOpenModal}
-        refetch={refetch}
-      />
       <tr
         onClick={handleRemoveAction}
         key={index}
@@ -97,6 +91,15 @@ const CategoryRow = ({ index, item, refetch }) => {
         </td>
       </tr>
 
+      {/* delete modal  */}
+      {deleteModal && (
+        <DeleteCategory
+          openModal={deleteModal}
+          setOpenModal={setDeleteOpenModal}
+          refetch={refetch}
+        />
+      )}
+      {/* edit modal  */}
       <CommonModal
         title={'Edit:' + ' ' + activeEditModal?.name}
         active={activeEditModal}

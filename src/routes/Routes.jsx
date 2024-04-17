@@ -14,6 +14,8 @@ import Product from '../pages/product/Product';
 import Supplier from '../pages/supplier/Supplier';
 import Customer from '../pages/customer/Customer';
 import MangeStock from '../pages/stock/manage-stock/MangeStock';
+import AddStock from '../pages/stock/add-stock/AddStock';
+import Report from '../pages/report/Report';
 
 const router = createBrowserRouter([
   {
@@ -35,7 +37,9 @@ const router = createBrowserRouter([
       { path: '/setup/supplier', element: <Supplier /> },
 
       // stock  path
+      { path: '/stock/add-stock', element: <AddStock /> },
       { path: '/stock/manage-stock', element: <MangeStock /> },
+      { path: '/stock/report', element: <Report /> },
     ],
   },
 ]);
