@@ -1,41 +1,42 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 const AddNewSupplier = ({ setActive, refetch }) => {
   const { register, handleSubmit, reset } = useForm();
-    const [photo, setPhoto] = useState('');
-  const [selectImage, setselectImage] = useState('');
-const onSubmit = data => {
+  const [photo, setPhoto] = useState("");
+  const [selectImage, setselectImage] = useState("");
+  const onSubmit = (data) => {
     const formData = new FormData();
-    formData.append('name', data?.name);
-    formData.append('branch_id', "1");
-    formData.append('phone', data?.phone);
-    formData.append('email', data?.email);
-    formData.append('address', data?.address);
-    formData.append('closing_balance', data?.closing_balance);
-    formData.append('nid', data?.nid);
-    formData.append('photo', photo);
-    formData.append('added_by', '1');
+    formData.append("name", data?.name);
+    formData.append("branch_id", "1");
+    formData.append("phone", data?.phone);
+    formData.append("email", data?.email);
+    formData.append("address", data?.address);
+    formData.append("closing_balance", data?.closing_balance);
+    formData.append("nid", data?.nid);
+    formData.append("photo", photo);
+    formData.append("added_by", "1");
 
-    fetch(`https://vicexhost.com/api/v1/supplier`, {
-      method: 'POST',
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/supplier`, {
+      method: "POST",
       body: formData,
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === 'success') {
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === "success") {
           toast.success(data?.message);
           setActive(false);
           refetch();
           reset();
+          return;
         } else {
-          toast.error('Failed to Add Product');
+          toast.error("Failed to Add Product");
           setActive(false);
         }
       })
-      .catch(errors => {
+      .catch((errors) => {
         console.log(errors);
-        toast.error('Failed to Product');
         setActive(false);
       });
   };
@@ -64,16 +65,14 @@ const onSubmit = data => {
             <span className="text-blue-base ">*</span>
           </label>
           <input
-            {...register('name')}
+            {...register("name")}
             required
-            type={'text'}
+            type={"text"}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
             id=""
-            placeholder={'Enter  name'}
+            placeholder={"Enter  name"}
           />
         </div>
-
-
 
         <div className=" w-full">
           <label
@@ -84,12 +83,12 @@ const onSubmit = data => {
             <span className="text-blue-base ">*</span>
           </label>
           <input
-            {...register('phone')}
+            {...register("phone")}
             required
-            type={'number'}
+            type={"number"}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
             id=""
-            placeholder={'Enter  phone'}
+            placeholder={"Enter  phone"}
           />
         </div>
         {/* input Photo  */}
@@ -110,12 +109,15 @@ const onSubmit = data => {
           />
         </div>
 
-        {
-          selectImage && <div  className='h-[150px] w-full  overflow-hidden'>
-            <img className=' w-full  h-full object-contain overflow-hidden' src={selectImage} alt="" />
+        {selectImage && (
+          <div className="h-[150px] w-full  overflow-hidden">
+            <img
+              className=" w-full  h-full object-contain overflow-hidden"
+              src={selectImage}
+              alt=""
+            />
           </div>
-        }
-
+        )}
 
         {/* input email  */}
         <div className=" w-full">
@@ -127,11 +129,11 @@ const onSubmit = data => {
             <span className="text-blue-base ">*</span>
           </label>
           <input
-            {...register('email')}
-            type={'text'}
+            {...register("email")}
+            type={"text"}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
             id=""
-            placeholder={'Enter email'}
+            placeholder={"Enter email"}
           />
         </div>
 
@@ -145,12 +147,12 @@ const onSubmit = data => {
             <span className="text-blue-base ">*</span>
           </label>
           <input
-            {...register('address')}
+            {...register("address")}
             required
-            type={'text'}
+            type={"text"}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
             id=""
-            placeholder={'Enter address'}
+            placeholder={"Enter address"}
           />
         </div>
 
@@ -164,12 +166,11 @@ const onSubmit = data => {
             <span className="text-blue-base ">*</span>
           </label>
           <input
-            {...register('nid')}
-            
-            type={'number'}
+            {...register("nid")}
+            type={"number"}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
             id=""
-            placeholder={'Enter nid number'}
+            placeholder={"Enter nid number"}
           />
         </div>
         {/* input closing_balance */}
@@ -182,12 +183,12 @@ const onSubmit = data => {
             <span className="text-blue-base ">*</span>
           </label>
           <input
-            {...register('closing_balance')}
+            {...register("closing_balance")}
             required
-            type={'number'}
+            type={"number"}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
             id=""
-            placeholder={'Enter closing balance'}
+            placeholder={"Enter closing balance"}
           />
         </div>
         <div className=" py-2 pt-12 ">
