@@ -1,32 +1,32 @@
-import { apiSlice } from '../apiSlice';
+import { apiSlice } from "../apiSlice";
 
 export const ProductApi = apiSlice.injectEndpoints({
-  endpoints: builder => ({
+  endpoints: (builder) => ({
     getProduct: builder.query({
-      query: data => ({
+      query: (data) => ({
         url: `v1/product?keyword=${data}`,
-        method: 'GET',
+        method: "GET",
       }),
     }),
-    
+
     CreateProduct: builder.mutation({
-      query: data => ({
-        url: 'v1/product',
-        method: 'POST',
+      query: (data) => ({
+        url: "v1/product",
+        method: "POST",
         body: data,
       }),
     }),
     removeProduct: builder.mutation({
-      query: data => ({
+      query: (data) => ({
         url: `v1/product/${data}`,
-        method: 'DELETE',
+        method: "DELETE",
         body: data,
       }),
     }),
     updateProduct: builder.mutation({
-      query: data => ({
+      query: (data) => ({
         url: `v1/product/${data?.id}`,
-        method: 'put',
+        method: "put",
         body: data,
       }),
     }),

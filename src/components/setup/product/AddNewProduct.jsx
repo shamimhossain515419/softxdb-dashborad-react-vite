@@ -198,7 +198,6 @@ const AddNewProduct = ({ setActive, refetch }) => {
             <textarea
               rows={5}
               {...register("description")}
-              required
               type={"text"}
               className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
               id=""
