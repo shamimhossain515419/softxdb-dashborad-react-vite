@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import toast from 'react-hot-toast';
 const UpdateCustmer = ({ refetch, setActive, active }) => {
   const {
     name,
@@ -36,26 +36,21 @@ const UpdateCustmer = ({ refetch, setActive, active }) => {
     formData.append('photo', selectPhoto ? selectPhoto : photo);
     formData.append('added_by', added_by);
 
-    fetch(`https://vicexhost.com/api/v1/customer/update/${id}`, {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/customer/update/${id}`, {
       method: 'POST',
       body: formData,
     })
       .then(res => res.json())
       .then(data => {
-        if (data.status === 'success') {
+        if (data.status == 'success') {
           toast.success(data?.message);
-          setActive(false);
           refetch();
-          reset();
-          toast.success(data?.message);
+          setActive(false);
           return;
         } else {
           toast.error('Failed to Add Product');
           setActive(false);
         }
-      })
-      .catch(errors => {
-        setActive(false);
       });
   };
 

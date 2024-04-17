@@ -2,7 +2,7 @@ import { apiSlice } from '../apiSlice';
 
 export const CustomerApi = apiSlice.injectEndpoints({
   endpoints: builder => ({
-    getCustomerData: builder.mutation({
+    getCustomerData: builder.query({
       query: data => ({
         url: `v1/customer?keyword=${data?.keyword}&per_page=${data?.limit}&page=${data?.page}`,
         method: 'GET',
@@ -25,5 +25,5 @@ export const CustomerApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetCustomerDataMutation, useRemoveCustomerMutation } =
+export const { useGetCustomerDataQuery, useRemoveCustomerMutation } =
   CustomerApi;

@@ -47,10 +47,13 @@ const UpdateProduct = ({ active, setActive, refetch }) => {
     formData.append('photo', photo);
     formData.append('added_by', active?.added_by);
 
-    fetch(`https://vicexhost.com/api/v1/product/update/${active?.id}`, {
-      method: 'POST',
-      body: formData,
-    })
+    fetch(
+      `${import.meta.env.VITE_BASE_URL}/api/v1/product/update/${active?.id}`,
+      {
+        method: 'POST',
+        body: formData,
+      }
+    )
       .then(res => res.json())
       .then(data => {
         console.log(data);

@@ -1,58 +1,82 @@
-import { useState } from "react";
-import { Collapse } from "react-collapse";
-import { FaArrowRight, FaChevronDown } from "react-icons/fa";
-import { IoSearchOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
-import CommonModal from "../../../ui/commonModal/commonModal";
-import { useGetProductQuery } from "../../../redux/features/api/product/productApi";
-import ProductRow from "./ProductRow";
-import AddNewProduct from "./AddNewProduct";
-import Loader from "../../../ui/loader/Loader";
+import { useEffect, useState } from 'react';
+import { Collapse } from 'react-collapse';
+import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
+import { IoSearchOutline } from 'react-icons/io5';
+import { Link, useSearchParams } from 'react-router-dom';
+import CommonModal from '../../../ui/commonModal/commonModal';
+import { useGetProductQuery } from '../../../redux/features/api/product/productApi';
+import ProductRow from './ProductRow';
+import AddNewProduct from './AddNewProduct';
+import Loader from '../../../ui/loader/Loader';
+import Pagination from '../../../ui/pagination/Pagination';
 
 const ProductComponent = () => {
-  const [showData, setShowData] = useState("25");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = searchParams.get('page');
+  const [page, setPage] = useState(currentPage ? currentPage : '1');
+  const [showData, setShowData] = useState('1');
   const [activeLimit, setActiveLimit] = useState(false);
-  const [keyword, setKeyword] = useState("");
-  const { data: productData, refetch, isLoading } = useGetProductQuery(keyword);
+  const [keyword, setKeyword] = useState('');
+  const [filterSupplier, setFilterSupllier] = useState({
+    keyword: keyword,
+    limit: showData,
+    page: page,
+  });
+  const {
+    data: productData,
+    isLoading,
+    refetch,
+  } = useGetProductQuery(filterSupplier);
   const [active, setActive] = useState(false);
   const showDataArray = [
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-    "21",
+    '5',
+    '10',
+    '15',
+    '20',
+    '25',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
   ];
-  if (isLoading) {
-    return <Loader />;
-  }
 
-  const keywordHandler = (keyword) => {
+  const keywordHandler = keyword => {
     setKeyword(keyword);
     refetch();
   };
 
-  console.log(productData);
+  useEffect(() => {
+    if (showData || keyword || page) {
+      const data = {
+        keyword: keyword,
+        limit: showData,
+        page: page,
+      };
+      setFilterSupllier(data);
+    }
+  }, [showData, keyword, page]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div>
       <div className="flex items-center gap-3">
-        <Link to={"/"} className="text-white-muted">
+        <Link to={'/'} className="text-white-muted">
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={"/setup/product"} className="text-white-base">
+        <Link to={'/setup/product'} className="text-white-base">
           product
         </Link>
       </div>
 
       {/* items Product  */}
       <div className="py-5 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
-   <h1 className="text-white-base  text-[30px] font-bold"> product </h1>
+        <h1 className="text-white-base  text-[30px] font-bold"> Product </h1>
         <div className=" flex gap-3 items-center ">
           <div>
             <button
@@ -82,7 +106,7 @@ const ProductComponent = () => {
               <div>
                 <FaChevronDown
                   className={` ${
-                    activeLimit ? " rotate-180" : ""
+                    activeLimit ? ' rotate-180' : ''
                   }  duration-200 text-[14px] text-white-base`}
                 />
               </div>
@@ -113,7 +137,7 @@ const ProductComponent = () => {
         {/* Product data  */}
         <div className="border text-white-base rounded-[4px] border-[#4d75ff] flex items-center gap-4 px-2 py-1">
           <input
-            onChange={(e) => keywordHandler(e.target.value)}
+            onChange={e => keywordHandler(e.target.value)}
             className=" w-full bg-transparent placeholder:text-white-base  outline-0 border-none"
             type="search"
             name="search"
@@ -179,10 +203,16 @@ const ProductComponent = () => {
           </tbody>
         </table>
       </div>
+      {/* pagination  */}
+      <Pagination
+        setPage={setPage}
+        per_page={showData}
+        totalResult={productData?.count}
+      />
 
       {/* add new branch  component  */}
       <CommonModal
-        title={"Add new product"}
+        title={'Add new product'}
         active={active}
         setActive={setActive}
       >

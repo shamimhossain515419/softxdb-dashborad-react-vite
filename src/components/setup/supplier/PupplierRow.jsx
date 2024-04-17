@@ -81,9 +81,9 @@ const SupplierRow = ({ index, item, refetch }) => {
       {/* delete modal  */}
       {deleteModal && (
         <DeleteSupplier
+          refetch={refetch}
           openModal={deleteModal}
           setOpenModal={setDeleteOpenModal}
-          refetch={refetch}
         />
       )}
       {/* update modal  */}

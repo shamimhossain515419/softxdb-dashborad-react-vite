@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useRemoveCustomerMutation } from '../../../redux/features/api/customer/customerApi';
 
-const DeleteCustomer = ({ openModal, setOpenModal }) => {
+const DeleteCustomer = ({ openModal, setOpenModal, refetch }) => {
   const [removeCustomer, { data }] = useRemoveCustomerMutation();
   const deleteUserHandler = () => {
     removeCustomer(openModal?.id);
@@ -11,6 +11,7 @@ const DeleteCustomer = ({ openModal, setOpenModal }) => {
   useEffect(() => {
     if (data?.status == 'success') {
       toast.success(data?.message);
+      refetch();
       setOpenModal();
     }
   }, [data, setOpenModal]);

@@ -10,7 +10,11 @@ import { useDispatch } from 'react-redux';
 import { addProduct } from '../../../redux/features/stock/addProductSlice';
 
 const AddStockFrom = () => {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState({
+    keyword: '',
+    limit: '',
+    page: '',
+  });
   // fetch data starting
   const { data: productData, refetch } = useGetProductQuery(searchValue);
   const { data: colors } = useGetColorQuery();
@@ -18,7 +22,11 @@ const AddStockFrom = () => {
   // fetch data end
   const dispatch = useDispatch();
   const setKeyword = word => {
-    setSearchValue(word);
+    setSearchValue({
+      keyword: word,
+      limit: '',
+      page: '',
+    });
     refetch();
   };
 

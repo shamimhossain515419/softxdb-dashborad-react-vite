@@ -27,7 +27,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
     formData.append('photo', photo);
     formData.append('added_by', '1');
 
-    fetch(`https://vicexhost.com/api/v1/customer`, {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/customer`, {
       method: 'POST',
       body: formData,
     })

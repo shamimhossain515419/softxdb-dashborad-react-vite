@@ -7,7 +7,7 @@ import CommonModal from '../../../ui/commonModal/commonModal';
 
 import SupplierRow from './PupplierRow';
 import AddNewSupplier from './AddNewSupplier';
-import { useGetSupplierDataMutation } from '../../../redux/features/api/supplier/supplier';
+import { useGetSupplierDataQuery } from '../../../redux/features/api/supplier/supplier';
 import Pagination from '../../../ui/pagination/Pagination';
 import Loader from '../../../ui/loader/Loader';
 
@@ -19,8 +19,17 @@ const SupplierComponent = () => {
   const [page, setPage] = useState(currentPage ? currentPage : '1');
   const [activeLimit, setActiveLimit] = useState(false);
   const [keyword, setKeyword] = useState('');
-  const [getSupplier, { data: productData, refetch, isLoading }] =
-    useGetSupplierDataMutation();
+  const [filterSupplier, setFilterSupllier] = useState({
+    keyword: keyword,
+    limit: showData,
+    page: page,
+  });
+  const {
+    data: suppliertData,
+
+    isLoading,
+    refetch,
+  } = useGetSupplierDataQuery(filterSupplier);
   const [active, setActive] = useState(false);
   const showDataArray = [
     '5',
@@ -35,19 +44,19 @@ const SupplierComponent = () => {
     '45',
     '50',
   ];
+
   useEffect(() => {
     if (showData || page || keyword) {
-      const data = {
+      setFilterSupllier({
         keyword: keyword,
         limit: showData,
         page: page,
-      };
-      getSupplier(data);
+      });
     }
     if (currentPage) {
       setPage(currentPage);
     }
-  }, [getSupplier, currentPage, setPage, showData, page, keyword]);
+  }, [currentPage, setPage, showData, page, keyword]);
 
   if (isLoading) {
     return <Loader />;
@@ -176,7 +185,7 @@ const SupplierComponent = () => {
             </tr>
           </thead>
           <tbody className="bg-primary-muted  text-white-base">
-            {productData?.suppliers?.map((item, index) => (
+            {suppliertData?.suppliers?.map((item, index) => (
               <SupplierRow
                 refetch={refetch}
                 index={index}
@@ -193,7 +202,7 @@ const SupplierComponent = () => {
       <Pagination
         setPage={setPage}
         per_page={showData}
-        totalResult={productData?.count}
+        totalResult={suppliertData?.count}
       />
       {/* add new branch  component  */}
       <CommonModal

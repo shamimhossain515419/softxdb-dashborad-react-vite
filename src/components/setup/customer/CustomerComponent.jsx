@@ -3,7 +3,7 @@ import { Collapse } from 'react-collapse';
 import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
 import { IoSearchOutline } from 'react-icons/io5';
 import { Link, useSearchParams } from 'react-router-dom';
-import { useGetCustomerDataMutation } from '../../../redux/features/api/customer/customerApi';
+import { useGetCustomerDataQuery } from '../../../redux/features/api/customer/customerApi';
 import CustomerRow from './CustomerRow';
 import CommonModal from '../../../ui/commonModal/commonModal';
 import AddCustomer from './Addcustomer/Customer';
@@ -18,8 +18,16 @@ const CustomerComponent = () => {
   const [page, setPage] = useState(currentPage ? currentPage : '1');
   const [activeLimit, setActiveLimit] = useState(false);
   const [keyword, setKeyword] = useState('');
-  const [getCustomerData, { data: productData, isLoading, refetch }] =
-    useGetCustomerDataMutation();
+  const [filterSupplier, setFilterSupllier] = useState({
+    keyword: keyword,
+    limit: showData,
+    page: page,
+  });
+  const {
+    data: productData,
+    isLoading,
+    refetch,
+  } = useGetCustomerDataQuery(filterSupplier);
   const [active, setActive] = useState(false);
   const showDataArray = [
     '5',
@@ -35,18 +43,18 @@ const CustomerComponent = () => {
     '50',
   ];
   useEffect(() => {
-    if (showData || page || keyword) {
+    if (showData || keyword || page) {
       const data = {
         keyword: keyword,
         limit: showData,
         page: page,
       };
-      getCustomerData(data);
+      setFilterSupllier(data);
     }
     if (currentPage) {
       setPage(currentPage);
     }
-  }, [getCustomerData, currentPage, setPage, showData, page, keyword]);
+  }, [currentPage, setPage, showData, page, keyword]);
 
   if (isLoading) {
     return <Loader />;
