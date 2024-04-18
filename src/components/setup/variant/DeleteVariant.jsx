@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-import { useRemoveColorMutation } from "../../../redux/features/api/color/ColorsApi";
-const DeleteColor = ({ openModal, setOpenModal, refetch }) => {
-  const [removeColor, { data }] = useRemoveColorMutation();
+
+import { useRemoveVariantMutation } from "../../../redux/features/api/variant/VariantApi";
+const DeleteVariant = ({ openModal, setOpenModal, refetch }) => {
+  //
+  const [removeVariant, { data }] = useRemoveVariantMutation();
   const deleteUserHandler = () => {
-    removeColor(openModal?.id);
+    removeVariant(openModal?.id);
   };
 
   useEffect(() => {
@@ -78,4 +80,4 @@ const DeleteColor = ({ openModal, setOpenModal, refetch }) => {
   );
 };
 
-export default DeleteColor;
+export default DeleteVariant;

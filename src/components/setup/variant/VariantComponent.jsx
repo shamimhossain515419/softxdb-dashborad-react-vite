@@ -1,20 +1,20 @@
 import { useState } from "react";
-
-import { FaArrowRight } from "react-icons/fa";
-
-import { Link } from "react-router-dom";
-import { useGetColorQuery } from "../../../redux/features/api/color/ColorsApi";
-import ColorRow from "./ColorRow";
-import CommonModal from "../../../ui/commonModal/commonModal";
-import AddNewColor from "./AddNewColor";
 import Loader from "../../../ui/loader/Loader";
+import { Link } from "react-router-dom";
+import { FaArrowRight } from "react-icons/fa6";
+import CommonModal from "../../../ui/commonModal/commonModal";
+import AddNewVariant from "./AddNewVariant";
+import { useGetVariantQuery } from "../../../redux/features/api/variant/VariantApi";
+import VariantRow from "./VariantRow";
 
-const ColorComponent = () => {
-  const { data: ColorData, refetch, isLoading } = useGetColorQuery();
+const VariantComponent = () => {
+  const { data: VariantData, refetch, isLoading } = useGetVariantQuery();
   const [active, setActive] = useState(false);
   if (isLoading) {
     return <Loader />;
   }
+
+  console.log(VariantData);
   return (
     <div>
       <div className="flex items-center gap-3">
@@ -23,24 +23,24 @@ const ColorComponent = () => {
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
         <Link to={"/setup/color"} className="text-white-base">
-          color
+          Variant
         </Link>
       </div>
-      {/* items color  */}
+      {/* items Variant  */}
       <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
-        <h1 className="text-white-base  text-[30px] font-bold"> Color </h1>
+        <h1 className="text-white-base  text-[30px] font-bold"> Variant </h1>
         <div className=" flex gap-3 items-center ">
           <div>
             <button
               onClick={() => setActive(true)}
               className="border-[1.5px] border-[#4d75ff] rounded-md inline-block  text-white-base tex-[14px] px-4 py-2 overflow-hidden"
             >
-              Add new color
+              Add new Variant
             </button>
           </div>
         </div>
       </div>
-      {/* color table  */}
+      {/* color Variant  */}
       <div className="overflow-x-auto">
         <table className="min-w-full  rounded-md overflow-hidden">
           <thead>
@@ -52,14 +52,17 @@ const ColorComponent = () => {
                 Name
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
+                Values
+              </th>
+              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 Action
               </th>
               {/* Add more table headers here */}
             </tr>
           </thead>
           <tbody className="bg-primary-muted  text-white-base">
-            {ColorData?.map((item, index) => (
-              <ColorRow
+            {VariantData?.map((item, index) => (
+              <VariantRow
                 refetch={refetch}
                 index={index}
                 item={item}
@@ -72,14 +75,14 @@ const ColorComponent = () => {
 
       {/* add new color  component  */}
       <CommonModal
-        title={"Add new color"}
+        title={"Add new Variant"}
         active={active}
         setActive={setActive}
       >
-        <AddNewColor refetch={refetch} setActive={setActive} />
+        <AddNewVariant refetch={refetch} setActive={setActive} />
       </CommonModal>
     </div>
   );
 };
 
-export default ColorComponent;
+export default VariantComponent;
