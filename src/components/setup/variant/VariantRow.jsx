@@ -23,15 +23,6 @@ const VariantRow = ({ index, item, refetch }) => {
       return;
     }
   };
-  //  update submit
-  const onSubmit = (data) => {
-    const UpdateData = {
-      id: activeEditModal?.id,
-      name: data.name,
-      added_by: activeEditModal?.added_by,
-    };
-    updateVariant(UpdateData);
-  };
 
   //  response and result
   useEffect(() => {
@@ -39,11 +30,27 @@ const VariantRow = ({ index, item, refetch }) => {
       toast.success(resultUpdate?.message);
       refetch();
       setActiveEditModal(false);
+    } else if (resultUpdate?.code == "404") {
+      toast.error(resultUpdate?.message);
+      refetch();
+      setActiveEditModal(false);
     }
   }, [refetch, resultUpdate, setActiveEditModal]);
 
   // warks for update
   const [values, setValues] = useState(activeEditModal?.attributes || []);
+
+  //  update submit
+  const onSubmit = (data) => {
+    const UpdateData = {
+      id: activeEditModal?.id,
+      name: data.name,
+      items: values,
+    };
+
+    // return;
+    updateVariant(UpdateData);
+  };
 
   const addRow = () => {
     setValues([...values, { name: "" }]);
@@ -56,9 +63,9 @@ const VariantRow = ({ index, item, refetch }) => {
   };
 
   const handleInputChange = (index, event) => {
-    const newValues = [...values]; // Create a copy of the state array
-    newValues[index] = { ...newValues[index], name: event.target.value }; // Update the specific item immutably
-    setValues(newValues); // Update the state with the new array
+    const newValues = [...values];
+    newValues[index] = { ...newValues[index], name: event.target.value };
+    setValues(newValues);
   };
 
   return (

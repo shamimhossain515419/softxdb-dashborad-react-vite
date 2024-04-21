@@ -1,7 +1,7 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
-  reducerPath: 'api',
+  reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_BASE_URL}/api/`,
     // prepareHeaders: async (headers, { getState, endpoint }) => {
@@ -13,5 +13,5 @@ export const apiSlice = createApi({
     // },
     // ${import.meta.env.VITE_BASE_URL}/api/`
   }),
-  endpoints: builder => ({}),
+  endpoints: (builder) => ({}),
 });

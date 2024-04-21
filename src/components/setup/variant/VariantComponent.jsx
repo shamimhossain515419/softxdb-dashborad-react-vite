@@ -14,7 +14,6 @@ const VariantComponent = () => {
     return <Loader />;
   }
 
-  console.log(VariantData);
   return (
     <div>
       <div className="flex items-center gap-3">
