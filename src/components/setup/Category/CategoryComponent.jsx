@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { FaArrowRight } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import CommonModal from '../../../ui/commonModal/commonModal';
-import { useGetCategoryQuery } from '../../../redux/features/api/category/CategoryApi';
-import AddNewCategory from './AddNewCategory';
-import CategoryRow from './CategoryRow';
-import Loader from '../../../ui/loader/Loader';
+import { useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import CommonModal from "../../../ui/commonModal/commonModal";
+import { useGetCategoryQuery } from "../../../redux/features/api/category/CategoryApi";
+import AddNewCategory from "./AddNewCategory";
+import CategoryRow from "./CategoryRow";
+import Loader from "../../../ui/loader/Loader";
 const CategoryComponent = () => {
   const { data: brandData, isLoading, error, refetch } = useGetCategoryQuery();
   const [active, setActive] = useState(false);
@@ -15,16 +15,16 @@ const CategoryComponent = () => {
   return (
     <div>
       <div className="flex items-center gap-3">
-        <Link to={'/'} className="text-white-muted">
+        <Link to={"/"} className="text-white-muted">
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/setup/category'} className="text-white-base">
+        <Link to={"/setup/category"} className="text-white-base">
           Category
         </Link>
       </div>
       {/* items Category  */}
-      <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
+      <div className="py-5 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
         <h1 className="text-white-base  text-[30px] font-bold"> Category </h1>
         <div className=" flex gap-3 items-center ">
           {/* <div
@@ -97,7 +97,7 @@ const CategoryComponent = () => {
 
       {/* add new category  component  */}
       <CommonModal
-        title={'Add new Category'}
+        title={"Add new Category"}
         active={active}
         setActive={setActive}
       >

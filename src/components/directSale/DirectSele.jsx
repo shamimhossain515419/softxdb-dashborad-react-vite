@@ -1,62 +1,62 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   FaAngleDoubleLeft,
   FaAngleDoubleRight,
   FaCloudUploadAlt,
-} from 'react-icons/fa';
-import { FaArrowRight, FaChevronDown } from 'react-icons/fa6';
-import { IoSearchOutline } from 'react-icons/io5';
-import { Collapse } from 'react-collapse';
-import DirectSaleTable from './DirectSaleTable';
-import { SiMinutemailer } from 'react-icons/si';
-import { BsThreeDots } from 'react-icons/bs';
-import { CategoryData } from '../../utility/selectItems/SelectItemsData';
-import Selectitem from '../../ui/selectitem/Selectitem';
-import { Link } from 'react-router-dom';
-import Datepick from '../../ui/datepick/Datepick ';
-import CommonModal from '../../ui/commonModal/commonModal';
+} from "react-icons/fa";
+import { FaArrowRight, FaChevronDown } from "react-icons/fa6";
+import { IoSearchOutline } from "react-icons/io5";
+import { Collapse } from "react-collapse";
+import DirectSaleTable from "./DirectSaleTable";
+import { SiMinutemailer } from "react-icons/si";
+import { BsThreeDots } from "react-icons/bs";
+import { CategoryData } from "../../utility/selectItems/SelectItemsData";
+import Selectitem from "../../ui/selectitem/Selectitem";
+import { Link } from "react-router-dom";
+import Datepick from "../../ui/datepick/Datepick ";
+import CommonModal from "../../ui/commonModal/commonModal";
 
 const DirectSele = () => {
-  const [category, setCategory] = useState({ name: 'Select category', id: 0 });
+  const [category, setCategory] = useState({ name: "Select category", id: 0 });
   const [active, setActive] = useState(false);
   const [activeUpload, setActiveUpload] = useState(false);
   const Categoryinfo = CategoryData;
-  const [showData, setShowData] = useState('25');
+  const [showData, setShowData] = useState("25");
   const [activeLimit, setActiveLimit] = useState(false);
   const showDataArray = [
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
   ];
   return (
     <div>
       <div className="flex items-center gap-3">
-        <Link to={'/'} className="text-white-muted">
+        <Link to={"/"} className="text-white-muted">
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/direct-sele'} className="text-white-base">
+        <Link to={"/direct-sele"} className="text-white-base">
           Items
         </Link>
       </div>
       {/* items button  */}
-      <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
+      <div className="py-5 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
         <h1 className="text-white-base"> Direct Sale </h1>
         <div className=" flex gap-3 items-center ">
           <div
             onClick={() => setActiveUpload(false)}
             className={` ${
               activeUpload == false
-                ? ' bg-blue-base'
-                : ' border  border-[#4d75ff] '
+                ? " bg-blue-base"
+                : " border  border-[#4d75ff] "
             }  p-[10px] rounded-full cursor-pointer`}
           >
             <FaCloudUploadAlt className={`text-[18px] text-white-base`} />
@@ -65,8 +65,8 @@ const DirectSele = () => {
             onClick={() => setActiveUpload(true)}
             className={` ${
               activeUpload == true
-                ? ' bg-blue-base'
-                : ' border  border-[#4d75ff] '
+                ? " bg-blue-base"
+                : " border  border-[#4d75ff] "
             }  p-[10px] rounded-full cursor-pointer`}
           >
             <FaCloudUploadAlt
@@ -235,7 +235,7 @@ const DirectSele = () => {
             <Selectitem
               active={category}
               setActive={setCategory}
-              title={'Categories'}
+              title={"Categories"}
               data={Categoryinfo}
             />
           </div>
@@ -243,7 +243,7 @@ const DirectSele = () => {
             <Selectitem
               active={category}
               setActive={setCategory}
-              title={'Available in'}
+              title={"Available in"}
               data={Categoryinfo}
             />
           </div>
@@ -251,7 +251,7 @@ const DirectSele = () => {
             <Selectitem
               active={category}
               setActive={setCategory}
-              title={'Item Type'}
+              title={"Item Type"}
               data={Categoryinfo}
             />
           </div>
@@ -290,7 +290,7 @@ const DirectSele = () => {
               <div>
                 <FaChevronDown
                   className={` ${
-                    activeLimit ? ' rotate-180' : ''
+                    activeLimit ? " rotate-180" : ""
                   }  duration-200 text-[14px] text-white-base`}
                 />
               </div>
@@ -328,7 +328,7 @@ const DirectSele = () => {
             placeholder="Search..."
           />
           <button className="cursor-pointer">
-            {' '}
+            {" "}
             <IoSearchOutline className="text-[15px] text-white-base " />
           </button>
         </div>
@@ -356,7 +356,7 @@ const DirectSele = () => {
                 <FaChevronDown className="text-[14px]" />
               </div>
               <p className="hidden sm:block text-[14px] font-normal px-3 cursor-pointer  border-r border-[#4d75ff] py-2 pr-2">
-                {' '}
+                {" "}
                 First
               </p>
               <div className="cursor-pointer border-r px-3 border-[#4d75ff] py-2 pr-2 ">
@@ -392,7 +392,7 @@ const DirectSele = () => {
       <div>
         <CommonModal active={active} setActive={setActive}>
           <h1 className="text-white-base">
-            {' '}
+            {" "}
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde quas
             modi ab quae corporis quam asperiores eius, temporibus voluptate
             cupiditate cum aliquam dicta, possimus quidem! Quisquam fuga

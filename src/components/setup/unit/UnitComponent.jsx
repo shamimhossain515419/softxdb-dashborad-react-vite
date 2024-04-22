@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import { Collapse } from 'react-collapse';
-import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
-import { IoSearchOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
-import { useGetUnitQuery } from '../../../redux/features/api/unit/UnitApi';
-import AddNewUnit from './AddNewUnit';
-import CommonModal from '../../../ui/commonModal/commonModal';
-import UnitRow from './UnitRow';
-import Loader from '../../../ui/loader/Loader';
+import { useState } from "react";
+import { Collapse } from "react-collapse";
+import { FaArrowRight, FaChevronDown } from "react-icons/fa";
+import { IoSearchOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import { useGetUnitQuery } from "../../../redux/features/api/unit/UnitApi";
+import AddNewUnit from "./AddNewUnit";
+import CommonModal from "../../../ui/commonModal/commonModal";
+import UnitRow from "./UnitRow";
+import Loader from "../../../ui/loader/Loader";
 const UnitComponent = () => {
   const { data: UnitData, isLoading, error, refetch } = useGetUnitQuery();
   const [active, setActive] = useState(false);
@@ -18,17 +18,20 @@ const UnitComponent = () => {
   return (
     <div>
       <div className="flex items-center gap-3">
-        <Link to={'/'} className="text-white-muted">
+        <Link to={"/"} className="text-white-muted">
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/setup/unit'} className="text-white-base">
+        <Link to={"/setup/unit"} className="text-white-base">
           Unit
         </Link>
       </div>
       {/* items unit  */}
-      <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
-        <h1 className="text-white-base  text-[30px] font-bold"> unit </h1>
+      <div className="py-5 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
+        <h1 className="text-white-base  text-[30px] font-bold capitalize">
+          {" "}
+          unit{" "}
+        </h1>
         <div className=" flex gap-3 items-center ">
           <div>
             <button
@@ -76,7 +79,7 @@ const UnitComponent = () => {
       </div>
 
       {/* add new unit  component  */}
-      <CommonModal title={'Add new unit'} active={active} setActive={setActive}>
+      <CommonModal title={"Add new unit"} active={active} setActive={setActive}>
         <AddNewUnit refetch={refetch} setActive={setActive} />
       </CommonModal>
     </div>

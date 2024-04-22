@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Collapse } from 'react-collapse';
-import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
-import { IoSearchOutline } from 'react-icons/io5';
-import { Link, useSearchParams } from 'react-router-dom';
-import CommonModal from '../../../ui/commonModal/commonModal';
-import { useGetProductQuery } from '../../../redux/features/api/product/productApi';
-import ProductRow from './ProductRow';
-import AddNewProduct from './AddNewProduct';
-import Loader from '../../../ui/loader/Loader';
-import Pagination from '../../../ui/pagination/Pagination';
+import { useEffect, useState } from "react";
+import { Collapse } from "react-collapse";
+import { FaArrowRight, FaChevronDown } from "react-icons/fa";
+import { IoSearchOutline } from "react-icons/io5";
+import { Link, useSearchParams } from "react-router-dom";
+import CommonModal from "../../../ui/commonModal/commonModal";
+import { useGetProductQuery } from "../../../redux/features/api/product/productApi";
+import ProductRow from "./ProductRow";
+import AddNewProduct from "./AddNewProduct";
+import Loader from "../../../ui/loader/Loader";
+import Pagination from "../../../ui/pagination/Pagination";
 
 const ProductComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentPage = searchParams.get('page');
-  const [page, setPage] = useState(currentPage ? currentPage : '1');
-  const [showData, setShowData] = useState('1');
+  const currentPage = searchParams.get("page");
+  const [page, setPage] = useState(currentPage ? currentPage : "1");
+  const [showData, setShowData] = useState("10");
   const [activeLimit, setActiveLimit] = useState(false);
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState("");
   const [filterSupplier, setFilterSupllier] = useState({
     keyword: keyword,
     limit: showData,
@@ -29,20 +29,19 @@ const ProductComponent = () => {
   } = useGetProductQuery(filterSupplier);
   const [active, setActive] = useState(false);
   const showDataArray = [
-    '5',
-    '10',
-    '15',
-    '20',
-    '25',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
+    "10",
+    "15",
+    "20",
+    "25",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
   ];
 
-  const keywordHandler = keyword => {
+  const keywordHandler = (keyword) => {
     setKeyword(keyword);
     refetch();
   };
@@ -65,11 +64,11 @@ const ProductComponent = () => {
   return (
     <div>
       <div className="flex items-center gap-3">
-        <Link to={'/'} className="text-white-muted">
+        <Link to={"/"} className="text-white-muted">
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/setup/product'} className="text-white-base">
+        <Link to={"/setup/product"} className="text-white-base">
           product
         </Link>
       </div>
@@ -106,7 +105,7 @@ const ProductComponent = () => {
               <div>
                 <FaChevronDown
                   className={` ${
-                    activeLimit ? ' rotate-180' : ''
+                    activeLimit ? " rotate-180" : ""
                   }  duration-200 text-[14px] text-white-base`}
                 />
               </div>
@@ -137,7 +136,7 @@ const ProductComponent = () => {
         {/* Product data  */}
         <div className="border text-white-base rounded-[4px] border-[#4d75ff] flex items-center gap-4 px-2 py-1">
           <input
-            onChange={e => keywordHandler(e.target.value)}
+            onChange={(e) => keywordHandler(e.target.value)}
             className=" w-full bg-transparent placeholder:text-white-base  outline-0 border-none"
             type="search"
             name="search"
@@ -204,6 +203,7 @@ const ProductComponent = () => {
         </table>
       </div>
       {/* pagination  */}
+      
       <Pagination
         setPage={setPage}
         per_page={showData}
@@ -212,7 +212,7 @@ const ProductComponent = () => {
 
       {/* add new branch  component  */}
       <CommonModal
-        title={'Add new product'}
+        title={"Add new product"}
         active={active}
         setActive={setActive}
       >
