@@ -1,39 +1,38 @@
-import { useState } from 'react';
-import { FaCheck } from 'react-icons/fa';
-import Address from './Address';
-import toast from 'react-hot-toast';
-import { useForm } from 'react-hook-form';
+import { useState } from "react";
+import { FaCheck } from "react-icons/fa";
+import Address from "./Address";
+import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
 const AddInformation = ({ refetch, CloseModal }) => {
   const [active, setActive] = useState(false);
-  const [category, setCategory] = useState({ name: 'Select category', id: 0 });
-  const [photo, setPhoto] = useState('');
-  const [selectImage, setselectImage] = useState('');
+  const [category, setCategory] = useState({ name: "Select category", id: 0 });
+  const [photo, setPhoto] = useState("");
+  const [selectImage, setselectImage] = useState("");
   const { register, handleSubmit, reset } = useForm();
-  const onSubmit = data => {
-    console.log(data);
+  const onSubmit = (data) => {
     const formData = new FormData();
-    formData.append('name', data?.name);
-    formData.append('branch_id', '1');
-    formData.append('phone', data?.phone);
-    formData.append('email', data?.email);
-    formData.append('reference_name', data?.reference_name);
-    formData.append('reference_address', data?.reference_address);
-    formData.append('reference_phone', data?.reference_phone);
-    formData.append('credit_limit', data?.credit_limit);
-    formData.append('address', data?.address);
-    formData.append('closing_balance', data?.closing_balance);
-    formData.append('nid', data?.nid);
-    formData.append('photo', photo);
-    formData.append('added_by', '1');
+    formData.append("name", data?.name);
+    formData.append("branch_id", "1");
+    formData.append("phone", data?.phone);
+    formData.append("email", data?.email);
+    formData.append("reference_name", data?.reference_name);
+    formData.append("reference_address", data?.reference_address);
+    formData.append("reference_phone", data?.reference_phone);
+    formData.append("credit_limit", data?.credit_limit);
+    formData.append("address", data?.address);
+    formData.append("closing_balance", data?.closing_balance);
+    formData.append("nid", data?.nid);
+    formData.append("photo", photo);
+    formData.append("added_by", "1");
 
     fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/customer`, {
-      method: 'POST',
+      method: "POST",
       body: formData,
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === 'success') {
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success") {
           toast.success(data?.message);
           setActive(false);
           CloseModal(false);
@@ -41,16 +40,16 @@ const AddInformation = ({ refetch, CloseModal }) => {
           reset();
           return;
         } else {
-          toast.error('Failed to Add Product');
+          toast.error("Failed to Add Product");
           setActive(false);
         }
       })
-      .catch(errors => {
+      .catch((errors) => {
         setActive(false);
       });
   };
 
-  const handleImageChange = e => {
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -80,7 +79,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                     Customer Name <span className="text-blue-base">*</span>
                   </label>
                   <input
-                    {...register('name')}
+                    {...register("name")}
                     type="text"
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="name"
@@ -98,7 +97,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   </label>
                   <input
                     type="email"
-                    {...register('email')}
+                    {...register("email")}
                     required
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="email"
@@ -116,7 +115,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   </label>
                   <input
                     type="text"
-                    {...register('address')}
+                    {...register("address")}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="address"
                     id="address"
@@ -134,7 +133,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   </label>
                   <input
                     type="number"
-                    {...register('nid')}
+                    {...register("nid")}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="nid"
                     id=""
@@ -151,7 +150,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   </label>
                   <input
                     type="number"
-                    {...register('phone')}
+                    {...register("phone")}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="phone"
                     id=""
@@ -168,7 +167,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   </label>
                   <input
                     type="number"
-                    {...register('credit_limit')}
+                    {...register("credit_limit")}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="credit_limit"
                     id=""
@@ -186,7 +185,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   </label>
                   <input
                     type="text"
-                    {...register('reference_name')}
+                    {...register("reference_name")}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="reference_name"
                     id=""
@@ -204,7 +203,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   </label>
                   <input
                     type="text"
-                    {...register('reference_address')}
+                    {...register("reference_address")}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="reference_address"
                     id=""
@@ -221,7 +220,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   </label>
                   <input
                     type="number"
-                    {...register('reference_phone')}
+                    {...register("reference_phone")}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="reference_phone"
                     id=""
@@ -238,7 +237,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                   </label>
                   <input
                     type="number"
-                    {...register('closing_balance')}
+                    {...register("closing_balance")}
                     className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
                     name="closing_balance"
                     id=""
@@ -254,8 +253,8 @@ const AddInformation = ({ refetch, CloseModal }) => {
             <div className="border border-dashed border-blue-500 rounded-lg flex justify-center items-center gap-5  p-4 ">
               {selectImage ? (
                 <div>
-                  {' '}
-                  <img src={selectImage} alt="" />{' '}
+                  {" "}
+                  <img src={selectImage} alt="" />{" "}
                 </div>
               ) : (
                 <div>
@@ -299,7 +298,7 @@ const AddInformation = ({ refetch, CloseModal }) => {
                       <div className="text-white-base text-center">
                         <p className="text-[13px]">Maximum file size 2MB</p>
                         <p className="text-[13px] mt-2">
-                          Supported Formats: JPG, JPEG, PNG & ICO{' '}
+                          Supported Formats: JPG, JPEG, PNG & ICO{" "}
                         </p>
                       </div>
                     </div>
@@ -337,8 +336,8 @@ const AddInformation = ({ refetch, CloseModal }) => {
               <div
                 className={` ${
                   active
-                    ? ' right-1 bg-white-base  '
-                    : ' left-1 bg-primary-base'
+                    ? " right-1 bg-white-base  "
+                    : " left-1 bg-primary-base"
                 } w-[25px] absolute  h-[25px]  flex justify-center items-center  rounded-full`}
               >
                 {active && <FaCheck className="text-[16px] text-blue-base " />}
