@@ -26,7 +26,7 @@ const VariantComponent = () => {
         </Link>
       </div>
       {/* items Variant  */}
-      <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
+      <div className="py-5 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
         <h1 className="text-white-base  text-[30px] font-bold"> Variant </h1>
         <div className=" flex gap-3 items-center ">
           <div>

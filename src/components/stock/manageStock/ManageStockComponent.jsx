@@ -1,49 +1,37 @@
-import { useState } from 'react';
-import { IoSearchOutline } from 'react-icons/io5';
-import { useGetStockQuery } from '../../../redux/features/api/stock/stockApi';
-import { Link } from 'react-router-dom';
-import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
-import { Collapse } from 'react-collapse';
-import StockRow from './StockRow';
+import { useState } from "react";
+import { IoSearchOutline } from "react-icons/io5";
+import { useGetStockQuery } from "../../../redux/features/api/stock/stockApi";
+import { Link } from "react-router-dom";
+import { FaArrowRight, FaChevronDown } from "react-icons/fa";
+import { Collapse } from "react-collapse";
+import StockRow from "./StockRow";
 
 const ManageStockComponent = () => {
-  const [showData, setShowData] = useState('25');
+  const [showData, setShowData] = useState("10");
   const [activeLimit, setActiveLimit] = useState(false);
-  const { data: stockData, refetch, isLoading } = useGetStockQuery('');
+  const { data: stockData, refetch, isLoading } = useGetStockQuery("");
   const [active, setActive] = useState(false);
-  const showDataArray = [
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
-  ];
+  const showDataArray = ["10", "15", "20", "25", "30", "35", "40", "45", "50"];
 
   return (
     <>
       <div>
         <div className="flex items-center gap-3">
-          <Link to={'/'} className="text-white-muted">
+          <Link to={"/"} className="text-white-muted">
             Home
           </Link>
           <FaArrowRight className="text-[18px] text-blue-base" />
-          <Link to={'/stock/manage-stock'} className="text-white-base">
+          <Link to={"/stock/manage-stock"} className="text-white-base">
             manage Stock
           </Link>
         </div>
         {/* items stock  */}
-        <div className="py-5 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
+        <div className="pt-5 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
           <h1 className="text-white-base  text-[30px] font-bold"> Stock </h1>
           <div className=" flex gap-3 items-center ">
             <div>
               <Link
-                to={'/stock/add-stock'}
+                to={"/stock/add-stock"}
                 className="border-[1.5px] border-[#4d75ff] rounded-md inline-block  text-white-base tex-[14px] px-4 py-2 overflow-hidden"
               >
                 Add new Stock
@@ -69,7 +57,7 @@ const ManageStockComponent = () => {
                 <div>
                   <FaChevronDown
                     className={` ${
-                      activeLimit ? ' rotate-180' : ''
+                      activeLimit ? " rotate-180" : ""
                     }  duration-200 text-[14px] text-white-base`}
                   />
                 </div>

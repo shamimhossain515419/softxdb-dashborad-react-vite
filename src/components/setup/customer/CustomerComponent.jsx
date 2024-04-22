@@ -1,23 +1,23 @@
-import { useEffect, useState } from 'react';
-import { Collapse } from 'react-collapse';
-import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
-import { IoSearchOutline } from 'react-icons/io5';
-import { Link, useSearchParams } from 'react-router-dom';
-import { useGetCustomerDataQuery } from '../../../redux/features/api/customer/customerApi';
-import CustomerRow from './CustomerRow';
-import CommonModal from '../../../ui/commonModal/commonModal';
-import AddCustomer from './Addcustomer/Customer';
-import Pagination from '../../../ui/pagination/Pagination';
-import Loader from '../../../ui/loader/Loader';
+import { useEffect, useState } from "react";
+import { Collapse } from "react-collapse";
+import { FaArrowRight, FaChevronDown } from "react-icons/fa";
+import { IoSearchOutline } from "react-icons/io5";
+import { Link, useSearchParams } from "react-router-dom";
+import { useGetCustomerDataQuery } from "../../../redux/features/api/customer/customerApi";
+import CustomerRow from "./CustomerRow";
+import CommonModal from "../../../ui/commonModal/commonModal";
+import AddCustomer from "./Addcustomer/Customer";
+import Pagination from "../../../ui/pagination/Pagination";
+import Loader from "../../../ui/loader/Loader";
 
 const CustomerComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentPage = searchParams.get('page');
+  const currentPage = searchParams.get("page");
 
-  const [showData, setShowData] = useState('5');
-  const [page, setPage] = useState(currentPage ? currentPage : '1');
+  const [showData, setShowData] = useState("10");
+  const [page, setPage] = useState(currentPage ? currentPage : "1");
   const [activeLimit, setActiveLimit] = useState(false);
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState("");
   const [filterSupplier, setFilterSupllier] = useState({
     keyword: keyword,
     limit: showData,
@@ -29,19 +29,7 @@ const CustomerComponent = () => {
     refetch,
   } = useGetCustomerDataQuery(filterSupplier);
   const [active, setActive] = useState(false);
-  const showDataArray = [
-    '5',
-    '7',
-    '10',
-    '16',
-    '20',
-    '25',
-    '30',
-    '35',
-    '40',
-    '45',
-    '50',
-  ];
+  const showDataArray = ["10", "15", "20", "25", "30", "35", "40", "45", "50"];
   useEffect(() => {
     if (showData || keyword || page) {
       const data = {
@@ -63,11 +51,11 @@ const CustomerComponent = () => {
   return (
     <div>
       <div className="flex items-center gap-3">
-        <Link to={'/setup/customer'} className="text-white-muted">
+        <Link to={"/setup/customer"} className="text-white-muted">
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/setup/customer'} className="text-white-base">
+        <Link to={"/setup/customer"} className="text-white-base">
           Customer
         </Link>
       </div>
@@ -103,7 +91,7 @@ const CustomerComponent = () => {
               <div>
                 <FaChevronDown
                   className={` ${
-                    activeLimit ? ' rotate-180' : ''
+                    activeLimit ? " rotate-180" : ""
                   }  duration-200 text-[14px] text-white-base`}
                 />
               </div>
@@ -134,7 +122,7 @@ const CustomerComponent = () => {
         {/* Brand data  */}
         <div className="border text-white-base rounded-[4px] border-[#4d75ff] flex items-center gap-4 px-2 py-1">
           <input
-            onChange={e => setKeyword(e.target.value)}
+            onChange={(e) => setKeyword(e.target.value)}
             className=" w-full bg-transparent placeholder:text-white-base  outline-0 border-none"
             type="search"
             name=""
@@ -142,7 +130,7 @@ const CustomerComponent = () => {
             placeholder="Search..."
           />
           <button className="cursor-pointer">
-            {' '}
+            {" "}
             <IoSearchOutline className="text-[15px] text-white-base " />
           </button>
         </div>
@@ -209,7 +197,7 @@ const CustomerComponent = () => {
       </div>
 
       <CommonModal
-        title={'Add new color'}
+        title={"Add new color"}
         active={active}
         setActive={setActive}
       >

@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import { Collapse } from 'react-collapse';
-import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
-import { IoSearchOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
-import CommonModal from '../../../ui/commonModal/commonModal';
-import { useGetSizeQuery } from '../../../redux/features/api/size/sizesApi';
-import SizeRow from './SizeRow';
-import AddNewSize from './AddNewSize';
-import Loader from '../../../ui/loader/Loader';
+import { useState } from "react";
+import { Collapse } from "react-collapse";
+import { FaArrowRight, FaChevronDown } from "react-icons/fa";
+import { IoSearchOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import CommonModal from "../../../ui/commonModal/commonModal";
+import { useGetSizeQuery } from "../../../redux/features/api/size/sizesApi";
+import SizeRow from "./SizeRow";
+import AddNewSize from "./AddNewSize";
+import Loader from "../../../ui/loader/Loader";
 
 const SizesComponent = () => {
   const { data: SizeData, refetch, isLoading } = useGetSizeQuery();
@@ -19,16 +19,16 @@ const SizesComponent = () => {
   return (
     <div>
       <div className="flex items-center gap-3">
-        <Link to={'/'} className="text-white-muted">
+        <Link to={"/"} className="text-white-muted">
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/setup/size'} className="text-white-base">
+        <Link to={"/setup/size"} className="text-white-base">
           size
         </Link>
       </div>
       {/* items size  */}
-      <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
+      <div className="py-5 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
         <h1 className="text-white-base  text-[30px] font-bold"> Size </h1>
         <div className=" flex gap-3 items-center ">
           <div>
@@ -73,7 +73,7 @@ const SizesComponent = () => {
       </div>
 
       {/* add new Size  component  */}
-      <CommonModal title={'Add new Size'} active={active} setActive={setActive}>
+      <CommonModal title={"Add new Size"} active={active} setActive={setActive}>
         <AddNewSize refetch={refetch} setActive={setActive} />
       </CommonModal>
     </div>

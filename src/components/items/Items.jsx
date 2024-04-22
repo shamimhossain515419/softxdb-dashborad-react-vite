@@ -1,59 +1,59 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { FaArrowRight } from 'react-icons/fa6';
-import { FaCloudUploadAlt } from 'react-icons/fa';
+import { useState } from "react";
+import { FaArrowRight } from "react-icons/fa6";
+import { FaCloudUploadAlt } from "react-icons/fa";
 
-import { IoSearchOutline } from 'react-icons/io5';
-import { Collapse } from 'react-collapse';
-import { FaChevronDown } from 'react-icons/fa';
-import ItemsTable from './ItemsTable';
-import { SiMinutemailer } from 'react-icons/si';
-import { FaAngleDoubleLeft } from 'react-icons/fa';
-import { BsThreeDots } from 'react-icons/bs';
-import { FaAngleDoubleRight } from 'react-icons/fa';
-import { CategoryData } from '../../utility/selectItems/SelectItemsData';
-import { Link } from 'react-router-dom';
-import Selectitem from '../../ui/selectitem/Selectitem';
+import { IoSearchOutline } from "react-icons/io5";
+import { Collapse } from "react-collapse";
+import { FaChevronDown } from "react-icons/fa";
+import ItemsTable from "./ItemsTable";
+import { SiMinutemailer } from "react-icons/si";
+import { FaAngleDoubleLeft } from "react-icons/fa";
+import { BsThreeDots } from "react-icons/bs";
+import { FaAngleDoubleRight } from "react-icons/fa";
+import { CategoryData } from "../../utility/selectItems/SelectItemsData";
+import { Link } from "react-router-dom";
+import Selectitem from "../../ui/selectitem/Selectitem";
 
 const Items = () => {
   const [activeButton, setActiveButton] = useState(1);
   const [activeUpload, setActiveUpload] = useState(false);
   const Categoryinfo = CategoryData;
-  const [showData, setShowData] = useState('25');
+  const [showData, setShowData] = useState("25");
   const [activeLimit, setActiveLimit] = useState(false);
-  const [category, setCategory] = useState({ name: 'Select category', id: 0 });
+  const [category, setCategory] = useState({ name: "Select category", id: 0 });
   const showDataArray = [
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
   ];
   return (
     <div>
       <div className="flex items-center gap-3">
-        <Link to={'/'} className="text-white-muted">
+        <Link to={"/"} className="text-white-muted">
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/item'} className="text-white-base">
+        <Link to={"/item"} className="text-white-base">
           Items
         </Link>
       </div>
       {/* items button  */}
-      <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
+      <div className="py-5 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
         <div className="border-[2px] border-[#4d75ff]  rounded-md  flex">
           <button
             onClick={() => setActiveButton(1)}
             className={` ${
-              activeButton == 1 ? 'bg-blue-base ' : ' '
+              activeButton == 1 ? "bg-blue-base " : " "
             } w-[150px] text-[14px]  px-3 py-2 text-white-base`}
           >
             item
@@ -61,7 +61,7 @@ const Items = () => {
           <button
             onClick={() => setActiveButton(2)}
             className={`${
-              activeButton == 2 ? 'bg-blue-base ' : ' '
+              activeButton == 2 ? "bg-blue-base " : " "
             }  w-[150px]  text-[14px]  px-3 py-2 text-white-base`}
           >
             Group items
@@ -72,8 +72,8 @@ const Items = () => {
             onClick={() => setActiveUpload(false)}
             className={` ${
               activeUpload == false
-                ? ' bg-blue-base'
-                : ' border  border-[#4d75ff] '
+                ? " bg-blue-base"
+                : " border  border-[#4d75ff] "
             }  p-[10px] rounded-full cursor-pointer`}
           >
             <FaCloudUploadAlt className={`text-[18px] text-white-base`} />
@@ -82,8 +82,8 @@ const Items = () => {
             onClick={() => setActiveUpload(true)}
             className={` ${
               activeUpload == true
-                ? ' bg-blue-base'
-                : ' border  border-[#4d75ff] '
+                ? " bg-blue-base"
+                : " border  border-[#4d75ff] "
             }  p-[10px] rounded-full cursor-pointer`}
           >
             <FaCloudUploadAlt
@@ -105,7 +105,7 @@ const Items = () => {
           <Selectitem
             active={category}
             setActive={setCategory}
-            title={'Categories'}
+            title={"Categories"}
             data={Categoryinfo}
           />
         </div>
@@ -113,7 +113,7 @@ const Items = () => {
           <Selectitem
             active={category}
             setActive={setCategory}
-            title={'Available in'}
+            title={"Available in"}
             data={Categoryinfo}
           />
         </div>
@@ -121,7 +121,7 @@ const Items = () => {
           <Selectitem
             active={category}
             setActive={setCategory}
-            title={'Item Type'}
+            title={"Item Type"}
             data={Categoryinfo}
           />
         </div>
@@ -129,7 +129,7 @@ const Items = () => {
           <Selectitem
             active={category}
             setActive={setCategory}
-            title={'Brand'}
+            title={"Brand"}
             data={Categoryinfo}
           />
         </div>
@@ -137,7 +137,7 @@ const Items = () => {
           <Selectitem
             active={category}
             setActive={setCategory}
-            title={'Status'}
+            title={"Status"}
             data={Categoryinfo}
           />
         </div>
@@ -172,7 +172,7 @@ const Items = () => {
                 <div>
                   <FaChevronDown
                     className={` ${
-                      activeLimit ? ' rotate-180' : ''
+                      activeLimit ? " rotate-180" : ""
                     }  duration-200 text-[14px] text-white-base`}
                   />
                 </div>
@@ -210,7 +210,7 @@ const Items = () => {
               placeholder="Search..."
             />
             <button className="cursor-pointer">
-              {' '}
+              {" "}
               <IoSearchOutline className="text-[15px] text-white-base " />
             </button>
           </div>
@@ -239,7 +239,7 @@ const Items = () => {
                 <FaChevronDown className="text-[14px]" />
               </div>
               <p className="hidden sm:block text-[14px] font-normal px-3 cursor-pointer  border-r border-[#4d75ff] py-2 pr-2">
-                {' '}
+                {" "}
                 First
               </p>
               <div className="cursor-pointer border-r px-3 border-[#4d75ff] py-2 pr-2 ">

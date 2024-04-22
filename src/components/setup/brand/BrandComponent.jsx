@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { FaArrowRight } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { useGetBrandQuery } from '../../../redux/features/api/brand/BrandApi';
-import BranchRow from './BrandRow';
-import CommonModal from '../../../ui/commonModal/commonModal';
-import AddNewBrand from './AddNewBrand';
-import Loader from '../../../ui/loader/Loader';
+import { useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { useGetBrandQuery } from "../../../redux/features/api/brand/BrandApi";
+import BranchRow from "./BrandRow";
+import CommonModal from "../../../ui/commonModal/commonModal";
+import AddNewBrand from "./AddNewBrand";
+import Loader from "../../../ui/loader/Loader";
 const BrandComponent = () => {
   const { data: brandData, isLoading, error, refetch } = useGetBrandQuery();
   const [active, setActive] = useState(false);
@@ -16,16 +16,16 @@ const BrandComponent = () => {
   return (
     <div>
       <div className="flex items-center gap-3">
-        <Link to={'/'} className="text-white-muted">
+        <Link to={"/"} className="text-white-muted">
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/setup/branch'} className="text-white-base">
+        <Link to={"/setup/branch"} className="text-white-base">
           Brand
         </Link>
       </div>
       {/* items Brand  */}
-      <div className="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
+      <div className="py-5 flex flex-col lg:flex-row justify-between lg:items-center gap-6">
         <h1 className="text-white-base  text-[30px] font-bold"> Brand </h1>
         <div className=" flex gap-3 items-center ">
           <div>
@@ -71,7 +71,7 @@ const BrandComponent = () => {
 
       {/* add new branch  component  */}
       <CommonModal
-        title={'Add new brand'}
+        title={"Add new brand"}
         active={active}
         setActive={setActive}
       >
