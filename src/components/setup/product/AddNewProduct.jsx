@@ -15,8 +15,7 @@ const AddNewProduct = ({ setActive, refetch }) => {
   const [unit, setUnit] = useState({ name: "Select Unit", id: 0 });
   const [photo, setPhoto] = useState("");
   const [serial_status, setSerial_status] = useState(false);
-  const [color_status, setColor_status] = useState(false);
-  const [size_status, setSize_status] = useState(false);
+
   const { data: categoryData } = useGetCategoryQuery();
   const { data: brandData } = useGetBrandQuery();
   const { data: UnitData } = useGetUnitQuery();
@@ -69,8 +68,21 @@ const AddNewProduct = ({ setActive, refetch }) => {
 
     setRows(newRows);
   };
+  let variantData = [];
 
-  //
+  // console.log(rows[0]?.selectedVariant.id);
+  // console.log(rows[0]?.selectedAttribute);
+
+  rows?.map((rs) => {
+    const variant = {
+      variant_id: rs?.selectedVariant.id,
+      attribute_id: rs?.selectedAttribute,
+    };
+
+    variantData.push(variant);
+  });
+  console.log(variantData);
+
   const onSubmit = (data) => {
     const formData = new FormData();
     formData.append("name", data?.name);
@@ -82,9 +94,8 @@ const AddNewProduct = ({ setActive, refetch }) => {
     formData.append("product_code", data?.product_code);
     formData.append("description", data?.description);
     formData.append("serial_status", serial_status ? "1" : "0");
-    formData.append("color_status", color_status ? "1" : "0");
-    formData.append("size_status", size_status ? "1" : "0");
     formData.append("photo", photo);
+    formData.append("variants", variantData);
     formData.append("added_by", "1");
 
     fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/product`, {

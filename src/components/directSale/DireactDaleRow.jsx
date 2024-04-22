@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { BsThreeDotsVertical } from 'react-icons/bs';
-import { MdDelete, MdModeEditOutline } from 'react-icons/md';
+import { useState } from "react";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { MdDelete, MdModeEditOutline } from "react-icons/md";
 
 const DireactDaleRow = ({ item, index }) => {
   const [active, setActive] = useState(false);
@@ -10,18 +10,14 @@ const DireactDaleRow = ({ item, index }) => {
       return;
     }
   };
-  const handleDelete = item => {
-    console.log('dfdf');
-  };
-  const handleEdit = item => {
-    console.log('dfdf');
-  };
+  const handleDelete = (item) => {};
+  const handleEdit = (item) => {};
   return (
     <>
       <tr
         onClick={handleRemoveAction}
         key={index}
-        className={`${index % 2 === 0 ? 'bg-primary-muted' : ''} relative`}
+        className={`${index % 2 === 0 ? "bg-primary-muted" : ""} relative`}
       >
         <td className="px-6 py-4 whitespace-nowrap">DSO-001027</td>
         <td className="px-6 py-4 whitespace-nowrap">24 Mar 2024</td>
@@ -46,8 +42,8 @@ const DireactDaleRow = ({ item, index }) => {
             onClick={() => setActive(!active)}
             className={`${
               index % 2 === 0
-                ? 'hover:bg-primary-base'
-                : 'hover:bg-primary-muted'
+                ? "hover:bg-primary-base"
+                : "hover:bg-primary-muted"
             } cursor-pointer  duration-300   w-[40px] h-[40px] rounded-full flex justify-center items-center gap-1`}
           >
             <BsThreeDotsVertical className="text-[20px] text-white-base" />
