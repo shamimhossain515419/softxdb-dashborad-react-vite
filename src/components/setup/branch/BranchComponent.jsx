@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { FaArrowRight } from 'react-icons/fa6';
-import { Link } from 'react-router-dom';
-import { useGetBranchQuery } from '../../../redux/features/api/branch/BranchApi';
-import BranchRow from './BranchRow';
-import CommonModal from '../../../ui/commonModal/commonModal';
-import AddNewBranch from './AddNewBranch';
-import Loader from '../../../ui/loader/Loader';
+import { useState } from "react";
+import { FaArrowRight } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+import { useGetBranchQuery } from "../../../redux/features/api/branch/BranchApi";
+import BranchRow from "./BranchRow";
+import CommonModal from "../../../ui/commonModal/commonModal";
+import AddNewBranch from "./AddNewBranch";
+import Loader from "../../../ui/loader/Loader";
 
 const BranchComponent = () => {
   const [active, setActive] = useState(false);
@@ -18,20 +18,17 @@ const BranchComponent = () => {
   return (
     <>
       <div className="flex items-center gap-3">
-        <Link to={'/'} className="text-white-muted">
+        <Link to={"/"} className="text-white-muted">
           Home
         </Link>
         <FaArrowRight className="text-[18px] text-blue-base" />
-        <Link to={'/setup/branch'} className="text-white-base">
+        <Link to={"/setup/branch"} className="text-white-base">
           Branch
         </Link>
       </div>
       {/* items Branch  */}
-      <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-6">
-        <h1 className="text-white-base  text-[30px] font-bold py-5">
-          {' '}
-          Branch{' '}
-        </h1>
+      <div className="flex py-5 flex-col lg:flex-row justify-between lg:items-center gap-6">
+        <h1 className="text-white-base  text-[30px] font-bold"> Branch </h1>
         <div>
           <button
             onClick={() => setActive(true)}
@@ -85,7 +82,7 @@ const BranchComponent = () => {
       {/* add new branch  component  */}
 
       <CommonModal
-        title={'Add new branch'}
+        title={"Add new branch"}
         active={active}
         setActive={setActive}
       >
