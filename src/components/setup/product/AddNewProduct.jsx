@@ -68,7 +68,7 @@ const AddNewProduct = ({ setActive, refetch }) => {
 
     setRows(newRows);
   };
-  let variantData = [];
+  let variantDatForBackend = [];
 
   // console.log(rows[0]?.selectedVariant.id);
   // console.log(rows[0]?.selectedAttribute);
@@ -79,28 +79,32 @@ const AddNewProduct = ({ setActive, refetch }) => {
       attribute_id: rs?.selectedAttribute,
     };
 
-    variantData.push(variant);
+    variantDatForBackend.push(variant);
   });
-  console.log(variantData);
 
   const onSubmit = (data) => {
-    const formData = new FormData();
-    formData.append("name", data?.name);
-    formData.append("category_id", category?.id);
-    formData.append("brand_id", brand?.id);
-    formData.append("unit_id", unit?.id);
-    formData.append("selling_price", data?.selling_price);
-    formData.append("purchase_price", data?.purchase_price);
-    formData.append("product_code", data?.product_code);
-    formData.append("description", data?.description);
-    formData.append("serial_status", serial_status ? "1" : "0");
-    formData.append("photo", photo);
-    formData.append("variants", variantData);
-    formData.append("added_by", "1");
+    const values = {
+      name: data?.name,
+      category_id: category?.id,
+      brand_id: brand?.id,
+      unit_id: unit?.id,
+      selling_price: data?.selling_price,
+      purchase_price: data?.purchase_price,
+      product_code: data?.product_code,
+      description: data?.description,
+      serial_status: serial_status ? "1" : "0",
+      // photo: photo,
+      variants: variantDatForBackend,
+      barcode: data?.barcode,
+      added_by: "1",
+    };
 
     fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/product`, {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values), // stringify the object
     })
       .then((res) => res.json())
       .then((data) => {
@@ -110,14 +114,15 @@ const AddNewProduct = ({ setActive, refetch }) => {
           refetch();
           reset();
         } else {
-          toast.error("Failed to Add Product");
-          setActive(false);
+          toast.error(data?.message);
+          // setActive(false);
+          console.log(data);
         }
       })
       .catch((errors) => {
         console.log(errors);
         toast.error("Failed to Product");
-        setActive(false);
+        // setActive(false);
       });
   };
 
@@ -149,10 +154,8 @@ const AddNewProduct = ({ setActive, refetch }) => {
             className="text-[16px] font-medium capitalize text-white-base"
           >
             Photo
-            <span className="text-blue-base ">*</span>
           </label>
           <input
-            required
             type={"file"}
             onChange={(e) => setPhoto(e.target.files[0])}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
@@ -208,6 +211,25 @@ const AddNewProduct = ({ setActive, refetch }) => {
           </label>
           <input
             {...register("product_code")}
+            required
+            type={"text"}
+            className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
+            id=""
+            placeholder={"Enter product code"}
+          />
+        </div>
+
+        {/* input barcode */}
+        <div className=" w-full">
+          <label
+            htmlFor=""
+            className="text-[16px] font-medium capitalize text-white-base"
+          >
+            barcode
+            <span className="text-blue-base ">*</span>
+          </label>
+          <input
+            {...register("barcode")}
             required
             type={"text"}
             className=" w-full text-[14px] text-white-base placeholder:text-white-muted placeholder:text-[12px] border border-blue-base block bg-transparent mt-2 outline-0 px-2 py-[10px] rounded "
