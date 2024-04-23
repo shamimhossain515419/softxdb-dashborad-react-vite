@@ -3,7 +3,7 @@ export const Menubar = [
   {
     id: 1,
     title: "Setup",
-    path: "/",
+    path: "/setup",
     icon: <FaRegSquarePlus></FaRegSquarePlus>,
     submenu: [
       {
@@ -61,7 +61,7 @@ export const Menubar = [
   {
     id: 4,
     title: "Stock",
-    path: "/",
+    path: "/stock",
     icon: <FaRegSquarePlus></FaRegSquarePlus>,
     submenu: [
       {
