@@ -25,6 +25,29 @@ const AddNewProduct = ({ setActive, refetch }) => {
   const { data: variantsData } = useGetVariantQuery();
   const [rows, setRows] = useState([]);
 
+  // console.log(rows);
+
+  const handleAttributeChange = (index, attribute_id) => {
+    const newRows = [...rows];
+
+    const isExiting = newRows[index].selectedAttribute.find(
+      (attribute) => attribute === attribute_id
+    );
+    if (isExiting) {
+      // remove item  attribute from array
+      const newAttribute = newRows[index].selectedAttribute.filter(
+        (attribute) => attribute !== attribute_id
+      );
+      newRows[index].selectedAttribute = newAttribute;
+    } else {
+      newRows[index].selectedAttribute = [
+        ...newRows[index].selectedAttribute,
+        attribute_id,
+      ];
+    }
+    setRows(newRows);
+  };
+
   const addRow = () => {
     setRows([...rows, { selectedVariant: "" }]);
   };
@@ -53,34 +76,30 @@ const AddNewProduct = ({ setActive, refetch }) => {
       (variant) => variant?.id == selectedVariantId
     );
 
-    // Update the selected variant for the row
     newRows[index].selectedVariant = selectedVariant;
 
-    // If the selected variant has attributes, populate the attributes array for the row
     if (selectedVariant && selectedVariant.attributes) {
       newRows[index].attributes = selectedVariant.attributes;
     } else {
-      newRows[index].attributes = []; // Clear attributes if no variant is selected or no attributes are available
+      newRows[index].attributes = [];
     }
 
-    // Reset selected attribute value
-    newRows[index].selectedAttribute = "";
+    newRows[index].selectedAttribute = [];
 
     setRows(newRows);
   };
-  let variantDatForBackend = [];
 
-  // console.log(rows[0]?.selectedVariant.id);
-  // console.log(rows[0]?.selectedAttribute);
+  let variantDatForBackend = [];
 
   rows?.map((rs) => {
     const variant = {
       variant_id: rs?.selectedVariant.id,
-      attribute_id: rs?.selectedAttribute,
+      attributes: rs?.selectedAttribute,
     };
 
     variantDatForBackend.push(variant);
   });
+  console.log(variantDatForBackend);
 
   const onSubmit = (data) => {
     const values = {
@@ -116,7 +135,6 @@ const AddNewProduct = ({ setActive, refetch }) => {
         } else {
           toast.error(data?.message);
           // setActive(false);
-          console.log(data);
         }
       })
       .catch((errors) => {
@@ -329,12 +347,12 @@ const AddNewProduct = ({ setActive, refetch }) => {
                 {rows.map((row, index) => {
                   return (
                     <div
-                      className="flex items-center gap-2 justify-between w-full py-2"
+                      className="flex  gap-2 justify-between items-start w-full py-2 border border-blue-base my-5 p-5 rounded-md"
                       key={index}
                     >
-                      <div className="flex ">
+                      <div className=" ">
                         <select
-                          className=" block p-2 focus:outline-none bg-primary-muted text-stone-50"
+                          className=" block p-2 focus:outline-none bg-primary-base text-stone-50  pr-5 w-44 max-w-full rounded-md "
                           name={`variant_${index}`}
                           defaultValue={row.selectedVariant}
                           onChange={(e) => handleVariantChange(index, e)}
@@ -348,28 +366,31 @@ const AddNewProduct = ({ setActive, refetch }) => {
                             </option>
                           ))}
                         </select>
-
                         {row.attributes && (
-                          <div className="flex items-center gap-2">
-                            <select
-                              className=" block p-2 focus:outline-none bg-primary-muted text-stone-50"
-                              value={row.selectedAttribute}
-                              onChange={(e) => {
-                                const newRows = [...rows];
-                                newRows[index].selectedAttribute =
-                                  e.target.value;
-                                setRows(newRows);
-                              }}
-                            >
-                              <option className="" value="" disabled>
-                                Select Attribute
-                              </option>
-                              {row.attributes.map((attribute) => (
-                                <option key={attribute.id} value={attribute.id}>
+                          <div className=" text-white-base">
+                            {row.attributes.map((attribute) => (
+                              <div
+                                key={attribute.id}
+                                className="flex items-center gap-2 my-2"
+                              >
+                                <input
+                                  className="w-6 h-6 focus:bg-red-500"
+                                  type="checkbox"
+                                  id={attribute.id}
+                                  name={attribute.id}
+                                  value={attribute.id}
+                                  onChange={() =>
+                                    handleAttributeChange(index, attribute.id)
+                                  }
+                                />
+                                <label
+                                  htmlFor={attribute.id}
+                                  className="px-1 text-lg"
+                                >
                                   {attribute.name}
-                                </option>
-                              ))}
-                            </select>
+                                </label>
+                              </div>
+                            ))}
                           </div>
                         )}
                       </div>
