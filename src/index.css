@@ -31,6 +31,7 @@ body {
 
 /* scroll bar design  */
 
+
 .sidebarScrool::-webkit-scrollbar {
   width: 6px;
 }
