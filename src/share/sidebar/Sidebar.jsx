@@ -14,7 +14,7 @@ const Sidebar = ({ active, setActive }) => {
             active
               ? "xl:w-0 bg-primary-muted "
               : "xl:w-[250px] overflow-hidden h-screen"
-          }  duration-500 !overflow-hidden `}
+          }  duration-500 !overflow-hidden`}
         >
           <div
             className={`${
@@ -27,8 +27,8 @@ const Sidebar = ({ active, setActive }) => {
             <div className="flex gap-2">
               <div
                 className={` ${
-                  active ? "w-0 hidden" : " w-[250px]"
-                }  bg-primary-muted w-[250px] fixed h-full pt-4 z-50 `}
+                  active ? "w-0" : "w-[250px]"
+                }  bg-primary-muted  max-w-full overflow-hidden fixed h-full pt-4 z-50 duration-500 `}
               >
                 <div className="flex">
                   <div

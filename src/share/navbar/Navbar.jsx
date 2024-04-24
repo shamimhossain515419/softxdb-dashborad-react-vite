@@ -13,7 +13,7 @@ const Navbar = () => {
   const [active, setActive] = useState(false);
 
   return (
-    <div className="bg-primary-muted  fixed w-full top-0  z-50  px-5 py-4 flex justify-between items-center gap-3 text-white-base">
+    <header className="bg-primary-muted  fixed w-full left-0 top-0  z-50  px-5 py-4 flex justify-between items-center gap-3 text-white-base">
       <div className="flex items-center cursor-pointer gap-2">
         <FaBarsStaggered
           onClick={toggleSitebarHandler}
@@ -69,7 +69,7 @@ const Navbar = () => {
           />
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

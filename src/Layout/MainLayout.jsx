@@ -7,12 +7,12 @@ const MainLayout = () => {
   const [active, setActive] = useState(false);
   return (
     <>
-      <div>
-        <Navbar />
-      </div>
       <div className="flex items-start gap-4 mt-[75px]">
         <Sidebar active={active} setActive={setActive} />
-        <div className="  mr-5 min-w-[50%] w-full p-1 lg:p-3 overflow-hidden  h-full">
+        <div className="mr-5 min-w-[50%] w-full p-1 lg:p-3  overflow-hidden h-full">
+          <div className="">
+            <Navbar />
+          </div>
           <Outlet />
         </div>
       </div>
