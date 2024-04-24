@@ -8,7 +8,11 @@ const SidebarComponents = ({ item }) => {
   const location = useLocation();
   const currentPath = location?.pathname;
   const activePath = "/" + currentPath.split("/")[1];
-
+  useEffect(() => {
+    if (activePath == item?.path) {
+      setAcive(true);
+    }
+  });
   return (
     <>
       <div
@@ -29,7 +33,7 @@ const SidebarComponents = ({ item }) => {
           } duration-200 text-[15px] text-white-base`}
         />
       </div>
-      <Collapse isOpened={active || activePath == item?.path} className="mt-3">
+      <Collapse isOpened={active} className="mt-3">
         <div className="  ml-[58px] text-white-muted space-y-1 ">
           {item?.submenu?.map((item, index) => {
             return (

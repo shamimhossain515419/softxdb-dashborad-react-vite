@@ -85,7 +85,7 @@ export const Menubar = [
   {
     id: 2,
     title: "item",
-    path: "/",
+    path: "/home",
     icon: <FaRegSquarePlus></FaRegSquarePlus>,
     submenu: [
       {
@@ -128,7 +128,7 @@ export const Menubar = [
   {
     id: 3,
     title: "Customer",
-    path: "/",
+    path: "/home",
     icon: <FaRegSquarePlus></FaRegSquarePlus>,
     submenu: [
       {
@@ -171,7 +171,7 @@ export const Menubar = [
   {
     id: 1,
     title: "Sale",
-    path: "/",
+    path: "/home",
     icon: <FaRegSquarePlus></FaRegSquarePlus>,
     submenu: [
       {
@@ -214,7 +214,7 @@ export const Menubar = [
   {
     id: 1,
     title: "item",
-    path: "/",
+    path: "/home",
     icon: <FaRegSquarePlus></FaRegSquarePlus>,
     submenu: [
       {
@@ -257,7 +257,7 @@ export const Menubar = [
   {
     id: 1,
     title: "Report",
-    path: "/",
+    path: "/home",
     icon: <FaRegSquarePlus></FaRegSquarePlus>,
     submenu: [
       {
@@ -270,7 +270,7 @@ export const Menubar = [
   {
     id: 1,
     title: "E-commerce",
-    path: "/",
+    path: "/home",
     icon: <FaRegSquarePlus></FaRegSquarePlus>,
     submenu: [
       {
@@ -313,7 +313,7 @@ export const Menubar = [
   {
     id: 1,
     title: "Inventory",
-    path: "/",
+    path: "/home",
     icon: <FaRegSquarePlus></FaRegSquarePlus>,
     submenu: [
       {
@@ -356,7 +356,7 @@ export const Menubar = [
   {
     id: 1,
     title: "Supplier",
-    path: "/",
+    path: "/home",
     icon: <FaRegSquarePlus></FaRegSquarePlus>,
     submenu: [
       {
@@ -399,7 +399,7 @@ export const Menubar = [
   {
     id: 1,
     title: "HRM",
-    path: "/",
+    path: "/home",
     icon: <FaRegSquarePlus></FaRegSquarePlus>,
     submenu: [
       {
@@ -443,7 +443,7 @@ export const Menubar = [
   {
     id: 1,
     title: "Configuration",
-    path: "/",
+    path: "/home",
     icon: <FaRegSquarePlus></FaRegSquarePlus>,
     submenu: [
       {
