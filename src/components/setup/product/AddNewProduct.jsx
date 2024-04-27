@@ -15,6 +15,7 @@ const AddNewProduct = ({ setActive, refetch }) => {
   const [unit, setUnit] = useState({ name: "Select Unit", id: 0 });
   const [photo, setPhoto] = useState("");
   const [serial_status, setSerial_status] = useState(false);
+  const [variant_status, setVariant_status] = useState(false);
 
   const { data: categoryData } = useGetCategoryQuery();
   const { data: brandData } = useGetBrandQuery();
@@ -112,6 +113,7 @@ const AddNewProduct = ({ setActive, refetch }) => {
       product_code: data?.product_code,
       description: data?.description,
       serial_status: serial_status ? "1" : "0",
+      price_in_variant_status: variant_status ? "1" : "0",
       // photo: photo,
       variants: variantDatForBackend,
       barcode: data?.barcode,
@@ -324,6 +326,30 @@ const AddNewProduct = ({ setActive, refetch }) => {
                   } w-[20px] absolute  h-[20px]  flex justify-center items-center  rounded-full`}
                 >
                   {serial_status && (
+                    <FaCheck className="text-[16px] text-blue-base " />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className=" pt-3">
+            <div className=" mt-3 space-y-1">
+              <p className="text-[16px] font-normal text-white-base">
+                Price In Variant:
+              </p>
+              <div
+                onClick={() => setVariant_status(!variant_status)}
+                className="bg-blue-base relative flex justify-center items-center  h-[25px] w-[45px]  cursor-pointer px-5 py-1 rounded-full"
+              >
+                <div
+                  className={` ${
+                    variant_status
+                      ? " right-1 bg-white-base  "
+                      : " left-1 bg-primary-base"
+                  } w-[20px] absolute  h-[20px]  flex justify-center items-center  rounded-full`}
+                >
+                  {variant_status && (
                     <FaCheck className="text-[16px] text-blue-base " />
                   )}
                 </div>
