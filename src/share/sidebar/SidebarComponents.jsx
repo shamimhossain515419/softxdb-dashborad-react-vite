@@ -8,20 +8,20 @@ const SidebarComponents = ({ item }) => {
   const location = useLocation();
   const currentPath = location?.pathname;
   const activePath = "/" + currentPath.split("/")[1];
-  useEffect(() => {
-    if (activePath == item?.path) {
-      setAcive(true);
-    }
-  });
+  // useEffect(() => {
+  //   if (activePath == item?.path) {
+  //     setAcive(true);
+  //   }
+  // });
   return (
     <>
       <div
         onClick={() => setAcive(!active)}
-        className="flex hover:bg-blue-base py-1 px-2 rounded-lg justify-between cursor-pointer items-center gap-4"
+        className="flex hover:bg-blue-base py-1 px-2  rounded-r-full justify-between cursor-pointer items-center gap-4"
       >
         <div className="flex items-center gap-3">
-          <div className="bg-blue-muted p-3 rounded-full">
-            <FaRegSquarePlus className="text-[15px] text-white-base" />
+          <div className="bg-blue-muted p-2 rounded-full">
+            <FaRegSquarePlus className="text-[14px] text-white-base" />
           </div>
           <h1 className="text-white-base text-[16px] font-medium  capitalize">
             {item?.title}
@@ -34,7 +34,7 @@ const SidebarComponents = ({ item }) => {
         />
       </div>
       <Collapse isOpened={active} className="mt-3">
-        <div className="  ml-[58px] text-white-muted space-y-1 ">
+        <div className="  ml-[38px] text-white-muted  space-y-1 ">
           {item?.submenu?.map((item, index) => {
             return (
               <NavLink
@@ -42,8 +42,8 @@ const SidebarComponents = ({ item }) => {
                 to={`${item?.path}`}
                 className={({ isActive }) =>
                   isActive
-                    ? "flex hover:text-white-base text-white-base duration-300 items-center gap-3"
-                    : "flex hover:text-white-base duration-300 items-center gap-3"
+                    ? "flex  bg-primary-base px-2 rounded-full py-1 hover:text-white-base text-white-base duration-300 items-center gap-3"
+                    : "flex group hover:text-white-base hover:bg-primary-base  px-2 rounded-full py-1 duration-300 items-center gap-3"
                 }
               >
                 <span
@@ -51,7 +51,7 @@ const SidebarComponents = ({ item }) => {
                     item?.path == location?.pathname
                       ? "opacity-100"
                       : "opacity-0"
-                  }  w-[8px] h-[8px] bg-blue-base rounded-full`}
+                  }  group-hover:w-[8px] group-hover:h-[8px] group-hover:bg-blue-base  group-hover:opacity-100 w-[8px] h-[8px] bg-blue-base rounded-full`}
                 ></span>
                 <span>{item?.title}</span>
               </NavLink>
