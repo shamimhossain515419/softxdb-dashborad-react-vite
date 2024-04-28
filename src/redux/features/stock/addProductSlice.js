@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import arraysEqual from "../../../utility/arraysEqual/arraysEqual";
 
 const initialState = {
   products: [],
@@ -13,8 +14,7 @@ const productsSlice = createSlice({
       const existing = state.products.find(
         (product) =>
           product.product_id === action.payload.product_id &&
-          product.color_id === action.payload.color_id &&
-          product.size_id === action.payload.size_id
+          arraysEqual(product.variants, action.payload.variants)
       );
       if (existing) {
         existing.quantity =
@@ -45,3 +45,5 @@ const productsSlice = createSlice({
 export const { addProduct, deleteAllProducts, deleteProduct } =
   productsSlice.actions;
 export default productsSlice.reducer;
+
+//

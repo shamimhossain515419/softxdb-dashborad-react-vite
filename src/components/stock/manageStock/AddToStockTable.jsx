@@ -1,51 +1,52 @@
-import { RiDeleteBin6Fill } from 'react-icons/ri';
-import { useSelector, useDispatch } from 'react-redux';
+import { RiDeleteBin6Fill } from "react-icons/ri";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   deleteAllProducts,
   deleteProduct,
-} from '../../../redux/features/stock/addProductSlice';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
-import { formattedDate } from '../../../utility/formattedDate/formattedDate';
+} from "../../../redux/features/stock/addProductSlice";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { formattedDate } from "../../../utility/formattedDate/formattedDate";
 
 const AddToStockTable = () => {
   const dispatch = useDispatch();
-  const { products } = useSelector(state => state?.products);
+  const { products } = useSelector((state) => state?.products);
+  console.log(products);
 
   // add stock
   const [isLoading, setLoading] = useState(false);
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState("");
 
   const handleAddStock = () => {
     setLoading(true);
     const data = {
-      added_by: '1',
-      branch_id: '1',
+      added_by: "1",
+      branch_id: "1",
       stock_date: formattedDate(date),
       items: products,
     };
 
     fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/stock`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setLoading(false);
-        if (data.status === 'success') {
+        if (data.status === "success") {
           toast.success(data?.message);
           dispatch(deleteAllProducts());
         } else {
           toast.error(data?.message);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setLoading(false);
-        console.log('error', err);
+        console.log("error", err);
       });
   };
 
@@ -62,11 +63,9 @@ const AddToStockTable = () => {
                 Name
               </th>
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-                Color
+                Variants
               </th>
-              <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
-                Size
-              </th>
+
               <th className="px-6 py-5   bg-blue-base text-left text-xs font-medium text-white-base uppercase tracking-wider">
                 Serial
               </th>
@@ -88,7 +87,7 @@ const AddToStockTable = () => {
               <tr
                 key={index}
                 className={`${
-                  index % 2 === 0 ? '' : ''
+                  index % 2 === 0 ? "" : ""
                 } border-b border-[#4D75FF]`}
               >
                 <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
@@ -96,11 +95,18 @@ const AddToStockTable = () => {
                   {item?.product_name}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {item?.color_id ? item?.color_name : 'N/A'}
+                  {item?.variants?.map((variant, i) => {
+                    return (
+                      <span
+                        className="p-1 px-2 shadow-md border rounded-md mx-1"
+                        key={i}
+                      >
+                        {variant?.attribute?.name}
+                      </span>
+                    );
+                  })}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {item?.size_id ? item?.size_name : 'N/A'}
-                </td>
+
                 <td className="px-6 py-4 whitespace-nowrap">
                   {item?.serials?.[0]}
                 </td>
@@ -128,7 +134,7 @@ const AddToStockTable = () => {
           onClick={handleAddStock}
           className="bg-blue-base px-4 py-2 rounded text-white-base"
         >
-          {isLoading ? 'Loading...' : ' Add to Stock'}
+          {isLoading ? "Loading..." : " Add to Stock"}
         </button>
       </div>
     </div>

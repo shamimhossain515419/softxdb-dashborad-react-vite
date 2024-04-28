@@ -74,16 +74,39 @@ const AddStockFrom = () => {
 
   const [selectedValues, setSelectedValues] = useState([]);
 
-  const handleSelectChange = (variant_id, attribute_id) => {
-    setSelectedValues([...selectedValues, { variant_id, attribute_id }]);
+  const handleSelectChange = (variantId, attributeId, attributeName) => {
+    const updatedSelectedValues = [...selectedValues];
+    const existingIndex = updatedSelectedValues.findIndex(
+      (item) => item.variant.id === variantId
+    );
+    if (existingIndex !== -1) {
+      updatedSelectedValues[existingIndex].attribute = {
+        id: attributeId,
+        name: attributeName,
+      };
+    } else {
+      updatedSelectedValues.push({
+        variant: {
+          id: variantId,
+          name: variants.find((variant) => variant.variant_id === variantId)
+            .variant_name,
+        },
+        attribute: { id: attributeId, name: attributeName },
+      });
+    }
+    setSelectedValues(updatedSelectedValues);
   };
-  console.log(selectedValues);
 
   // variant end
 
   //  handle add  product
   const handleAddProduct = () => {
+    if (variants.length !== selectedValues?.length) {
+      toast.error("Please select all variants");
+      return;
+    }
     const data = {
+      variants: selectedValues,
       product_id: product?.id,
       product_name: product?.name,
       price: parseFloat(price),
@@ -104,11 +127,13 @@ const AddStockFrom = () => {
     setQuantity("");
     setSerial([]);
     setPrice(0);
+    setSelectedValues([]);
   };
 
   useEffect(() => {
     setPrice(product?.selling_price);
   }, [product]);
+
   return (
     <>
       {/* select  section  */}
@@ -141,34 +166,35 @@ const AddStockFrom = () => {
         <>
           {product?.id && (
             <div className="text-white-base mt-12 border p-2">
-              {variants?.map((variant, i) => {
-                return (
-                  <div key={i} className="border p-2 my-3 rounded">
-                    <div className=" ">
-                      <select
-                        className="bg-primary-base w-full p-1"
-                        onChange={(e) =>
-                          handleSelectChange(
-                            variant.variant_id,
-                            variant.attributes[e.target.selectedIndex]?.id
-                          )
-                        }
-                      >
-                        <option value="" disabled>
-                          Select {variant.variant_name}
+              {variants?.map((variant, i) => (
+                <div key={i} className="border p-2 my-3 rounded">
+                  <div className="">
+                    <h1>{variant?.variant_name}</h1>
+                    <select
+                      className="bg-primary-base w-full p-1"
+                      onChange={(e) =>
+                        handleSelectChange(
+                          variant.variant_id,
+                          e.target.value,
+                          e.target.options[e.target.selectedIndex].text
+                        )
+                      }
+                    >
+                      <option value="0" disabled selected>
+                        Select {variant.variant_name}
+                      </option>
+                      {variant?.attributes?.map((attr) => (
+                        <option key={attr?.id} value={attr.id}>
+                          {attr.name}
                         </option>
-                        {variant?.attributes?.map((attr, j) => (
-                          <option key={j} value={attr.id}>
-                            {attr.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+                      ))}
+                    </select>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
           )}
+          {/* Output the selected values */}
         </>
 
         {/*  serial  */}
