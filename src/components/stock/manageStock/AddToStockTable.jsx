@@ -15,6 +15,7 @@ import CommonModal from "../../../ui/commonModal/commonModal";
 const AddToStockTable = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state?.products);
+  // console.log(products);
 
   // add stock
   const [isLoading, setLoading] = useState(false);
@@ -39,6 +40,7 @@ const AddToStockTable = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setLoading(false);
         if (data.status === "success") {
           toast.success(data?.message);

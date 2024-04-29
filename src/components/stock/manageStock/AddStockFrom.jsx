@@ -48,8 +48,6 @@ const AddStockFrom = () => {
     }
   });
 
-  console.log(allSerials);
-
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       //check duplicate
