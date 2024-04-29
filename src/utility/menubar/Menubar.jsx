@@ -171,43 +171,13 @@ export const Menubar = [
   {
     id: 1,
     title: "Sale",
-    path: "/home",
+    path: "/sale",
     icon: <FaRegSquarePlus></FaRegSquarePlus>,
     submenu: [
       {
         id: 1,
-        title: "Category",
-        path: "/",
-      },
-      {
-        id: 2,
-        title: "Items",
-        path: "/",
-      },
-      {
-        id: 3,
-        title: "Manufacturer",
-        path: "/",
-      },
-      {
-        id: 4,
-        title: "Brand",
-        path: "/",
-      },
-      {
-        id: 5,
-        title: "Colors",
-        path: "/",
-      },
-      {
-        id: 6,
-        title: "Size types",
-        path: "/",
-      },
-      {
-        id: 7,
-        title: "Attribute Set",
-        path: "/",
+        title: "Add Sale",
+        path: "/sale/add-sale",
       },
     ],
   },
