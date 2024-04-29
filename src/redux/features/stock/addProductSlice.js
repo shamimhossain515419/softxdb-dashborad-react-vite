@@ -19,6 +19,10 @@ const productsSlice = createSlice({
       if (existing) {
         existing.quantity =
           parseFloat(existing.quantity) + parseFloat(action.payload.quantity);
+        // if have serial_status update serial
+        if (action.payload.serial_status) {
+          existing.serials = [...existing.serials, ...action.payload.serials];
+        }
       } else {
         state.products.push({
           ...action.payload,

@@ -8,14 +8,17 @@ import {
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { formattedDate } from "../../../utility/formattedDate/formattedDate";
+import { BiEditAlt } from "react-icons/bi";
+
+import CommonModal from "../../../ui/commonModal/commonModal";
 
 const AddToStockTable = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state?.products);
-  console.log(products);
 
   // add stock
   const [isLoading, setLoading] = useState(false);
+  const [serialModal, setSerialModal] = useState(false);
   const [date, setDate] = useState("");
 
   const handleAddStock = () => {
@@ -52,6 +55,28 @@ const AddToStockTable = () => {
 
   return (
     <div>
+      <CommonModal
+        title={"Serials"}
+        active={serialModal}
+        setActive={setSerialModal}
+      >
+        {serialModal && (
+          <>
+            <div className="flex items-center justify-center">
+              {serialModal?.map((sl) => {
+                return (
+                  <span
+                    key={sl}
+                    className="p-1 px-2 shadow-md border rounded-md mx-1 text-white-base"
+                  >
+                    {sl}
+                  </span>
+                );
+              })}
+            </div>
+          </>
+        )}
+      </CommonModal>
       <div className="overflow-x-auto">
         <table className="min-w-full  rounded-md overflow-hidden">
           <thead>
@@ -108,7 +133,15 @@ const AddToStockTable = () => {
                 </td>
 
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {item?.serials?.[0]}
+                  {item?.serial_status ? (
+                    <BiEditAlt
+                      onClick={() => setSerialModal(item?.serials)}
+                      size={25}
+                      className="cursor-pointer"
+                    />
+                  ) : (
+                    <>N/A</>
+                  )}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {item?.quantity} pcs

@@ -1,15 +1,11 @@
 import SelectAndSearch from "../../../ui/selectAndSearch/SelectAndSearch";
 import { useGetProductQuery } from "../../../redux/features/api/product/productApi";
-import SelectItem from "../../../ui/selectitem/Selectitem";
-import {
-  useGetColorQuery,
-  useGetVariantByProductQuery,
-} from "../../../redux/features/api/color/ColorsApi";
-import { useGetSizeQuery } from "../../../redux/features/api/size/sizesApi";
+import { useGetVariantByProductQuery } from "../../../redux/features/api/color/ColorsApi";
+
 import { MdClose } from "react-icons/md";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../../redux/features/stock/addProductSlice";
 
 const AddStockFrom = () => {
@@ -37,15 +33,33 @@ const AddStockFrom = () => {
     name: "Select product",
     id: 0,
   });
+  const { products } = useSelector((state) => state?.products);
 
   const [serials, setSerial] = useState([]);
+
   const [price, setPrice] = useState(product?.selling_price);
   const [quantity, setQuantity] = useState(0);
   // all states end
+
+  let allSerials = [];
+  products?.forEach((product) => {
+    if (product.serials && product.serials.length > 0) {
+      allSerials.push(...product.serials);
+    }
+  });
+
+  console.log(allSerials);
+
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       //check duplicate
       const isExit = serials?.find((item) => item === event.target.value);
+
+      const checkAll = allSerials?.find((item) => item === event.target.value);
+      if (checkAll) {
+        toast.error("Serial number already exist");
+        return;
+      }
 
       if (event.target.value == "") {
         toast.error("Serial number is empty");
@@ -100,11 +114,13 @@ const AddStockFrom = () => {
   // variant end
 
   //  handle add  product
+
   const handleAddProduct = () => {
     if (variants.length !== selectedValues?.length) {
       toast.error("Please select all variants");
       return;
     }
+
     const data = {
       variants: selectedValues,
       product_id: product?.id,
@@ -112,7 +128,6 @@ const AddStockFrom = () => {
       price: parseFloat(price),
       quantity: quantity,
       serials,
-      //status
       serial_status: product?.serial_status,
     };
     if (!quantity) return toast.error("Please provide a quantity");
@@ -149,17 +164,6 @@ const AddStockFrom = () => {
             />
           </div>
         </div>
-        {/*  colors */}
-        {/* {product?.color_status && (
-          <div className=" pt-12">
-            <SelectItem
-              data={colors}
-              title={"Select Color"}
-              active={color}
-              setActive={setColor}
-            />
-          </div>
-        )} */}
 
         {/*  size */}
 
